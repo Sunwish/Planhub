@@ -1,0 +1,12 @@
+.h1{
+  font-size: 42rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+
+.p{
+  font-size: 32rpx;
+  font-weight: normal;
+  margin: 0 30rpx;
+  margin-bottom: 16rpx;
+}

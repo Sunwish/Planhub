@@ -1,0 +1,11 @@
+<!--miniprogram/pages/plan/detail/detail.wxml-->
+
+<view class="plan-info">
+  <view class="plan-name">
+    <text class="h1">{{planData[0].planName}}</text>
+  </view>
+  <view class="plan-introduction">
+    <text class="p">{{planData[0].planIntroduction}}</text>
+  </view>
+</view>
+

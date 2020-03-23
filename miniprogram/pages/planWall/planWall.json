@@ -1,0 +1,8 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "计划墙",
+  "backgroundColor": "#000000",
+  "disableScroll": true,
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark" 
+}

@@ -1,0 +1,56 @@
+{
+  "pages": [
+    
+    "pages/planWall/planWall",
+    "pages/plan/create/createPlan",
+    
+    
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room",
+    "pages/message/message",
+    "pages/plan/detail/detail"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/planWall/planWall",
+        "text": "计划墙",
+        "position": "top"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "position": "top"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "position": "top"
+      }
+    ]
+  }
+}

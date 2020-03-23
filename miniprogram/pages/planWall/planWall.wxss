@@ -1,0 +1,75 @@
+/* miniprogram/pages/planWall/planWall.wxss */
+
+page{
+  overflow-y: hidden;
+}
+
+.scroll-forums{
+  position: absolute;
+  left: 30rpx;
+  right: 100rpx;
+  top: 0rpx;
+  height: 60rpx;
+  white-space: nowrap;
+}
+
+.forum-item{
+  text-align: center;
+  padding: 0 20rpx;
+  background-color: #fff;
+  margin-right: 18rpx;
+  border-radius: 52rpx;
+  height: 52rpx;
+  line-height: 52rpx;
+  min-width: 60rpx;
+  max-width: 200rpx;
+  font-size: 24rpx;
+  letter-spacing: 3rpx;
+  /*white-space: normal;*/
+}
+
+.forum-item-selected{
+  background-color: rgb(61, 149, 238);
+  color: #fff;
+}
+
+.scroll-view{
+  position: absolute;
+  left: 0;
+  top: 80rpx;
+  bottom: 100rpx;
+  /*height: 100%;*/
+}
+
+.create-new-plane{
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  font-size: 36rpx;
+  text-align: center;
+  background-color: #ffffff;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.create-new-plane navigator{
+  width: 100%;
+}
+
+.plan-item{
+  background-color: #fff;
+  margin: 30rpx 24rpx;
+  margin-top: 0;
+  padding: 24rpx;
+}
+
+.plan-info-name{
+  padding-bottom: 10rpx;
+  color: #000;
+  font-size: 36rpx;
+}
+
+.plan-info-introdution{
+  padding-bottom: 10rpx;
+  color: #aaa;
+  font-size: 30rpx;
+}
