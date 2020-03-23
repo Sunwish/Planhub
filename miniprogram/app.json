@@ -4,7 +4,7 @@
     "pages/planWall/planWall",
     "pages/plan/create/createPlan",
     
-    
+    "pages/user/user",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -47,8 +47,13 @@
         "position": "top"
       },
       {
+       "pagePath": "pages/user/user",
+       "text": "我的",
+       "position": "top"
+      },
+      {
         "pagePath": "pages/index/index",
-        "text": "我的",
+        "text": "系统",
         "position": "top"
       }
     ]
