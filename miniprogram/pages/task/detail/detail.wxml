@@ -2,10 +2,10 @@
 
 <view class="plan-info">
   <view class="plan-name">
-    <text class="h1">{{planData[0].planName}}</text>
+    <text class="h1">{{taskData[0].taskName}}</text>
   </view>
   <view class="plan-introduction">
-    <text class="p">{{planData[0].planIntroduction}}</text>
+    <text class="p">{{taskData[0].taskDescription}}</text>
   </view>
 </view>
 

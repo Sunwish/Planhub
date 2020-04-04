@@ -36,22 +36,39 @@ page{
 .scroll-view{
   position: absolute;
   left: 0;
-  top: 80rpx;
+  top: /*80rpx*/ 0rpx;
   bottom: 100rpx;
   /*height: 100%;*/
 }
 
 .create-new-plane{
   position: absolute;
-  width: 100%;
+  width: 50%;
   bottom: 0px;
   font-size: 36rpx;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #1ce25e;
+  color: white;
   height: 100rpx;
   line-height: 100rpx;
 }
 .create-new-plane navigator{
+  width: 100%;
+}
+
+.join-plane{
+  position: absolute;
+  right: 0rpx;
+  width: 50%;
+  bottom: 0rpx;
+  font-size: 36rpx;
+  text-align: center;
+  background-color: rgb(65, 162, 252);
+  color: white;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.join-plane navigator{
   width: 100%;
 }
 

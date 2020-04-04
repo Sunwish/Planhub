@@ -1,6 +1,7 @@
 <!--miniprogram/pages/planWall/planWall.wxml-->
 
 <!--Forums selection-->
+<!--
 <scroll-view class="scroll-forums" scroll-x="true">
   <view wx:for='{{dataForums}}' wx:key='index' style="display: inline-block;">
     <view id="{{item._id}}" wx:if="{{item._id == forumSelectedId}}" class="forum-item forum-item-selected" bindtap="onForumSelected">
@@ -11,19 +12,22 @@
     </view>
   </view>
 </scroll-view>
-
+-->
 <!--Plans selection-->
 <view style="overflow: hidden;">
   <scroll-view class="scroll-view" scroll-y="true">
-  <view wx:for='{{dataPlans}}' wx:key='index' class="plan-item">
+  <view wx:for='{{tasksData}}' wx:key='index' class="plan-item">
     <view id='{{item._id}}' bindtap="onPlanSelected">
-      <view class="plan-info-name">{{item.planName}}</view>
-      <view class="plan-info-introdution">{{item.planIntroduction}}</view>
+      <view class="plan-info-name">{{item.taskName}}</view>
+      <view class="plan-info-introdution">{{item.taskDescription}}</view>
     </view>
   </view>
   </scroll-view>
 </view>
 
 <view class="create-new-plane">
-  <navigator url="../plan/create/createPlan">+ 创建新计划</navigator>
+  <navigator url="../task/create/createTask">+ 创建新任务</navigator>
+</view>
+<view class="join-plane">
+  <navigator url="../task/join/join">+ 加入任务</navigator>
 </view>

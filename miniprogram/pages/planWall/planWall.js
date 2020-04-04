@@ -8,23 +8,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dataPlans: [],
-    dataForums: [],
-    forumSelectedId: ''
+    tasksData: {},
+    openid: ''
   },
 
 /**
  * 请求计划数据
  */
- queryPlans: function() {
+ queryTasks: function() {
+   if (this.data.openid == '') return;
    const db = wx.cloud.database()
-   db.collection('plans').where({
-     forumId: this.data.forumSelectedId
+   const _ = db.command
+   db.collection('tasks').where({
+     _participantsId: /*"odtr25T7IGDlWObdJ9jqz2JUc1g4"*/this.data.openid
    }).get({
      success: res => {
        /*console.log(res.data)*/
        this.setData({
-         dataPlans: res.data
+         tasksData: res.data
        })
      },
      fail: err => {
@@ -38,40 +39,18 @@ Page({
  },
 
 /**
- * 请求分区(板块)数据
- */
-  queryForums: function() {
-    const db = wx.cloud.database()
-    db.collection('forums').get({
-      success: res => {
-        /*console.log(res.data)*/
-        this.setData({
-          dataForums: res.data
-        })
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询板块失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    })
-  },
-
-/**
  * 请求数据
  */
   onQuery: function () {
-    this.queryForums();
-    this.queryPlans();
+    this.queryTasks();
   },
+
 
 /**
  * 分区被选择
- */
+ 
   onForumSelected: function(e) {
-    /*console.log(e.currentTarget.id);*/
+    console.log(e.currentTarget.id);
     var tappedId = e.currentTarget.id;
     var oldSelectedId = this.data.forumSelectedId;
     if (tappedId == oldSelectedId)  return;
@@ -80,14 +59,15 @@ Page({
     });
     this.onQuery();
   },
+*/
 
 /**
- * 计划被选择
+ * 任务被选择
  */
   onPlanSelected: function(e) {
-   var planId = e.currentTarget.id;
+   var taskId = e.currentTarget.id;
    wx.navigateTo({
-     url: '/pages/plan/detail/detail?planId=' + planId,
+     url: '/pages/task/detail/detail?taskId=' + taskId,
    });
   },
 
@@ -95,9 +75,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      forumSelectedId: '9a393e025e784012001d5e41715661f5' /* 广场ID */
-    })
+    // 获取openid
+    if (!app.globalData.openid) {
+      // 调用云函数
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          app.globalData.openid = res.result.openid;
+          this.data.openid = app.globalData.openid;
+          this.onQuery();
+        },
+        fail: err => {
+          /*console.error('[云函数] [login] 调用失败', err)*/
+        }
+      })
+    }
   },
 
   /**

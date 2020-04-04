@@ -1,9 +1,7 @@
 {
   "pages": [
-    
     "pages/planWall/planWall",
-    "pages/plan/create/createPlan",
-    
+    "pages/task/create/createTask",
     "pages/user/user",
     "pages/index/index",
     "pages/userConsole/userConsole",
@@ -19,7 +17,8 @@
     "pages/im/im",
     "pages/im/room/room",
     "pages/message/message",
-    "pages/plan/detail/detail"
+    "pages/task/detail/detail",
+    "pages/task/join/join"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -38,7 +37,7 @@
     "list": [
       {
         "pagePath": "pages/planWall/planWall",
-        "text": "计划墙",
+        "text": "任务",
         "position": "top"
       },
       {
@@ -47,9 +46,9 @@
         "position": "top"
       },
       {
-       "pagePath": "pages/user/user",
-       "text": "我的",
-       "position": "top"
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "position": "top"
       },
       {
         "pagePath": "pages/index/index",

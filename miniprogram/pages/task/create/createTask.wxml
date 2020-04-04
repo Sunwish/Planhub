@@ -1,8 +1,8 @@
 <!--miniprogram/pages/plan/create/createPlan.wxml-->
-<form bindsubmit="onCreatePlan">
+<form bindsubmit="onCreateTask">
   <view class="basic-info">
-    <input type="text" name="name" placeholder="计划名"></input>
-    <textarea name="introdution" placeholder="计划还是要有的"></textarea>
+    <input type="text" name="name" placeholder="任务名"></input>
+    <textarea name="description" placeholder="任务描述还是要有的"></textarea>
   </view>
 
   <view class="plan-config">
@@ -12,6 +12,6 @@
   </view>
 
   <view class="button-view">
-    <button form-type="submit" size="mini" class="button-create" style="width: 100%">创建计划</button>
+    <button form-type="submit" size="mini" class="button-create" style="width: 100%">创建任务</button>
   </view>
 </form>

@@ -8,29 +8,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    planId: '',
-    planData: {}
+    taskId: '',
+    taskData: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var planId = options.planId;
+    var taskId = options.taskId;
     /*console.log(planId);*/
-    this.onGetPlan(planId);
+    this.onGetTask(taskId);
     
   },
 
-  onGetPlan: function(planId) {
+  onGetTask: function (taskId) {
     const db = wx.cloud.database()
-    db.collection('plans').where({
-      _id: planId
+    db.collection('tasks').where({
+      _id: taskId
     }).get({
       success: res => {
         console.log(res.data)
         this.setData({
-          planData: res.data
+          taskData: res.data
         })
       },
       fail: err => {

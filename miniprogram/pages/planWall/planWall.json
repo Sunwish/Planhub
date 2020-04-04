@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "计划墙",
+  "navigationBarTitleText": "任务",
   "backgroundColor": "#000000",
   "disableScroll": true,
   "enablePullDownRefresh": true,

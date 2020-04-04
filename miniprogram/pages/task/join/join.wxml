@@ -1,0 +1,11 @@
+<!--miniprogram/pages/task/join/join.wxml-->
+
+<form bindsubmit="onJoinTask">
+  <view class="basic-info">
+    <input type="text" name="taskId" placeholder="任务ID"></input>
+  </view>
+
+  <view class="button-view">
+    <button form-type="submit" size="mini" class="button-join" style="width: 100%">加入任务</button>
+  </view>
+</form>
