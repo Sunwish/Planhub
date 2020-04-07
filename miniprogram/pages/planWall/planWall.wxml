@@ -25,9 +25,12 @@
   </scroll-view>
 </view>
 
-<view class="create-new-plane">
+<view class="authorization" wx:if="{{needAuthor}}">
+  <button open-type="getUserInfo" bindgetuserinfo="authorUserInfo">登录授权</button>
+</view>
+<view class="create-new-plane" wx:if="{{!needAuthor}}">
   <navigator url="../task/create/createTask">+ 创建新任务</navigator>
 </view>
-<view class="join-plane">
+<view class="join-plane" wx:if="{{!needAuthor}}">
   <navigator url="../task/join/join">+ 加入任务</navigator>
 </view>

@@ -18,33 +18,50 @@ Page({
 
   },
 
-/**
- * 要改写成云函数！
- */
   onJoinTask: function(data){
-    var id = data.detail.value.taskId;
-    
     const db = wx.cloud.database();
-    const _ = db.command;
-    db.collection('tasks').doc(id).update({
+    db.collection('tasks').where({
+      _id: data.detail.value.taskId
+    }).get({
+      success: res => {
+        if (res.data.length == 1){
+          this.joinTask({ taskId: data.detail.value.taskId })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '任务不存在'
+          });
+        }
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询失败'
+        });
+      }
+    })
+  },
+
+  joinTask: function(data){
+    wx.cloud.callFunction({
+      name: 'joinTask',
       data: {
-        _participantsId: _.push(app.globalData.openid)
+        taskId: data.taskId
       },
       success: res => {
         wx.showToast({
           title: '加入任务成功',
-        })
-
+        });
         setTimeout(function () {
           wx.navigateBack({})
-        }, 1000)
+        }, 1000);
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
           title: '加入任务失败'
-        })
-        console.error('[数据库] [更新记录] 失败：', err)
+        });
+        console.error('[云函数] [joinTask] 调用失败', err)
       }
     })
   },

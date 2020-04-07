@@ -72,6 +72,23 @@ page{
   width: 100%;
 }
 
+.authorization{
+  position: absolute;
+  left: 0rpx;
+  width: 100%;
+  bottom: 0rpx;
+  font-size: 36rpx;
+  text-align: center;
+  background-color: rgb(65, 162, 252);
+  height: 100rpx;
+  line-height: 100rpx;
+  z-index: 10;
+}
+.authorization button{
+  color: white;
+  width: 100%;
+}
+
 .plan-item{
   background-color: #fff;
   margin: 30rpx 24rpx;
