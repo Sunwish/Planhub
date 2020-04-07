@@ -2,6 +2,10 @@
 
 @import "../../../style/common.wxss";
 
+view{
+  margin: 30rpx 24rpx;
+}
+
 .basic-info{
   font-size: 32rpx;
 }

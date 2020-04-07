@@ -24,7 +24,19 @@ Page({
       _id: data.detail.value.taskId
     }).get({
       success: res => {
+        // 检查任务是否存在
         if (res.data.length == 1){
+          // 检查是否已经加入任务
+          if(res.data[0]._participantsId.includes(app.globalData.openid) == true){
+            wx.showToast({
+              icon: 'none',
+              title: '你已加入该任务'
+            });
+            setTimeout(function () {
+              wx.navigateBack({})
+            }, 1000);
+            return;
+          }
           this.joinTask({ taskId: data.detail.value.taskId })
         } else {
           wx.showToast({

@@ -21,13 +21,30 @@ Page({
    const db = wx.cloud.database()
    const _ = db.command
    db.collection('tasks').where({
-     _participantsId: /*"odtr25T7IGDlWObdJ9jqz2JUc1g4"*/this.data.openid
+     _participantsId: this.data.openid
    }).get({
      success: res => {
        /*console.log(res.data)*/
        this.setData({
          tasksData: res.data
        })
+       // 获取创建者的昵称和头像数据
+       for (var i = 0; i <= res.data.length; i++){
+         db.collection('users').where({
+           _openid: res.data[i]._openid
+         }).get({
+           success: info => {
+             /* 
+                本来是想根据每个task的创建者openid对应获取其昵称显示在task项上，昵称是取的出来
+                可是.get上一行 res.data[i]._openid 中的 i 到异步回调里已经不是调用时的 i 值了,
+                i 值不同步，取到的昵称和task条目对不上怎么破。。
+             console.log(i)
+             console.log(res.data[i].taskName)
+             console.log(info.data[0].nickName)
+             */
+           }
+         })
+       }
      },
      fail: err => {
        wx.showToast({
@@ -135,11 +152,14 @@ Page({
       wx.getSetting({
         success: res => {
           if (!res.authSetting['scope.userInfo']) {
+            // 未授权
+            wx.hideTabBar({})
             this.setData({
               // 显示登录授权按钮
               needAuthor: true
             })
           } else {
+            wx.showTabBar({})
             this.setData({
               // 显示创建/加入任务按钮
               needAuthor: false
@@ -148,6 +168,7 @@ Page({
         },
         fail: err =>{
           console.log(err);
+          wx.hideTabBar({})
           this.setData({
             // 显示登录授权按钮
             needAuthor: true
@@ -158,8 +179,9 @@ Page({
     }
     // 用户点击登录授权按钮触发事件
     if(typeof (e.detail.userInfo) != 'undefined'){
+      wx.showTabBar({})
       this.setData({
-        // 显示登录授权按钮
+        // 显示创建/加入任务按钮
         needAuthor: false
       });
       this.updateDBUserInfo();
