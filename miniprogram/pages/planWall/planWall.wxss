@@ -94,12 +94,14 @@ page{
   margin: 30rpx 24rpx;
   margin-top: 0;
   padding: 24rpx;
+  min-height: 92rpx;
 }
 
 .plan-info-name{
   padding-bottom: 10rpx;
   color: #000;
   font-size: 36rpx;
+  overflow: hidden;
 }
 
 .plan-info-introdution{

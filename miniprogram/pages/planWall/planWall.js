@@ -20,31 +20,17 @@ Page({
    if (this.data.openid == '') return;
    const db = wx.cloud.database()
    const _ = db.command
-   db.collection('tasks').where({
-     _participantsId: this.data.openid
-   }).get({
-     success: res => {
-       /*console.log(res.data)*/
+
+   wx.cloud.callFunction({
+     name: 'getTasks',
+     data:{
+
+     },
+     success: res =>{
+       console.log(res.result.list)
        this.setData({
-         tasksData: res.data
+         tasksData: res.result.list
        })
-       // 获取创建者的昵称和头像数据
-       for (var i = 0; i <= res.data.length; i++){
-         db.collection('users').where({
-           _openid: res.data[i]._openid
-         }).get({
-           success: info => {
-             /* 
-                本来是想根据每个task的创建者openid对应获取其昵称显示在task项上，昵称是取的出来
-                可是.get上一行 res.data[i]._openid 中的 i 到异步回调里已经不是调用时的 i 值了,
-                i 值不同步，取到的昵称和task条目对不上怎么破。。
-             console.log(i)
-             console.log(res.data[i].taskName)
-             console.log(info.data[0].nickName)
-             */
-           }
-         })
-       }
      },
      fail: err => {
        wx.showToast({
