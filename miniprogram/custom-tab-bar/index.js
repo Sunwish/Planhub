@@ -24,13 +24,6 @@ Component({
       "position": "top",
       "icon": "manager-o",
       "selectedIcon":"manager"
-    },
-    {
-      "pagePath": "/pages/index/index",
-      "text": "系统",
-      "position": "top",
-      "icon": "setting-o",
-      "selectedIcon": "setting"
     }]
   },
   attached() {
