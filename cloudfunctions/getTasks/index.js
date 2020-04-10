@@ -9,7 +9,6 @@ exports.main = async (event, context) => {
   /*
   联表查询(https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/aggregate/Aggregate.lookup.html)
   */
-  // localField 可否为 _participantsId？取出所有参与者的信息，数组中的第一项即是创建者信息？未尝试。
   const db = cloud.database()
   let res = await db.collection('tasks').aggregate()
     .lookup({

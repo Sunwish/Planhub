@@ -28,9 +28,12 @@
           <view style="color:#aaa;font-size:30rpx;">{{item.creatorInfo[0].nickName}}</view>
         </view>
       </view>
-      <view>
-        <view style="font-size:30rpx; color:#aaa; margin-left:16rpx;">
+      <view style="height:78rpx; width:100%; overflow:hidden;">
+        <view style="font-size:30rpx; color:#aaa; margin:0 16rpx; display:inline-block; line-height:64rpx;">
           参与者：
+        </view>
+        <view style="display:inline-block; line-height:64rpx;" wx:for="{{item.participantsrInfo}}">
+          <image src="{{item.avatarUrl}}" style="width:48rpx; height:48rpx;border-radius:24rpx;vertical-align:middle;margin-right:12rpx; background-color:#aaa;"></image>
         </view>
       </view>
     </view>

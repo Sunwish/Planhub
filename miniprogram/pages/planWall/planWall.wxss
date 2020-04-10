@@ -95,6 +95,7 @@ page{
   margin-top: 0;
   padding: 24rpx;
   min-height: 92rpx;
+  padding-bottom: 0;
 }
 
 .plan-info-name{
