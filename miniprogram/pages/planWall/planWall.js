@@ -1,12 +1,20 @@
 // miniprogram/pages/planWall/planWall.js
 
 const app = getApp();
+//自定义导航栏需求
 
-Page({
+Component({
 
-  /**
-   * 页面的初始数据
-   */
+  pageLifetimes: {
+    show() {
+      if (typeof this.getTabBar === 'function' &&
+        this.getTabBar()) {
+        this.getTabBar().setData({
+          selected: 0
+        })
+      }
+    }
+  },
   data: {
     tasksData: {},
     openid: '',
@@ -16,7 +24,8 @@ Page({
 /**
  * 请求计划数据
  */
- queryTasks: function() {
+ methods: {
+  queryTasks: function() {
    if (this.data.openid == '') return;
    const db = wx.cloud.database()
    const _ = db.command
@@ -80,6 +89,7 @@ Page({
    */
   onLoad: function (options) {
     // 获取openid和授权
+    wx.hideTabBar();
     if (!app.globalData.openid) {
       // 调用云函数
       wx.cloud.callFunction({
@@ -287,4 +297,5 @@ Page({
   },
 
 
+ }
 })

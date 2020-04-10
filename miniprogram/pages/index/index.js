@@ -1,7 +1,17 @@
 //index.js
 const app = getApp()
 
-Page({
+Component({
+  pageLifetimes: {
+    show() {
+      if (typeof this.getTabBar === 'function' &&
+        this.getTabBar()) {
+        this.getTabBar().setData({
+          selected: 3
+        })
+      }
+    }
+  },
   data: {
     avatarUrl: './user-unlogin.png',
     userInfo: {},
@@ -9,8 +19,9 @@ Page({
     takeSession: false,
     requestResult: ''
   },
-
+  methods: {
   onLoad: function() {
+    wx.hideTabBar();
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -117,4 +128,5 @@ Page({
     })
   },
 
+ }
 })

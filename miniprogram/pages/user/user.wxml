@@ -1,7 +1,7 @@
 
 <view class="container">
   <block wx:if="{{hasuserInfo}}">
-   <van-image class="User-Infomation"
+   <van-image class="user-pic"
     round
     width="7rem"
     height="7rem"
@@ -11,7 +11,7 @@
   <text>{{user.nickName}}</text>
   </block>
   <block wx:else>
-   <van-image class="User-Infomation"
+   <van-image class="user-pic"
     round
     width="7rem"
     height="7rem"

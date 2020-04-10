@@ -1,13 +1,25 @@
 
 const app = getApp()
 
-Page({
+Component({
+  pageLifetimes: {
+    show() {
+      if (typeof this.getTabBar === 'function' &&
+        this.getTabBar()) {
+        this.getTabBar().setData({
+          selected: 2
+        })
+      }
+    }
+  },
   data:{
        userimg :{},
        user:{},
        hasuserInfo: false,
   },
+  methods: {
   onLoad: function(){
+    wx.hideTabBar();
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -25,4 +37,5 @@ Page({
       }
     })
   }
+ }
 })

@@ -20,39 +20,47 @@
     "pages/task/detail/detail",
     "pages/task/join/join"
   ],
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index"
+  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "TASK",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
-    "color": "#000000",
-    "selectedColor": "#000000",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
+    "custom": true,
     "list": [
       {
         "pagePath": "pages/planWall/planWall",
         "text": "任务",
-        "position": "top"
+        "position": "top",
+        "icon": "todo-list-o",
+        "selectedIcon":"todo-list"
       },
       {
         "pagePath": "pages/message/message",
         "text": "消息",
-        "position": "top"
+        "position": "top",
+        "icon": "chat-o",
+        "selectedIcon":"chat"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
-        "position": "top"
+        "position": "top",
+        "icon": "manager-o",
+        "selectedIcon":"manager"
       },
       {
         "pagePath": "pages/index/index",
         "text": "系统",
-        "position": "top"
+        "position": "top",
+        "icon": "setting-o",
+        "selectedIcon": "setting"
       }
     ]
   }
