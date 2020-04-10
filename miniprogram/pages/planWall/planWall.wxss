@@ -1,6 +1,6 @@
 /* miniprogram/pages/planWall/planWall.wxss */
 
-page{
+Component{
   overflow-y: hidden;
 }
 

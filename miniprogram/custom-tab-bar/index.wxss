@@ -4,13 +4,13 @@
   left: 0;
   right: 0;
   height: 55px;
-  background: white;
+  background:#F6F6F6;
   display: flex;
   padding-bottom: env(safe-area-inset-bottom);
 }
 
 .tab-bar-border {
-  background-color: rgba(0, 0, 0, 0.33);
+  background-color:#F6F6F6;
   position: absolute;
   left: 0;
   top: 0;

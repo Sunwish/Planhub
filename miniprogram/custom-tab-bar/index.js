@@ -1,9 +1,9 @@
 Component({
   data: {
-    "color": "#8FBC8F",
-    "selectedColor": "#006400",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
+    "color": "#A9A9A9",
+    "selectedColor": "#00BFFF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "#FFFFFF",
     list: [ {
       "pagePath": "/pages/planWall/planWall",
       "text": "任务",

@@ -16,6 +16,7 @@ Component({
        userimg :{},
        user:{},
        hasuserInfo: false,
+       hour:{}
   },
   methods: {
   onLoad: function(){
@@ -35,6 +36,7 @@ Component({
           })
         }
       }
+      
     })
   }
  }

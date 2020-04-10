@@ -1,5 +1,5 @@
 {
-  "usingComponents": {},
+  "usingComponents": {"van-search": "@vant/weapp/search/index"},
   "navigationBarTitleText": "任务",
   "backgroundColor": "#000000",
   "disableScroll": true,

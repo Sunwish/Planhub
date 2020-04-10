@@ -8,7 +8,7 @@
     src="{{userimg}}"
     fit="cover"
   />
-  <text>{{user.nickName}}</text>
+  <text class="user-name">{{user.nickName}}</text>
   </block>
   <block wx:else>
    <van-image class="user-pic"
