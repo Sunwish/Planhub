@@ -11,14 +11,20 @@ exports.main = async (event, context) => {
   */
   const db = cloud.database()
   let res = await db.collection('tasks').aggregate()
+    .match({
+      _participantsId: wxContext.OPENID
+    })
     .lookup({
       from: 'users',
       localField: '_openid',
       foreignField: '_openid',
       as: 'creatorInfo',
     })
-    .match({
-      _participantsId: wxContext.OPENID
+    .lookup({
+      from: 'users',
+      localField: '_participantsId',
+      foreignField: '_openid',
+      as: 'participantsrInfo',
     })
     .end()
     console.log(res)
