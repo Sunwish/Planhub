@@ -149,13 +149,13 @@ Component({
         success: res => {
           if (!res.authSetting['scope.userInfo']) {
             // 未授权
-            wx.hideTabBar({})
+            //wx.hideTabBar({})
             this.setData({
               // 显示登录授权按钮
               needAuthor: true
             })
           } else {
-            wx.showTabBar({})
+            //wx.showTabBar({})
             this.setData({
               // 显示创建/加入任务按钮
               needAuthor: false
@@ -164,7 +164,7 @@ Component({
         },
         fail: err =>{
           console.log(err);
-          wx.hideTabBar({})
+          //wx.hideTabBar({})
           this.setData({
             // 显示登录授权按钮
             needAuthor: true
@@ -175,7 +175,7 @@ Component({
     }
     // 用户点击登录授权按钮触发事件
     if(typeof (e.detail.userInfo) != 'undefined'){
-      wx.showTabBar({})
+      //wx.showTabBar({})
       this.setData({
         // 显示创建/加入任务按钮
         needAuthor: false
@@ -207,6 +207,7 @@ Component({
         }).get({
           success: res => {
             // 已登记，更新资料
+            console.log('users 表中 _openid: ' + this.data.openid + ' 找到' + res.data.length + '条记录')
             if (res.data.length == 1) {
               db.collection('users').doc(res.data[0]._id).update({
                 data: {

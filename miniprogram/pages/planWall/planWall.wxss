@@ -44,7 +44,7 @@ page{
 .create-new-plane{
   position: absolute;
   width: 50%;
-  bottom: 0px;
+  bottom: 55px;
   font-size: 36rpx;
   text-align: center;
   background-color: #1ce25e;
@@ -60,7 +60,7 @@ page{
   position: absolute;
   right: 0rpx;
   width: 50%;
-  bottom: 0rpx;
+  bottom: 55px;
   font-size: 36rpx;
   text-align: center;
   background-color: rgb(65, 162, 252);
@@ -76,7 +76,7 @@ page{
   position: absolute;
   left: 0rpx;
   width: 100%;
-  bottom: 0rpx;
+  bottom: 55px;
   font-size: 36rpx;
   text-align: center;
   background-color: rgb(65, 162, 252);
