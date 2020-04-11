@@ -46,20 +46,22 @@ Page({
   },
 
   onGetTask: function (taskId) {
-    const db = wx.cloud.database()
-    db.collection('tasks').where({
-      _id: taskId
-    }).get({
+    wx.cloud.callFunction({
+      name: 'getTasks',
+      data: {
+        key: 'tid',
+        tid: taskId
+      },
       success: res => {
-        console.log(res.data)
+        // console.log(res.result.list[0]]
         this.setData({
-          taskData: res.data
+          taskData: res.result.list[0]
         })
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '请求失败'
+          title: '查询记录失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
       }

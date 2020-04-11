@@ -1,7 +1,7 @@
 Component({
   data: {
     "color": "#A9A9A9",
-    "selectedColor": "#29aef7",
+    "selectedColor": "#3388ff",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "#FFFFFF",
     list: [ {

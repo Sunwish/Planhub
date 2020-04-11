@@ -33,7 +33,7 @@ Component({
    wx.cloud.callFunction({
      name: 'getTasks',
      data:{
-
+       key: 'uid'
      },
      success: res =>{
        console.log(res.result.list)

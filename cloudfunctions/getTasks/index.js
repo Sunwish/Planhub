@@ -10,25 +10,57 @@ exports.main = async (event, context) => {
   联表查询(https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/aggregate/Aggregate.lookup.html)
   */
   const db = cloud.database()
-  let res = await db.collection('tasks').aggregate()
-    .match({
-      _participantsId: wxContext.OPENID
-    })
-    .lookup({
-      from: 'users',
-      localField: '_openid',
-      foreignField: '_openid',
-      as: 'creatorInfo',
-    })
-    .lookup({
-      from: 'users',
-      localField: '_participantsId',
-      foreignField: '_openid',
-      as: 'participantsrInfo',
-    })
-    .end()
+  console.log(event.key)
+  if (event.key == 'uid'){ // get by creatorId
+    let res = await db.collection('tasks').aggregate()
+      .match({
+        _participantsId: wxContext.OPENID,
+        _parentId: ''
+      })
+      .lookup({
+        from: 'users',
+        localField: '_openid',
+        foreignField: '_openid',
+        as: 'creatorInfo',
+      })
+      .lookup({
+        from: 'users',
+        localField: '_participantsId',
+        foreignField: '_openid',
+        as: 'participantsrInfo',
+      })
+      .end()
     console.log(res)
     return res
+  } else if (event.key == 'tid') // getByTaskId
+  {
+    let res = await db.collection('tasks').aggregate()
+      .match({
+        _id: event.tid,
+      })
+      .lookup({
+        from: 'users',
+        localField: '_openid',
+        foreignField: '_openid',
+        as: 'creatorInfo',
+      })
+      .lookup({
+        from: 'users',
+        localField: '_participantsId',
+        foreignField: '_openid',
+        as: 'participantsrInfo',
+      })
+      .lookup({
+        from: 'tasks',
+        localField: 'subTasksId',
+        foreignField: '_id',
+        as: 'subTaskInfo',
+      })
+      .end()
+    console.log(res)
+    return res
+  }
+  
 
 /*
   return {

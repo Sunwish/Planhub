@@ -5,3 +5,7 @@
 .plan-name{
   text-align: center;
 }
+
+.scroll-forums{
+  white-space: nowrap;
+}
