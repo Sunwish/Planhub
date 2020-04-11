@@ -10,6 +10,7 @@
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
     "van-col": "@vant/weapp/col/index",
     "van-dialog": "@vant/weapp/dialog/index",
+    "van-divider": "@vant/weapp/divider/index",
     "van-field": "@vant/weapp/field/index",
     "van-goods-action": "@vant/weapp/goods-action/index",
     "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",

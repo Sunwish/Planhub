@@ -1,22 +1,12 @@
-
 <view class="container">
-  <block wx:if="{{hasuserInfo}}">
-   <van-image class="user-pic"
-    round
-    width="7rem"
-    height="7rem"
-    src="{{userimg}}"
-    fit="cover"
-  />
-  <text class="user-name">{{user.nickName}}</text>
-  </block>
-  <block wx:else>
-   <van-image class="user-pic"
-    round
-    width="7rem"
-    height="7rem"
-    src="./user-unlogin.png"
-    fit="cover"
-  />
-  </block>
+	<block wx:if="{{hasuserInfo}}">
+		<van-image class="user-pic" round width="7rem" height="7rem" src="{{userimg}}" fit="cover" />
+		<text class="user-name">Hi~,{{user.nickName}}</text>
+	</block>
+	<block wx:else>
+		<van-image class="user-pic" round width="7rem" height="7rem" src="./user-unlogin.png" fit="cover" />
+	</block>
+	<van-cell-group class="function">
+		<van-cell icon="setting-o" title="设置" size="large" is-link bind:click="setting" />
+	</van-cell-group>
 </view>

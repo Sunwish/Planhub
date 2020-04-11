@@ -2,7 +2,7 @@ Component({
   data: {
     "color": "#A9A9A9",
     "selectedColor": "#3388ff",
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#F6F6F6",
     "borderStyle": "#FFFFFF",
     list: [ {
       "pagePath": "/pages/planWall/planWall",
