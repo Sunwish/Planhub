@@ -1,7 +1,7 @@
 Component({
   data: {
     "color": "#A9A9A9",
-    "selectedColor": "#00BFFF",
+    "selectedColor": "#29aef7",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "#FFFFFF",
     list: [ {
@@ -33,9 +33,9 @@ Component({
       const data = e.currentTarget.dataset
       const url = data.path
       wx.switchTab({url})
-     // this.setData({
-     //   selected: data.index
-     // })
+     // this.setData({ 
+     //   selected: data.index 
+     // }) 
     }
   }
 })

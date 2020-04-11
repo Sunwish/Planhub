@@ -1,11 +1,36 @@
 <!--miniprogram/pages/plan/detail/detail.wxml-->
 
-<view class="plan-info">
-  <view class="plan-name">
-    <text class="h1">{{taskData[0].taskName}}</text>
-  </view>
-  <view class="plan-introduction">
-    <text class="p">{{taskData[0].taskDescription}}</text>
-  </view>
-</view>
+<van-cell-group>
+  <van-cell title="{{taskData[0].taskName}}" value="" label="{{taskData[0].taskDescription}}" border="{{ false }}" />
 
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <van-collapse-item name="1" icon="stop" value="已接受">
+      <view slot="title">
+        <span class="van-collapse-text">子任务1  </span>
+        <!--<van-tag type="danger">标签</van-tag>-->
+      </view>
+      我是子任务描述
+      <van-steps steps="{{ steps }}" active="{{ active[0] }}" active-color="#38f"/>
+    </van-collapse-item>
+    <van-collapse-item name="2" icon="stop" value="处理中">
+      <view slot="title">
+        <span class="van-collapse-text">子任务2  </span>
+        <!--<van-tag type="danger">标签</van-tag>-->
+      </view>
+      我是子任务描述
+      <van-steps steps="{{ steps }}" active="{{ active[1] }}" active-color="#38f"/>
+    </van-collapse-item>
+  </van-collapse>
+</van-cell-group>
+
+<!--
+<van-cell value="内容" is-link>
+  <view slot="title">
+    <span class="van-cell-text">单元格  </span>
+    <van-tag type="danger">标签</van-tag>
+  </view>
+</van-cell>
+<van-cell title="单元格" icon="shop-o" >
+  <van-icon slot="right-icon" name="search" class="custom-icon" />
+</van-cell>
+-->

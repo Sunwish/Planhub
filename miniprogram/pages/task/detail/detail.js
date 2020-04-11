@@ -9,7 +9,30 @@ Page({
    */
   data: {
     taskId: '',
-    taskData: {}
+    taskData: {},
+    activeNames: [],
+    steps: [
+      {
+        text: '未开始',
+        //desc: '描述信息'
+      },
+      {
+        text: '已接受'
+      },
+      {
+        text: '处理中'
+      },
+      {
+        text: '已完成'
+      }
+    ],
+    active:[1, 2]
+  },
+
+  onChange(event) {
+    this.setData({
+      activeNames: event.detail
+    });
   },
 
   /**

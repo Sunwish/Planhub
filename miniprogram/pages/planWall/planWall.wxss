@@ -36,7 +36,7 @@ Component{
 .scroll-view{
   position: absolute;
   left: 0;
-  top: /*80rpx*/ 0rpx;
+  top: /*80rpx*/ 24rpx;
   bottom: 100rpx;
   /*height: 100%;*/
 }
