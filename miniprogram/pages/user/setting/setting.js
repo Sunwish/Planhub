@@ -17,15 +17,15 @@ Page({
       _openid: app.globalData.openid
     }).get({
       success: res => {
-         db.collection('users').doc(res.data[0]._id).update({
-         data:{
-          Mespush:detail
-         }
-      })
-     },
-     fail: f => {
-      console.log('update UserInfo failed')
-     }
+        db.collection('users').doc(res.data[0]._id).update({
+          data: {
+            Mespush: detail
+          }
+        })
+      },
+      fail: f => {
+        console.log('update UserInfo failed')
+      }
     })
   },
   onLoad: function (options) {
@@ -33,17 +33,14 @@ Page({
     //全局变量取openid
     var Openid = app.globalData.openid;
     const db = wx.cloud.database();
-    var checked =true;
     db.collection('users').where({
       _openid: Openid
     }).get({
-      success: function (res) {
-          checked=res.data[0].Mespush;
+      success: res => {
+        this.setData({
+          checked1: res.data[0].Mespush
+        })
       }
-    })
-    console.log(checked)
-    this.setData({
-      checked1: checked
     })
   },
 })
