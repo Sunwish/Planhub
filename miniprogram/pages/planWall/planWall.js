@@ -154,12 +154,14 @@ Component({
               // 显示登录授权按钮
               needAuthor: true
             })
+            app.globalData.Authorize = false;
           } else {
             //wx.showTabBar({})
             this.setData({
               // 显示创建/加入任务按钮
               needAuthor: false
             })
+            app.globalData.Authorize = true;
           }
         },
         fail: err =>{
@@ -199,7 +201,7 @@ Component({
         var province = userInfo.province
         var city = userInfo.city
         var country = userInfo.country
-
+        app.globalData.Authorize = true;
         // 查找用户是否已登记
         const db = wx.cloud.database();
         db.collection('users').where({

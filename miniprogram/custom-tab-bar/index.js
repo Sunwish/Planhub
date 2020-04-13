@@ -1,5 +1,6 @@
 Component({
   data: {
+    "selected":{},
     "color": "#A9A9A9",
     "selectedColor": "#3388ff",
     "backgroundColor": "#F6F6F6",
@@ -25,14 +26,22 @@ Component({
       "icon": "manager-o",
       "selectedIcon":"manager"
     }]
-  },
+  },  
   attached() {
   },
   methods: {
     switchTab(e) {
       const data = e.currentTarget.dataset
       const url = data.path
-      wx.switchTab({url})
+      wx.switchTab({
+        url,
+        //跳转刷新
+        success: function (e) {
+          var page = getCurrentPages().pop();
+          if (page == undefined || page == null) return;
+          page.onLoad();
+          }
+      })
      // this.setData({ 
      //   selected: data.index 
      // }) 

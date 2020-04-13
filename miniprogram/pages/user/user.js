@@ -14,34 +14,29 @@ Component({
   data: {
     userimg: {},
     user: {},
-    hasuserInfo: false,
-    hour: {}
+    hasuserInfo: {}
   },
   methods: {
     onLoad: function () {
       wx.hideTabBar();
-      wx.getSetting({
-        success: res => {
-          if (res.authSetting['scope.userInfo']) {
-            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-            wx.getUserInfo({
-              success: res => {
-                this.setData({
-                  hasuserInfo: true,
-                  userimg: res.userInfo.avatarUrl,
-                  user: res.userInfo
-                })
-              }
+      //判断用户是否授权
+
+      if (app.globalData.Authorize) {
+        wx.getUserInfo({
+          success: res => {
+            this.setData({
+              userimg: res.userInfo.avatarUrl,
+              user: res.userInfo
             })
           }
-        }
-
-      })
+        })
+      }
     },
-    setting:function(){
+    //设置按钮的跳转
+    setting: function () {
       wx.navigateTo({
         url: 'setting/setting',
       })
-    }
+    },
   }
 })
