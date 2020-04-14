@@ -56,7 +56,8 @@ Page({
       success: res => {
         // console.log(res.result.list[0]]
         this.setData({
-          taskData: res.result.list[0]
+          taskData: res.result.list[0],
+          loading: false
         })
       },
       fail: err => {
@@ -81,9 +82,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.setData({
-      loading: false
-    });
+    
   },
 
   /**
