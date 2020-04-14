@@ -25,5 +25,5 @@
 </view>
 
 <view class="button-view">
-  <button form-type="submit" size="large" class="button-create" style="width: 100%">提交反馈</button>
+  <van-button plain hairline loading-text="加载中..." type="info"  size="large" class="button-create" style="width: 100%">提交反馈</van-button>
 </view>

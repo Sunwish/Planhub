@@ -3,6 +3,7 @@
       "van-rate": "@vant/weapp/rate/index",
       "van-cell": "@vant/weapp/cell/index",
       "van-cell-group": "@vant/weapp/cell-group/index",
-      "van-switch": "@vant/weapp/switch/index"
+      "van-switch": "@vant/weapp/switch/index",
+      "van-button": "@vant/weapp/button/index"
   }
 }
