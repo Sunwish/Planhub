@@ -1,31 +1,37 @@
 <!--miniprogram/pages/plan/detail/detail.wxml-->
 
 <van-cell-group>
-  <van-cell title="{{taskData.taskName}}" value="" label="{{taskData.taskDescription}}" border="{{ false }}" />
-  <van-cell value="">
-    <view slot="title">
-      <view style="font-size:30rpx; margin:0 16rpx 0 0; display:inline-block; ">
-          <van-icon name="friends" size="36rpx"/>
-      </view>
-      
-      <!--<scroll-view class="scroll-forums" scroll-x="true">-->
-      <view style="display:inline-block; line-height:64rpx;" wx:for="{{taskData.participantsrInfo}}" wx:key="key">
-          <image src="{{item.avatarUrl}}" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
-      </view>
-      <!--</scroll-view>-->
-    </view>
-  </van-cell>
-  <van-collapse value="{{ activeNames }}" bind:change="onChange">
-    <van-collapse-item name="1" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="key">
+  <van-skeleton row="4" loading="{{ loading }}">
+    <van-cell title="{{taskData.taskName}}" label="{{taskData.taskDescription}}" value="" border="{{ false }}" />
+    <van-cell value="">
       <view slot="title">
-        <span class="van-collapse-text">{{item.taskName}}  </span>
-        <!--<van-tag type="danger">标签</van-tag>-->
+        <view style="font-size:30rpx; margin:0 16rpx 0 0; display:inline-block; ">
+            <van-icon name="friends" size="36rpx"/>
+        </view>
+        <!--<scroll-view class="scroll-forums" scroll-x="true">-->
+        <view style="display:inline-block; line-height:64rpx;" wx:for="{{taskData.participantsrInfo}}" wx:key="key">
+            <image src="{{item.avatarUrl}}" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
+        </view>
+        <!--</scroll-view>-->
       </view>
-      {{item.taskDescription}}
-      <van-steps steps="{{ steps }}" active="{{ active[0] }}" active-color="#38f"/>
-    </van-collapse-item>
-  </van-collapse>
+    </van-cell>
+    <van-collapse value="{{ activeNames }}" bind:change="onChange">
+      <van-collapse-item name="1" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="key">
+        <view slot="title">
+          <span class="van-collapse-text">{{item.taskName}}  </span>
+          <!--<van-tag type="danger">标签</van-tag>-->
+        </view>
+        {{item.taskDescription}}
+        <van-steps steps="{{ steps }}" active="{{ active[0] }}" active-color="#38f"/>
+      </van-collapse-item>
+    </van-collapse>
+  </van-skeleton>
 </van-cell-group>
+
+
+<view class="create-new-subTask">
+  <van-button round type="info" bind:click='addSubTask'>+ 添加子任务</van-button>
+</view>
 
 <!--
 <van-cell value="内容" is-link>

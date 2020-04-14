@@ -9,3 +9,13 @@
 .scroll-forums{
   white-space: nowrap;
 }
+
+van-skeleton view{
+  background: #fff;
+}
+
+.create-new-subTask{
+  position: absolute;
+  right: 30rpx;
+  bottom: 120rpx;
+}

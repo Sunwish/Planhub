@@ -11,6 +11,7 @@ Page({
     taskId: '',
     taskData: {},
     activeNames: [],
+    loading: true,
     steps: [
       {
         text: '未开始',
@@ -68,11 +69,21 @@ Page({
     })
   },
 
+  addSubTask: function (){
+    console.log('addSubTask: function ()');
+    wx.showToast({
+      icon: "none",
+      title: 'addSubTask: function ()'
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    this.setData({
+      loading: false
+    });
   },
 
   /**

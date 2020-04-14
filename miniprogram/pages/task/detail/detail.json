@@ -5,8 +5,11 @@
     "van-collapse": "@vant/weapp/collapse/index",
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-steps": "@vant/weapp/steps/index",
-    "van-tag": "@vant/weapp/tag/index"
+    "van-tag": "@vant/weapp/tag/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-skeleton": "@vant/weapp/skeleton/index"
   },
-  "navigationBarTitleText": "计划详情",
+  "navigationBarTitleText": "任务详情",
   "disableScroll": true
 }
