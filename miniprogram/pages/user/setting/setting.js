@@ -44,4 +44,9 @@ Page({
       }
     })
   },
+  feedback:function(){
+    wx.navigateTo({
+      url: '../../feedback/feedback',
+    })
+  }
 })

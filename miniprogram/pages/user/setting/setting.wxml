@@ -3,13 +3,8 @@
      <van-switch slot="right-icon" checked="{{ checked1 }}"  size="23px" bind:change="onChange1"/>
    </van-cell>
 </van-cell-group>
-<title> 给个五星好评呗</title>
-<van-rate
-  value="0"
-  size="{{ 25 }}"
-  color="#ee0a24"
-  void-color="#eee"
-  void-icon="star"
-  bind:change="onChange"
-  allow-half
-/>
+	<van-cell-group class="function">
+		<van-cell  title="意见反馈" size="large" is-link bind:click="feedback" />
+	</van-cell-group>
+
+
