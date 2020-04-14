@@ -2,7 +2,6 @@
    <van-cell icon="comment-circle-o" title="消息推送"size="large" >
     <van-switch slot="right-icon" checked="{{ checked1 }}"  size="18px" bind:change="onChange1"/>
    </van-cell>
-
 	<van-cell-group class="function">
 		<van-cell icon="edit" title="意见反馈" size="large" is-link bind:click="feedback" />
     <van-cell icon="contact" title="关于我们" size="large" is-link bind:click="contact" /> 
