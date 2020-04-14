@@ -8,6 +8,7 @@ Page({
   onChange1({
     detail
   }) {
+    wx.vibrateShort();
     this.setData({
       checked1: detail
     })
