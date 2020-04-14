@@ -48,5 +48,15 @@ Page({
     wx.navigateTo({
       url: '../../feedback/feedback',
     })
-  }
+  },
+  contact:function(){
+    wx.navigateTo({
+      url: '../../contact/contact',
+    })
+  },
+  guide:function(){
+    wx.navigateTo({
+      url: '../../guide/guide',
+    })
+  },
 })

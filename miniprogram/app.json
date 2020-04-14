@@ -7,7 +7,9 @@
     "pages/task/detail/detail",
     "pages/task/join/join",
     "pages/user/setting/setting",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/contact/contact",
+    "pages/guide/guide"
   ],
   "usingComponents": {
     "van-icon": "@vant/weapp/icon/index"
