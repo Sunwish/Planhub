@@ -6,7 +6,8 @@
     "pages/message/message",
     "pages/task/detail/detail",
     "pages/task/join/join",
-    "pages/user/setting/setting"
+    "pages/user/setting/setting",
+    "pages/feedback/feedback"
   ],
   "usingComponents": {
     "van-icon": "@vant/weapp/icon/index"
