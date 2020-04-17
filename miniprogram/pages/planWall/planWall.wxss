@@ -42,7 +42,7 @@ Component{
 }
 
 .create-new-plane{
-  position: absolute;
+  position: fixed;
   width: 50%;
   bottom: 55px;
   font-size: 36rpx;
@@ -57,7 +57,7 @@ Component{
 }
 
 .join-plane{
-  position: absolute;
+  position: fixed;
   right: 0rpx;
   width: 50%;
   bottom: 55px;

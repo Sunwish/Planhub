@@ -48,5 +48,7 @@
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-picker": "@vant/weapp/picker/index"
   },
-  "navigationBarTitleText": ""
+  "navigationBarTitleText": "",
+  "disableScroll": true,
+  "enablePullDownRefresh": true
 }

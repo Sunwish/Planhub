@@ -1,4 +1,5 @@
-<van-cell-group title="设置">
+<title class="titleview">设置</title>
+<van-cell-group >
    <van-cell icon="comment-circle-o" title="消息推送"size="large" >
     <van-switch slot="right-icon" checked="{{ checked1 }}"  size="18px" bind:change="onChange1"/>
    </van-cell>
@@ -9,4 +10,5 @@
     <van-cell icon="question-o" title="使用指南"size="large" is-link bind:click="guide" />  
   </van-cell-group>
 </van-cell-group>
+
 
