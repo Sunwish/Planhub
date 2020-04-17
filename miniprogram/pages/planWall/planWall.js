@@ -182,6 +182,7 @@ Component({
         // 显示创建/加入任务按钮
         needAuthor: false
       });
+      app.globalData.Authorize = true;
       this.updateDBUserInfo();
     }
   },

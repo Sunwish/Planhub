@@ -15,7 +15,6 @@ Component({
     userimg: {},
     user: {},
     hasuserInfo: false,
-    hour: {}
   },
   methods: {
     onLoad: function () {
@@ -42,6 +41,9 @@ Component({
       wx.navigateTo({
         url: 'setting/setting',
       })
+    },
+    getUserInfo:function(){
+
     }
   }
 })

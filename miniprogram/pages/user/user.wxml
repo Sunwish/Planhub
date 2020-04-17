@@ -7,7 +7,7 @@
 	  </van-cell-group>
 	</block>
 	<block wx:else>
-		<van-image class="user-pic" round width="7rem" height="7rem" src="./user-unlogin.png" fit="cover" />
+		<van-image class="user-pic" round width="7rem" height="7rem" src="./user-unlogin.png" fit="cover" click="getUserInfo" />
 		<text class="user-name">Hi~,请登录</text>
 </block>
 </view>
