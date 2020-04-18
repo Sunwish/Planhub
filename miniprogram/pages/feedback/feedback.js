@@ -1,11 +1,20 @@
 // pages/feedback/feedback.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+     
+  },
+  submitfeedback: function(){
+    wx.showToast({
+      title: '提交成功',
+    })
+    setTimeout(function () {
+      wx.navigateBack({})
+    }, 1000)
   },
 
   /**

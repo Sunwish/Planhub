@@ -4,7 +4,8 @@
       "van-cell": "@vant/weapp/cell/index",
       "van-cell-group": "@vant/weapp/cell-group/index",
       "van-switch": "@vant/weapp/switch/index",
-      "van-button": "@vant/weapp/button/index"
+      "van-button": "@vant/weapp/button/index",
+      "van-toast": "@vant/weapp/toast/index"
   },
   "disableScroll": true
 }

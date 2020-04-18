@@ -6,6 +6,6 @@
   </view>
 
   <view class="button-view">
-    <button form-type="submit" size="mini" class="button-join" style="width: 100%">加入任务</button>
+    <button form-type="submit" size="small" class="button-join" style="width: 100%">加入任务</button>
   </view>
 </form>

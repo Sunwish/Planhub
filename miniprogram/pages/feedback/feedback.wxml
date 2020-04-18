@@ -1,6 +1,5 @@
 <!--pages/feedback/feedback.wxml-->
 
-
 <viewtest>
 <text> 给个五星好评呗</text>
 </viewtest>
@@ -25,5 +24,8 @@
 </view>
 
 <view class="button-view">
-  <van-button plain hairline loading-text="加载中..." type="info"  size="large" class="button-create" style="width: 100%">提交反馈</van-button>
+  <van-button bind:click='submitfeedback' plain hairline loading-text="加载中..." type="info"  size="large" class="button-create" style="width: 100%">提交反馈</van-button>
 </view>
+
+
+
