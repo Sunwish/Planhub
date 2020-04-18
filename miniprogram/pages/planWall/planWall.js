@@ -40,6 +40,8 @@ Component({
        this.setData({
          tasksData: res.result.list
        })
+       wx.stopPullDownRefresh();
+       wx.hideNavigationBarLoading(); // 完成加载
      },
      fail: err => {
        wx.showToast({
@@ -285,7 +287,6 @@ Component({
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.onQuery();
-    wx.stopPullDownRefresh();
   },
 
   /**

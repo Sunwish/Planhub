@@ -1,7 +1,7 @@
 {
   "usingComponents": {"van-search": "@vant/weapp/search/index"},
   "navigationBarTitleText": "任务",
-  "backgroundColor": "#000000",
+  "backgroundColor": "#f7f8fa",
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark" 
 }
