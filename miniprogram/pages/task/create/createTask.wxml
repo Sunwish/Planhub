@@ -1,17 +1,17 @@
 <!--miniprogram/pages/plan/create/createPlan.wxml-->
 <form bindsubmit="onCreateTask">
-  <view class="basic-info">
-    <input type="text" name="name" placeholder="任务名"></input>
-    <textarea name="description" placeholder="任务描述还是要有的"></textarea>
-  </view>
+	<view class="basic-info">
+		<input type="text" name="name" placeholder="任务名"></input>
+		<textarea name="description" placeholder="任务描述还是要有的"></textarea>
+	</view>
 
-  <view class="plan-config">
-    <text class="h1">选择分区</text>
-    <view></view>
-    <input name="forum" placeholder="手动填写，若无对应分区则自动创建新分区"></input>
-  </view>
+	<view class="plan-config">
+		<text class="h1">选择分区</text>
+		<view></view>
+		<input name="forum" placeholder="手动填写，若无对应分区则自动创建新分区"></input>
+	</view>
 
-  <view class="button-view">
-    <button form-type="submit" size="small" class="button-create" style="width: 100%">创建任务</button>
-  </view>
+	<view class="button-view">
+		<button form-type="submit" size="small" class="button-create" style="width: 100%">创建任务</button>
+	</view>
 </form>
