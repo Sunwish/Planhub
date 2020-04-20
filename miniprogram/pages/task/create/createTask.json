@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "van-field": "@vant/weapp/field/index"
+  },
   "backgroundColor": "#ffffff",
   "backgroundTextStyle": "light",
   "navigationBarTitleText": "创建新任务",
