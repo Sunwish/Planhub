@@ -9,7 +9,8 @@
     "pages/user/setting/setting",
     "pages/feedback/feedback",
     "pages/contact/contact",
-    "pages/guide/guide"
+    "pages/guide/guide",
+    "pages/invite/invite"
   ],
   "usingComponents": {
     "van-icon": "@vant/weapp/icon/index",

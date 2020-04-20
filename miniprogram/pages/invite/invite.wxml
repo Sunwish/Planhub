@@ -1,0 +1,4 @@
+<!--pages/invite/invite.wxml-->
+<view class="comfirm-join">
+  <van-button round type="info" color='#1ce25e' bind:click='comfirm'> 确认加入</van-button>
+</view>

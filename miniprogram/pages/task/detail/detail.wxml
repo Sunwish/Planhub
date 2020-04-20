@@ -33,6 +33,10 @@
   <van-button round type="info" bind:click='addSubTask'>+ 添加子任务</van-button>
 </view>
 
+<view class="share-task">
+  <van-button open-type="share" round type="info" color='#1ce25e' bind:click='returnTid'> 邀请成员加入</van-button>
+</view>
+
 <!--
 <van-cell value="内容" is-link>
   <view slot="title">

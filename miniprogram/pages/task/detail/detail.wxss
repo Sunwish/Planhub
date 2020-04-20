@@ -19,3 +19,9 @@ van-skeleton view{
   right: 30rpx;
   bottom: 120rpx;
 }
+
+.share-task{
+  position: absolute;
+  right: 30rpx;
+  bottom: 240rpx;
+}

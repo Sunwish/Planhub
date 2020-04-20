@@ -75,8 +75,21 @@ Page({
     wx.showToast({
       icon: "none",
       title: 'addSubTask: function ()'
-    })
+    }) 
   },
+
+
+
+  returnTid: function (){
+    var pages = getCurrentPages();
+    console.log("get taskId frrom this page");
+    var tid = pages[1].options.taskId;
+    console.log(pages[1].options.taskId);
+    app.globalData.taskid2share = tid;
+    console.log(app.globalData.taskid2share);
+    return tid;
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -123,7 +136,14 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    return {
+      title: '加入我的任务',
+      path: 'pages/invite/invite?tid='+app.globalData.taskid2share,
+      imageUrl: '../../../images/invite.jpg',
+      success: function (res) {
+        console.log('成功', res)
+      }
+    }
   }
 })
