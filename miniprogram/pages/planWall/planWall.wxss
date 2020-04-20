@@ -41,39 +41,15 @@ Component{
   /*height: 100%;*/
 }
 
-.create-new-plane{
-  position: fixed;
-  width: 50%;
-  bottom: 55px;
-  font-size: 36rpx;
-  text-align: center;
-  background-color: #1ce25e;
-  color: white;
-  height: 100rpx;
-  line-height: 100rpx;
-}
-.create-new-plane navigator{
-  width: 100%;
+.new-task{
+  position:fixed;
+  right: 50rpx;
+  bottom: 150rpx;
 }
 
-.join-plane{
-  position: fixed;
-  right: 0rpx;
-  width: 50%;
-  bottom: 55px;
-  font-size: 36rpx;
-  text-align: center;
-  background-color: rgb(65, 162, 252);
-  color: white;
-  height: 100rpx;
-  line-height: 100rpx;
-}
-.join-plane navigator{
-  width: 100%;
-}
 
 .authorization{
-  position: absolute;
+  position: fixed;
   left: 0rpx;
   width: 100%;
   bottom: 55px;

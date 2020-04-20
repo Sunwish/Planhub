@@ -302,7 +302,11 @@ Component({
   onShareAppMessage: function () {
 
   },
-
+  addTask:function(){
+    wx.navigateTo({
+      url: '../task/create/createTask',
+    })
+  },
 
  }
 })

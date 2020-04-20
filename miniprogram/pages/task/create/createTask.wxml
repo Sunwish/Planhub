@@ -1,17 +1,37 @@
 <!--miniprogram/pages/plan/create/createPlan.wxml-->
-<form bindsubmit="onCreateTask">
-	<view class="basic-info">
-		<input type="text" name="name" placeholder="任务名"></input>
-		<textarea name="description" placeholder="任务描述还是要有的"></textarea>
-	</view>
-
-	<view class="plan-config">
-		<text class="h1">选择分区</text>
-		<view></view>
-		<input name="forum" placeholder="手动填写，若无对应分区则自动创建新分区"></input>
-	</view>
-
-	<view class="button-view">
-		<button form-type="submit" size="small" class="button-create" style="width: 100%">创建任务</button>
-	</view>
-</form>
+<van-notify id="van-notify" />
+<van-tabs active="{{ activeTab }}" color="#3388ff" animated border="{{false}}">
+	<van-tab title="创建任务">
+		<van-cell-group title="任务信息">
+			<van-field bind:change="nameChange" label="任务名" placeholder="给你的任务取一个名字吧~" required />
+			<van-field bind:change="descriptionChange" label="任务描述" placeholder="任务描述还是要有的" type="textarea" autosize />
+		</van-cell-group>
+		<van-cell-group title="任务时间">
+			<van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" is-link required />
+			<van-calendar show="{{ show }}" type="range" bind:close="onClose" bind:confirm="onConfirm" color="#3388ff" confirm-text="完成" confirm-disabled-text="请选择结束时间" />
+		</van-cell-group>
+			<van-radio-group value="{{ radio }}" bind:change="onChange">
+				<van-cell-group title="任务提醒方式">
+					<van-cell title="无需提醒" clickable data-name="1" bind:click="onClick">
+						<van-radio slot="right-icon" name="1" />
+					</van-cell>
+					<van-cell title="每日提醒" clickable data-name="2" bind:click="onClick">
+						<van-radio slot="right-icon" name="2" />
+						</van-cell>
+						<van-cell title="截止日提醒" clickable data-name="3" bind:click="onClick">
+						<van-radio slot="right-icon" name="3" />
+					</van-cell>
+				</van-cell-group>
+			</van-radio-group>
+			<van-cell-group title="附件上传（最多上传五个附件,暂时只支持图片）">
+       <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead"  multiple max-count="5" />
+			</van-cell-group>
+			<van-button type="info"bind:click="onCreateTask" class="button-view" >创建任务</van-button>
+	</van-tab>
+	<van-tab title="加入任务">
+	      <van-cell-group title="任务信息">
+			  <van-field bind:change="IDChange" label="任务ID"  required />
+				</van-cell-group>
+				<van-button type="info"bind:click="onJoinTask" class="button-view" >加入任务</van-button>
+	</van-tab>
+</van-tabs>

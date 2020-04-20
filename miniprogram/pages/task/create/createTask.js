@@ -1,6 +1,7 @@
 // miniprogram/pages/plan/create/createPlan.js
 
 const app = getApp();
+import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
 
 Page({
 
@@ -8,7 +9,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    "activeTab":0,
+    "date": '',
+    "show": false,
+    "radio":'1',
+    "name":"",
+    "description":"",
+    "taskId":""
   },
 
   /**
@@ -68,22 +75,19 @@ Page({
   },
 
   onGetForumIdByName: function (forumName) {
-    
-    
+
+
   },
 
-  onCreateTask: function (data) {
-    var taskName = data.detail.value.name;
-    var taskDescription = data.detail.value.description;
-    
-    if (taskName == ""){
-      wx.showToast({
-        icon: "none",
-        title: '任务名不能为空'
-      })
+  onCreateTask: function () {
+    var taskName = this.data.name;
+    var taskDescription = this.data.description;
+
+    if (taskName == "") {
+      Notify({ type: 'danger', message: '任务名不能为空！' });
       return;
     }
-    
+
     if (taskDescription == "") {
       taskDescription = "任务描述还是要有的.";
     }
@@ -152,6 +156,118 @@ Page({
         console.error('[数据库] [新增记录] 失败：', err)
       }
     })
-  }
+  },
+  nameChange(event){
+      this.setData({
+        name:event.detail
+      })
+  },
+  descriptionChange(event){
+    this.setData({
+      description:event.detail
+    })
+},
+   IDChange(event){
+    this.setData({
+      taskId:event.detail
+    })
+},
+  //日历展示
+  onDisplay() {
+    this.setData({
+      show: true
+    });
+  },
+  onClose() {
+    this.setData({
+      show: false
+    });
+  },
+  //返回时间
+  formatDate(date) {
+    date = new Date(date);
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  },
+  onConfirm(event) {
+    const [start, end] = event.detail;
+    this.setData({
+      show: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`
+    });
+  },
+  //选择框的提醒
+  onChange(event) {
+    this.setData({
+      radio: event.detail
+    });
+  },
+  
+  onClick(event) {
+    const {
+      name
+    } = event.currentTarget.dataset;
+    this.setData({
+      radio: name
+    });
+  },
 
+  onJoinTask: function(data){
+    const db = wx.cloud.database();
+    db.collection('tasks').where({
+      _id: this.data.taskId
+    }).get({
+      success: res => {
+        // 检查任务是否存在
+        if (res.data.length == 1){
+          // 检查是否已经加入任务
+          if(res.data[0]._participantsId.includes(app.globalData.openid) == true){
+            wx.showToast({
+              icon: 'none',
+              title: '你已加入该任务'
+            });
+            setTimeout(function () {
+              wx.navigateBack({})
+            }, 1000);
+            return;
+          }
+          this.joinTask({ taskId:this.data.taskId })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '任务不存在'
+          });
+        }
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询失败'
+        });
+      }
+    })
+  },
+
+  joinTask: function(data){
+    wx.cloud.callFunction({
+      name: 'joinTask',
+      data: {
+        taskId: data.taskId
+      },
+      success: res => {
+        wx.showToast({
+          title: '加入任务成功',
+        });
+        setTimeout(function () {
+          wx.navigateBack({})
+        }, 1000);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '加入任务失败'
+        });
+        console.error('[云函数] [joinTask] 调用失败', err)
+      }
+    })
+  },
 })

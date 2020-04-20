@@ -40,13 +40,10 @@
   </view>
   </scroll-view>
 </view>
-
 <view class="authorization" wx:if="{{needAuthor}}">
   <button open-type="getUserInfo" bindgetuserinfo="authorUserInfo">登录授权</button>
 </view>
-<view class="create-new-plane" wx:if="{{!needAuthor}}">
-  <navigator url="../task/create/createTask">+ 创建新任务</navigator>
+<view class="new-task" wx:if="{{!needAuthor}}" >
+  <van-button round type="info" bind:click='addTask' icon="plus" ></van-button>
 </view>
-<view class="join-plane" wx:if="{{!needAuthor}}">
-  <navigator url="../task/join/join">+ 加入任务</navigator>
-</view>
+

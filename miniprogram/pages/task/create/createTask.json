@@ -1,9 +1,19 @@
 {
   "usingComponents": {
-    "van-field": "@vant/weapp/field/index"
+    "van-field": "@vant/weapp/field/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-notify": "@vant/weapp/notify/index"
   },
   "backgroundColor": "#ffffff",
   "backgroundTextStyle": "light",
-  "navigationBarTitleText": "创建新任务",
+  "navigationBarTitleText": "任务中心",
   "disableScroll": true
 }
