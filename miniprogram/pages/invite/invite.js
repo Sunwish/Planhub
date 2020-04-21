@@ -31,7 +31,9 @@ Page({
     }
   },
 
-  comfirm: function(){
+  comfirm: function(e){
+    console.log("comfirmPart");
+    console.log(app.globalData.openid);
     var tid = app.globalData.taskid2share;
     console.log(tid);
     const db = wx.cloud.database();

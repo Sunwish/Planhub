@@ -92,7 +92,7 @@ Component({
   onLoad: function (options) {
     // 获取openid和授权
     wx.hideTabBar();
-    if (!app.globalData.openid) {
+    //if (!app.globalData.openid) {
       // 调用云函数
       wx.cloud.callFunction({
         name: 'login',
@@ -112,8 +112,8 @@ Component({
         fail: err => {
           /*console.error('[云函数] [login] 调用失败', err)*/
         }
-      })
-    }
+      })   
+    //}
   },
 
   /**

@@ -43,7 +43,6 @@ Page({
     var taskId = options.taskId;
     /*console.log(planId);*/
     this.onGetTask(taskId);
-    
   },
 
   onGetTask: function (taskId) {
@@ -82,7 +81,7 @@ Page({
 
   returnTid: function (){
     var pages = getCurrentPages();
-    console.log("get taskId frrom this page");
+    console.log("get taskId from this page");
     var tid = pages[1].options.taskId;
     console.log(pages[1].options.taskId);
     app.globalData.taskid2share = tid;
@@ -139,10 +138,11 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: '加入我的任务',
+      //path: 'pages/planWall/planWall',
       path: 'pages/invite/invite?tid='+app.globalData.taskid2share,
       imageUrl: '../../../images/invite.jpg',
       success: function (res) {
-        console.log('成功', res)
+        console.log('成功', res);
       }
     }
   }
