@@ -26,12 +26,12 @@
 			<van-cell-group title="附件上传（最多上传五个附件,暂时只支持图片）">
        <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead"  multiple max-count="5" />
 			</van-cell-group>
-			<van-button type="info"bind:click="onCreateTask" class="button-view" >创建任务</van-button>
+			<van-button round type="info" block bind:click="onCreateTask" class="button-view" >创建任务</van-button>
 	</van-tab>
 	<van-tab title="加入任务">
 	      <van-cell-group title="任务信息">
 			  <van-field bind:change="IDChange" label="任务ID"  required />
 				</van-cell-group>
-				<van-button type="info"bind:click="onJoinTask" class="button-view" >加入任务</van-button>
+				<van-button round type="info" block bind:click="onJoinTask" class="button-view" >加入任务</van-button>
 	</van-tab>
 </van-tabs>

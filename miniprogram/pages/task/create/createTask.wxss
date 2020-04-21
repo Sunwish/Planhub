@@ -2,5 +2,7 @@
 
 
   .button-view{
-  display: flex;
+    display: flex;
+    margin: 30rpx 0;
+    padding: 0 15px;
   }

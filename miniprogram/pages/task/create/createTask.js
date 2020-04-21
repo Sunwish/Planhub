@@ -15,7 +15,7 @@ Page({
     "radio":'1',
     "name":"",
     "description":"",
-    "taskId":""
+    "taskId":"",
   },
 
   /**

@@ -34,7 +34,7 @@
 </view>
 
 <view class="share-task">
-  <van-button open-type="share" round type="info" color='#1ce25e' bind:click='returnTid'> 邀请成员加入</van-button>
+  <van-button open-type="share" round type="primary" bind:click='returnTid'> 邀请成员加入</van-button>
 </view>
 
 <!--
