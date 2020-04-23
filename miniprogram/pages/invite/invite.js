@@ -60,7 +60,7 @@ Page({
             }, 1000);
             return;
           }
-          this.joinTask({ tid });
+          this.joinTask(tid);
         } 
         else {
           wx.showToast({
@@ -78,16 +78,16 @@ Page({
     })
   },
   joinTask: function(tid){
-    console.log("openid:");
-    console.log(app.globalData.openid);
+    //console.log("openid:");
+    //console.log(app.globalData.openid);
     //var tid = app.globalData.taskid2share;
-    console.log(tid);
+    //console.log(tid);
     const db = wx.cloud.database();
     console.log('joinSharedTask');
     wx.cloud.callFunction({
       name: 'joinTask',
       data: {
-        taskId: tid
+        taskId: this.data.tid
       },
       success: res => {
         wx.showToast({
