@@ -14,6 +14,5 @@
   },
   "backgroundColor": "#ffffff",
   "backgroundTextStyle": "light",
-  "navigationBarTitleText": "任务中心",
-  "//disableScroll": true
+  "navigationBarTitleText": "任务中心"
 }

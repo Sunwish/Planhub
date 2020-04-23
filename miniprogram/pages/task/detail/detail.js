@@ -13,6 +13,7 @@ Page({
     activeNames: [],
     loading: true,
     tid: '',
+    checked: false,
     steps: [
       {
         text: '未开始',
@@ -37,6 +38,12 @@ Page({
     });
   },
 
+  onChange_checkbox(event){
+    this.setData({
+      checked: event.detail
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -58,7 +65,7 @@ Page({
         tid: taskId
       },
       success: res => {
-        // console.log(res.result.list[0]]
+        console.log(res.result.list[0])
         this.setData({
           taskData: res.result.list[0],
           loading: false

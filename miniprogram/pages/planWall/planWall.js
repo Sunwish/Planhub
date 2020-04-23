@@ -36,7 +36,7 @@ Component({
        key: 'uid'
      },
      success: res =>{
-       console.log(res.result.list)
+       // console.log(res.result.list)
        this.setData({
          tasksData: res.result.list
        })
@@ -212,7 +212,7 @@ Component({
         }).get({
           success: res => {
             // 已登记，更新资料
-            console.log('users 表中 _openid: ' + this.data.openid + ' 找到' + res.data.length + '条记录')
+            // console.log('users 表中 _openid: ' + this.data.openid + ' 找到' + res.data.length + '条记录')
             if (res.data.length >= 1) {
               db.collection('users').doc(res.data[0]._id).update({
                 data: {
