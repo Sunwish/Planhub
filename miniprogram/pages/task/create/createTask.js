@@ -9,13 +9,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "activeTab":0,
+    "activeTab": 0,
     "date": '',
     "show": false,
-    "radio":'1',
-    "name":"",
-    "description":"",
-    "taskId":"",
+    "radio": '1',
+    "name": "",
+    "description": "",
+    "taskId": "",
+    "FileList": []
   },
 
   /**
@@ -84,7 +85,10 @@ Page({
     var taskDescription = this.data.description;
 
     if (taskName == "") {
-      Notify({ type: 'danger', message: '任务名不能为空！' });
+      Notify({
+        type: 'danger',
+        message: '任务名不能为空！'
+      });
       return;
     }
 
@@ -157,21 +161,21 @@ Page({
       }
     })
   },
-  nameChange(event){
-      this.setData({
-        name:event.detail
-      })
+  nameChange(event) {
+    this.setData({
+      name: event.detail
+    })
   },
-  descriptionChange(event){
+  descriptionChange(event) {
     this.setData({
-      description:event.detail
+      description: event.detail
     })
-},
-   IDChange(event){
+  },
+  IDChange(event) {
     this.setData({
-      taskId:event.detail
+      taskId: event.detail
     })
-},
+  },
   //日历展示
   onDisplay() {
     this.setData({
@@ -201,7 +205,7 @@ Page({
       radio: event.detail
     });
   },
-  
+
   onClick(event) {
     const {
       name
@@ -211,16 +215,16 @@ Page({
     });
   },
 
-  onJoinTask: function(data){
+  onJoinTask: function (data) {
     const db = wx.cloud.database();
     db.collection('tasks').where({
       _id: this.data.taskId
     }).get({
       success: res => {
         // 检查任务是否存在
-        if (res.data.length == 1){
+        if (res.data.length == 1) {
           // 检查是否已经加入任务
-          if(res.data[0]._participantsId.includes(app.globalData.openid) == true){
+          if (res.data[0]._participantsId.includes(app.globalData.openid) == true) {
             wx.showToast({
               icon: 'none',
               title: '你已加入该任务'
@@ -230,7 +234,9 @@ Page({
             }, 1000);
             return;
           }
-          this.joinTask({ taskId:this.data.taskId })
+          this.joinTask({
+            taskId: this.data.taskId
+          })
         } else {
           wx.showToast({
             icon: 'none',
@@ -247,7 +253,7 @@ Page({
     })
   },
 
-  joinTask: function(data){
+  joinTask: function (data) {
     wx.cloud.callFunction({
       name: 'joinTask',
       data: {
@@ -269,5 +275,44 @@ Page({
         console.error('[云函数] [joinTask] 调用失败', err)
       }
     })
+  },
+  uploadFilePromise(fileName, chooseResult) {
+    return wx.cloud.uploadFile({
+      cloudPath: fileName,
+      filePath: chooseResult.path
+    });
+  },
+  afterRead(event) {
+    const {
+      file
+    } = event.detail;
+    fileList = this.data.FileList;
+    this.setData({
+      FileList: fileList.concat(file)
+    });
+    fileList = this.data.FileList;
+    wx.cloud.init();
+    const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`my-photo${index}.png`, file));
+    Promise.all(uploadTasks)
+      .then(data => {
+        wx.showToast({
+          title: '上传成功',
+          icon: 'none'
+        });
+        const newFileList = data.map(item => {
+          url: item.fileID
+        });
+        this.setData({
+          cloudPath: data,
+          FileList: newFileList
+        });
+      })
+      .catch(e => {
+        wx.showToast({
+          title: '上传失败',
+          icon: 'none'
+        });
+        console.log(e);
+      });
   },
 })
