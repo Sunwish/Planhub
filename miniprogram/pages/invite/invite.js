@@ -6,10 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      tid: ''
   },
 
   onLoad: function (options) {
+    this.data.tid = options.tid;
+    console.log(options);
+    //var tid = JSON.parse(decodeURIComponent(options.tid));
+    //console.log(this.data.tid);
+    //console.log(r);
     if (!app.globalData.openid) {
       // 调用云函数
       wx.cloud.callFunction({
@@ -17,24 +22,65 @@ Page({
         data: {},
         success: res => {
           app.globalData.openid = res.result.openid;
-          this.data.openid = app.globalData.openid;
+          //this.data.openid = app.globalData.openid;
           // 检查登录状态
-          this.checkLogin();
+          //this.checkLogin();
           // 检查授权
-          this.authorUserInfo();
+          //this.authorUserInfo();
           console.log(app.globalData.openid);
         },
         fail: err => {
-          /*console.error('[云函数] [login] 调用失败', err)*/
+          console.error('[云函数] [login] 调用失败', err)
         }
       })
     }
   },
-
-  comfirm: function(e){
-    console.log("comfirmPart");
+  onJoinTask: function(){
+    //console.log('hahahahahahahahha');
+    console.log(this.data.tid);
+    //console.log('hahahahahahahahha');
+    const db = wx.cloud.database();
+    var tid = this.data.tid;
+    db.collection('tasks').where({
+      _id: tid
+    }).get({
+      success: res => {
+        // 检查任务是否存在
+        if (res.data.length == 1){
+          // 检查是否已经加入任务
+          if(res.data[0]._participantsId.includes(app.globalData.openid) == true){
+            wx.showToast({
+              icon: 'none',
+              title: '你已加入该任务'
+            });
+            setTimeout(function () {
+              wx.switchTab({
+                url: '../planWall/planWall',
+              })
+            }, 1000);
+            return;
+          }
+          this.joinTask({ tid });
+        } 
+        else {
+          wx.showToast({
+            icon: 'none',
+            title: '任务不存在'
+          });
+        }
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '任务查找失败'
+        });
+      }
+    })
+  },
+  joinTask: function(tid){
+    console.log("openid:");
     console.log(app.globalData.openid);
-    var tid = app.globalData.taskid2share;
+    //var tid = app.globalData.taskid2share;
     console.log(tid);
     const db = wx.cloud.database();
     console.log('joinSharedTask');

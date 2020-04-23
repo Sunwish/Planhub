@@ -12,6 +12,7 @@ Page({
     taskData: {},
     activeNames: [],
     loading: true,
+    tid: '',
     steps: [
       {
         text: '未开始',
@@ -42,6 +43,10 @@ Page({
   onLoad: function (options) {
     var taskId = options.taskId;
     /*console.log(planId);*/
+    this.data.tid = taskId;
+    //console.log(taskId);
+    //console.log(pages[1].options.taskId);
+
     this.onGetTask(taskId);
   },
 
@@ -79,15 +84,18 @@ Page({
 
 
 
-  returnTid: function (){
-    var pages = getCurrentPages();
-    console.log("get taskId from this page");
-    var tid = pages[1].options.taskId;
-    console.log(pages[1].options.taskId);
-    app.globalData.taskid2share = tid;
-    console.log(app.globalData.taskid2share);
-    return tid;
-  },
+  //returnTid: function (){
+    //var pages = getCurrentPages();
+    //console.log("get taskId from this page");
+    //this.data.taskId = pages[1].options.taskId;
+    //var tid = pages[1].options.taskId;
+    //app.globalData.taskid2share = tid;
+    //console.log(pages[1].options.taskId);    
+    //console.log(tid);
+    //console.log(app.globalData.taskid2share);
+    //var tid = this.data.tid;
+    //this.onShareAppMessage(tid);
+  //},
 
 
   /**
@@ -135,11 +143,21 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function () {
+    //var tid = res;
+    //console.log(res);
+    //var t = JSON.stringify(tid);
+    //var res = encodeURIComponent(res);
+    //var t = tid;
+    //var tid =  encodeURI(t);
+    //var p = '/pages/invite/invite?tid='+ this.data.tid;
+    //var p1 = '/pages/invite/invite?tid=0d9cdb685e9bc2be005f20d80bea6204';
+    //console.log(JSON.stringify(p));
+    //console.log(JSON.stringify(p1));
     return {
       title: '加入我的任务',
       //path: 'pages/planWall/planWall',
-      path: 'pages/invite/invite?tid='+app.globalData.taskid2share,
+      path: '/pages/invite/invite?tid='+this.data.tid,
       imageUrl: '../../../images/invite.jpg',
       success: function (res) {
         console.log('成功', res);
