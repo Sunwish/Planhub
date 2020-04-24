@@ -82,11 +82,9 @@ Page({
   },
 
   addSubTask: function (){
-    console.log('addSubTask: function ()');
-    wx.showToast({
-      icon: "none",
-      title: 'addSubTask: function ()'
-    }) 
+    wx.navigateTo({
+      url: '/pages/task/createSub/createSub?taskId=' + this.data.tid,
+    })
   },
 
 

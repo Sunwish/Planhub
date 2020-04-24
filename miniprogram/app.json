@@ -9,7 +9,8 @@
     "pages/feedback/feedback",
     "pages/contact/contact",
     "pages/guide/guide",
-    "pages/invite/invite"
+    "pages/invite/invite",
+    "pages/task/createSub/createSub"
   ],
   "usingComponents": {
     "van-action-sheet": "@vant/weapp/action-sheet/index",
