@@ -16,7 +16,7 @@
       </view>
     </van-cell>
     <van-collapse value="{{ activeNames }}" bind:change="onChange">
-      <van-collapse-item name="1" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="key">
+      <van-collapse-item name="{{item.taskName}}" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="key">
         <view slot="title">
           <span class="van-collapse-text">{{item.taskName}}  </span>
           <!--<van-tag type="danger">标签</van-tag>-->

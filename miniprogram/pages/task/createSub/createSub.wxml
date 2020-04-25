@@ -23,7 +23,7 @@
 				</van-cell>
 			</van-cell-group>
 		</van-radio-group>
-		<van-button round type="info" block bind:click="onCreateTask" class="button-view">创建任务</van-button>
+		<van-button round type="info" block bind:click="onCreateSubTask" class="button-view">添加子任务</van-button>
 	</van-tab>
 	<van-tab title="处理人">
 		<van-swipe-cell right-width="{{ 65 }}">
