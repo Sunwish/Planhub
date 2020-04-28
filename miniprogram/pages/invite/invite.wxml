@@ -1,4 +1,8 @@
 <!--pages/invite/invite.wxml-->
+<view class="container">
+		<van-image class="user-pic" round width="7rem" height="7rem" src="{{userimg}}" fit="cover" />
+    <text class="user-name">{{user}}邀请你加入任务</text>		
+</view>
 <view class="comfirm-join">
   <van-button round type="info" color='#1ce25e' bind:click='onJoinTask'> 确认加入</van-button>
 </view>

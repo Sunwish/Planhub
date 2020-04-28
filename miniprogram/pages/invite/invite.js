@@ -1,20 +1,37 @@
 // pages/invite/invite.js
 const app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-      tid: ''
+      tid: '',
+      userimg: {},
+      user: {},
+      inviteid: {},
   },
-
   onLoad: function (options) {
     this.data.tid = options.tid;
     console.log(options);
     //var tid = JSON.parse(decodeURIComponent(options.tid));
     //console.log(this.data.tid);
-    //console.log(r);
+    const db = wx.cloud.database();
+    db.collection('tasks').where({
+      _id: this.data.tid
+    }).get({
+      success: res => {
+        this.data.inviteid = res.data[0]._openid;
+        console.log(res.data[0]._openid);
+        db.collection('users').where({
+          _openid: this.data.inviteid
+        }).get({
+          success: res =>{
+            console.log(res.data[0].nickName);
+            this.setData({
+              userimg: res.data[0].avatarUrl,
+              user: res.data[0].nickName
+            })
+          }
+        })
+      }
+    })
     if (!app.globalData.openid) {
       // 调用云函数
       wx.cloud.callFunction({
