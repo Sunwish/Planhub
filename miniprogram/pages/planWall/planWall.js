@@ -18,7 +18,8 @@ Component({
   data: {
     tasksData: {},
     openid: '',
-    needAuthor: true
+    needAuthor: true,
+    authorStatusChecked: false
   },
 
 /**
@@ -154,14 +155,16 @@ Component({
             //wx.hideTabBar({})
             this.setData({
               // 显示登录授权按钮
-              needAuthor: true
+              needAuthor: true,
+              authorStatusChecked: true
             })
             app.globalData.Authorize = false;
           } else {
             //wx.showTabBar({})
             this.setData({
               // 显示创建/加入任务按钮
-              needAuthor: false
+              needAuthor: false,
+              authorStatusChecked: true
             })
             app.globalData.Authorize = true;
           }
@@ -171,7 +174,8 @@ Component({
           //wx.hideTabBar({})
           this.setData({
             // 显示登录授权按钮
-            needAuthor: true
+            needAuthor: true,
+            authorStatusChecked: true
           })
         }
       })
@@ -182,7 +186,8 @@ Component({
       //wx.showTabBar({})
       this.setData({
         // 显示创建/加入任务按钮
-        needAuthor: false
+        needAuthor: false,
+        authorStatusChecked: true
       });
       app.globalData.Authorize = true;
       this.updateDBUserInfo();
