@@ -15,7 +15,7 @@
         <!--</scroll-view>-->
       </view>
     </van-cell>
-    <van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <van-collapse value="{{ activeNames }}" bind:change="onChange" accordion>
       <van-collapse-item name="{{item.taskName}}" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="subTaskInfo">
         <view slot="title">
           <span class="van-collapse-text">{{item.taskName}}  </span>
@@ -52,7 +52,7 @@
   cancel-text="取消"
 />
 
-<van-popup show="{{ showAddSubTaskPop }}" bind:close="onAddSubTaskPopClose" position="bottom" custom-style="height: 80%;" round>
+<van-popup show="{{ showAddSubTaskPop }}" bind:close="onAddSubTaskPopClose" position="bottom" custom-style="height: 90%;" round>
 <van-tabs active="{{ activeTab }}" color="#3388ff" animated border="{{false}}">
 	<van-tab title="子任务信息">
 		<van-cell-group title="任务信息">
