@@ -22,7 +22,7 @@ van-skeleton>view{
   position:fixed;
   right: 30rpx;
   bottom: 120rpx;
-  z-index: 999;
+  z-index: 99;
 }
 
 .taskDescription{
@@ -47,5 +47,11 @@ van-skeleton>view{
   position:fixed;
   right: 30rpx;
   bottom: 240rpx;
-  z-index: 999;
+  z-index: 99;
 }
+
+ .button-view{
+    display: flex;
+    margin: 30rpx 0;
+    padding: 0 15px;
+  }
