@@ -1,7 +1,0 @@
-/* miniprogram/pages/user/setting/setting.wxss */
-.switch-cell{
-  height:10px;
-}
-.function{
-  height:30px;
-}

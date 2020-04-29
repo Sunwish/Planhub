@@ -16,7 +16,9 @@ Page({
     "name": "",
     "description": "",
     "taskId": "",
-    "FileList": []
+    "fileList": [
+
+     ]
   },
 
   /**
@@ -91,7 +93,6 @@ Page({
       });
       return;
     }
-
     if (taskDescription == "") {
       taskDescription = "任务描述还是要有的.";
     }
@@ -283,36 +284,26 @@ Page({
     });
   },
   afterRead(event) {
-    const {
-      file
-    } = event.detail;
-    fileList = this.data.FileList;
-    this.setData({
-      FileList: fileList.concat(file)
-    });
-    fileList = this.data.FileList;
+    const { file } = event.detail;
+    fileList = this.data.fileList;
+    this.setData({ fileList: fileList.concat(file) });
+    fileList = this.data.fileList;
     wx.cloud.init();
-    const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`my-photo${index}.png`, file));
-    Promise.all(uploadTasks)
-      .then(data => {
-        wx.showToast({
-          title: '上传成功',
-          icon: 'none'
+    if (!fileList.length) {
+      wx.showToast({ title: '请选择图片', icon: 'none' });
+      return;
+    } else {
+      const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`my-photo${index}.png`, file));
+      Promise.all(uploadTasks)
+        .then(data => {
+          wx.showToast({ title: '上传成功', icon: 'none' });
+          const newFileList = data.map(item => { url: item.fileID });
+          this.setData({ cloudPath: data, fileList: newFileList });
+        })
+        .catch(e => {
+          wx.showToast({ title: '上传失败', icon: 'none' });
+          console.log(e);
         });
-        const newFileList = data.map(item => {
-          url: item.fileID
-        });
-        this.setData({
-          cloudPath: data,
-          FileList: newFileList
-        });
-      })
-      .catch(e => {
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none'
-        });
-        console.log(e);
-      });
+    }
   },
-})
+}) 

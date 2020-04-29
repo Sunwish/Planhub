@@ -1,9 +1,9 @@
 Component({
   data: {
     "selected":{},
-    "color": "#A9A9A9",
+    "color": "#353535",
     "selectedColor": "#3388ff",
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#353535",
     "borderStyle": "#FFFFFF",
     list: [ {
       "pagePath": "/pages/planWall/planWall",

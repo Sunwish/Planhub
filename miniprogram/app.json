@@ -5,7 +5,6 @@
     "pages/user/user",
     "pages/message/message",
     "pages/task/detail/detail",
-    "pages/user/setting/setting",
     "pages/feedback/feedback",
     "pages/contact/contact",
     "pages/guide/guide",

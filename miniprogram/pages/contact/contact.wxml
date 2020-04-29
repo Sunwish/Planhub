@@ -1,2 +1,10 @@
 <!--pages/contact/contact.wxml-->
-<text>待完善</text>
+<van-skeleton title loading="{{ loading }}" avatar >
+  <view class="demo-preview">
+      <van-image class="demo-preview-img" fit="cover" src="./about1.jpg" round width="7rem" height="7rem"   />
+      <view class="demo-content">
+        <view class="demo-content-h3">Plane Guan</view>
+        <view class="domo-content-p">程序开发，策划。</view>
+      </view>
+    </view>
+</van-skeleton>

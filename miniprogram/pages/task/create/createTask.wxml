@@ -24,7 +24,7 @@
 			</van-cell-group>
 		</van-radio-group>
 		<van-cell-group title="附件上传（最多上传五个附件,暂时只支持图片）">
-			<van-uploader file-list="{{ FileList }}"   bind:delete="delete" bind:click-preview="clickPreview" use-before-read="{{ true }}" bind:after-read="afterRead"  max-count="5" />
+			<van-uploader file-list="{{ fileList }}"   bind:delete="delete" bind:click-preview="clickPreview" use-before-read="{{ true }}" bind:after-read="afterRead"  max-count="5" />
 		</van-cell-group>
 		<van-button round type="info" block bind:click="onCreateTask" class="button-view">创建任务</van-button>
 	</van-tab>
