@@ -15,7 +15,7 @@
         <!--</scroll-view>-->
       </view>
     </van-cell>
-    <van-collapse value="{{ activeNames }}" bind:change="onChange" accordion>
+    <van-collapse value="{{ activeNames }}" bind:change="onChange">
       <van-collapse-item name="{{item.taskName}}" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="subTaskInfo">
         <view slot="title">
           <span class="van-collapse-text">{{item.taskName}}  </span>
