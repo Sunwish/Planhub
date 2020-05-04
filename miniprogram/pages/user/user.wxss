@@ -46,3 +46,14 @@
   font-size: var(--cell-icon-size, 16px);
   margin-left: 5px;
 }
+
+.contact-btn {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  margin-left: 0rpx;
+  padding-left: 0rpx;
+  text-align: left;
+}
+
+

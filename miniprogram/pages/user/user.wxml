@@ -13,12 +13,20 @@
 				</van-cell>
 				<van-cell  class="function" title="意见反馈" size="large" is-link bind:click="feedback" >
 				<van-icon class="cell-icon" slot="icon" name="edit" size="25px" />
-				</van-cell>
+				</van-cell>			
 				<van-cell  class="function" title="关于我们" size="large" is-link bind:click="contact" >
 				<van-icon class="cell-icon" slot="icon" name="contact" size="25px" />
-				</van-cell>
+				</van-cell> 
+
+		    <button class='contact-btn' open-type='contact'>       
+			  <van-cell title="联系客服" size="large" is-link >
+			  <van-icon class="cell-icon" slot="icon" name="service-o" size="25px" />
+			  </van-cell>
+				</button> 
+
 			</van-cell-group>
 		</van-cell-group>
+
 	</block>
 	<block wx:else>
 		<van-image class="user-pic" round width="7rem" height="7rem" src="./user-unlogin.png" fit="cover" click="getUserInfo" />

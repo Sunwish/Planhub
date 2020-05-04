@@ -8,6 +8,25 @@ Page({
       inviteid: {},
   },
   onLoad: function (options) {
+    if (!app.globalData.openid) {
+      // 调用云函数
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          app.globalData.openid = res.result.openid;
+          //this.data.openid = app.globalData.openid;
+          // 检查登录状态
+          //this.checkLogin();
+          // 检查授权
+          //this.authorUserInfo();
+          console.log(app.globalData.openid);
+        },
+        fail: err => {
+          console.error('[云函数] [login] 调用失败', err)
+        }
+      })
+    }
     this.data.tid = options.tid;
     console.log(options);
     //var tid = JSON.parse(decodeURIComponent(options.tid));
@@ -32,25 +51,7 @@ Page({
         })
       }
     })
-    if (!app.globalData.openid) {
-      // 调用云函数
-      wx.cloud.callFunction({
-        name: 'login',
-        data: {},
-        success: res => {
-          app.globalData.openid = res.result.openid;
-          //this.data.openid = app.globalData.openid;
-          // 检查登录状态
-          //this.checkLogin();
-          // 检查授权
-          //this.authorUserInfo();
-          console.log(app.globalData.openid);
-        },
-        fail: err => {
-          console.error('[云函数] [login] 调用失败', err)
-        }
-      })
-    }
+
   },
   onJoinTask: function(){
     //console.log('hahahahahahahahha');
