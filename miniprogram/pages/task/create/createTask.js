@@ -102,7 +102,7 @@ Page({
     var _handlersId = [];
     var status = 0;
     var creationTime = Date.now();
-    var deadline = "";
+    var deadline = this.data.date;
     var priority = 0;
     var subTasksId = [];
 
@@ -186,6 +186,13 @@ Page({
   onClose() {
     this.setData({
       show: false
+    });
+  },
+  onConfirm(event) {
+    const [start, end] = event.detail;
+    this.setData({
+      show: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`
     });
   },
   //返回时间
