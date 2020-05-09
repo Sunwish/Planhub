@@ -13,7 +13,17 @@ Page({
     activeNames: [],
     loading: true,
     tid: '',
+    operTaskId: '',
     checked: false,
+    showTaskHandlerDetialMenu: false,
+    taskHandlerDetialTitle: '',
+    taskHandlerDetialMenuActions: [
+      {
+        name: '删除任务',
+        color: 'red',
+      }
+    ],
+
     showSubTaskHandlerDetialMenu: false,
     subTaskHandlerDetialTitle: '',
     showAddSubTaskPop: false,
@@ -30,6 +40,10 @@ Page({
       {
         name: '邀请好友加入处理',
         openType: 'share'
+      },
+      {
+        name: '删除任务',
+        color: 'red',
       }
     ],
     steps: [
@@ -109,19 +123,93 @@ Page({
     })
   },
 
+  taskHandlerDetial: function (e) {
+    // console.log(e)
+    this.setData({
+      showTaskHandlerDetialMenu: true,
+      taskHandlerDetialTitle: e.currentTarget.dataset.subtaskname,
+      operTaskId: e.currentTarget.id
+    })
+    console.log(e.currentTarget.id)
+  },
+
+  onTaskHandlerDetialMenuSelect(event) {
+    switch (event.detail.name) {
+      case '删除任务':
+        this.deleteTask(this.data.operTaskId);
+        break;
+      default:
+        console.log('default');
+    }
+  },
+
+  onTaskHandlerDetialMenuClose() {
+    this.setData({ showTaskHandlerDetialMenu: false })
+  },
+
   subTaskHandlerDetial: function(e){
     // console.log(e)
     this.setData({
       showSubTaskHandlerDetialMenu: true,
-      subTaskHandlerDetialTitle: e.currentTarget.dataset.subtaskname
+      subTaskHandlerDetialTitle: e.currentTarget.dataset.subtaskname,
+      operTaskId: e.currentTarget.id
     })
     // console.log(e.currentTarget.id)
   },
 
   onSubTaskHandlerDetialMenuSelect(event) {
-    wx.showToast({
-      icon: 'none',
-      title: event.detail.name
+    switch (event.detail.name){
+      case '删除任务':
+        this.deleteSubTask(this.data.operTaskId);
+        break;
+      case "添加处理人":
+        console.log('添加处理人');
+        break;
+      default:
+        console.log('default');
+    }
+  },
+
+  deleteTask: function(taskId){
+    for (var i = 0; i < this.data.taskData.subTasksId.length; i++){
+      this.deleteSubTask(this.data.taskData.subTasksId[i], true)
+    }
+    const db = wx.cloud.database();
+    db.collection('tasks').doc(taskId).remove({
+      success: res => {
+        wx.showToast({
+          title: '删除任务成功',
+        })
+        setTimeout(function () {
+          wx.navigateBack({})
+        }, 1000)
+      },
+      fail: err => {
+        wx.showToast({
+          title: '删除任务失败，请重试',
+        })
+      }
+    })
+  },
+
+  deleteSubTask: function (subTaskId, silent=false) {
+    const db = wx.cloud.database();
+    db.collection('tasks').doc(subTaskId).remove({
+      success: res=>{
+        if(!silent){
+          wx.showToast({
+            title: '删除子任务成功'
+          })
+          this.onShow();
+        }
+      },
+      fail: err => {
+        if (!silent) {
+          wx.showToast({
+            title: '删除子任务成功'
+          })
+        }
+      }
     })
   },
 

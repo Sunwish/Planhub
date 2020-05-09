@@ -12,10 +12,15 @@
         <view style="display:inline-block; line-height:64rpx;" wx:for="{{taskData.participantsrInfo}}" wx:key="key">
             <image src="{{item.avatarUrl}}" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
         </view>
+        <!--任务的处理人详情按钮 应当仅处理人可见！-->
+        <view style="display:block; float:right;">
+          <van-icon bindtap="taskHandlerDetial" id="{{taskData._id}}" data-subtaskname="{{taskData.taskName}}" name="ellipsis" size="24px"/>
+        </view>
         <!--</scroll-view>-->
       </view>
     </van-cell>
     <van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <!--折叠面板开始-->
       <van-collapse-item name="{{item.taskName}}" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="subTaskInfo">
         <view slot="title">
           <span class="van-collapse-text">{{item.taskName}}  </span>
@@ -38,6 +43,7 @@
         <van-checkbox value="{{ checked }}" shape="square" bind:change="onChange_checkbox" icon-size="16px">小任务点示例</van-checkbox>
         <van-steps steps="{{ steps }}" active="{{ active[0] }}" active-color="#38f"/>
       </van-collapse-item>
+      <!--折叠面板结束-->
     </van-collapse>
   </van-skeleton>
 </van-cell-group>
@@ -49,6 +55,16 @@
   bind:close="onSubTaskHandlerDetialMenuClose"
   bind:cancel="onSubTaskHandlerDetialMenuClose"
   description="{{subTaskHandlerDetialTitle}}"
+  cancel-text="取消"
+/>
+
+<van-action-sheet
+  show="{{ showTaskHandlerDetialMenu }}"
+  actions="{{ taskHandlerDetialMenuActions }}"
+  bind:select="onTaskHandlerDetialMenuSelect"
+  bind:close="onTaskHandlerDetialMenuClose"
+  bind:cancel="onTaskHandlerDetialMenuClose"
+  description="{{taskHandlerDetialTitle}}"
   cancel-text="取消"
 />
 
