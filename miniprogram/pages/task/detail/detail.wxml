@@ -77,7 +77,7 @@
 		</van-cell-group>
 		<van-cell-group title="子任务时间">
 			<van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" is-link required />
-			<van-calendar show="{{ show }}" type="range" bind:close="onClose" bind:confirm="onConfirm" color="#3388ff" confirm-text="完成" confirm-disabled-text="请选择结束时间" />
+			<van-calendar show="{{ show }}" type="range" position="top" bind:close="onClose" bind:confirm="onConfirm" color="#3388ff" confirm-text="完成" confirm-disabled-text="请选择结束时间" />
 		</van-cell-group>
 		<van-radio-group value="{{ radio }}" bind:change="onRadioChange">
 			<van-cell-group title="子任务提醒方式">
