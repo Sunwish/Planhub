@@ -1,31 +1,7 @@
-<!--pages/feedback/feedback.wxml-->
-
-<viewtest>
-<text> 给个五星好评呗</text>
-</viewtest>
-<van-rate
-  value="0"
-  size="{{ 25 }}"
-  color="#039"
-  void-color="#eee"
-  void-icon="star"
-  bind:change="onChange"
-  allow-half
-/>
-
-
-
-<view class="plan-config">
-  <test class="h1">请留下宝贵建议！</test>
-  <textarea name="advise" placeholder="您的每一条建议都是我们进步的来源"></textarea>
-  <text class="h1">请留下联系方式！</text>
-  <view></view>
-  <input name="contact" placeholder="当建议被采用我们会联系宁"></input>
+<view class="opinion_wrap">
+  <form bindsubmit="formSubmit">
+      <textarea name="opinion" maxlength="500" value="{{content}}"  placeholder-class="placeholder" placeholder="您的反馈是我们进步的来源！" />
+      <input name="contact" value="{{contact}}" placeholder-class="placeholder" placeholder="请留下联系方式！" />
+      <button class="submit-button" formType="submit" hover-class="none" loading="{{loading}}">提交反馈</button>
+  </form>
 </view>
-
-<view class="button-view">
-  <van-button bind:click='submitfeedback' plain hairline loading-text="加载中..." type="info"  size="large" class="button-create" style="width: 100%">提交反馈</van-button>
-</view>
-
-
-

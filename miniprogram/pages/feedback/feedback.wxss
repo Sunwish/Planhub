@@ -1,76 +1,46 @@
-/* pages/feedback/feedback.wxss */
-@import "../../style/common.wxss";
-viewtest{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 24rpx;
-}
-middle{
-  display: flex;
-  font-size:47rpx;
-  font-weight:bold; 
-  justify-content: center;
+page{
+  background-color: #f7f8fa;
 }
 
-
-
-
-
-view{
-  margin: 30rpx 24rpx;
+textarea{
+  text-align: center;
+  padding: 20rpx;
+  margin-top: 50rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  min-height: 400rpx;
+  width: auto;
+  border: 2rpx solid black;
+  border-radius:30rpx; 
+  background-color: #fff
 }
-
-.basic-info{
-  font-size: 32rpx;
+input{
+  text-align: center;
+  margin-top: 30rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 100rpx;
+  padding-left: 20rpx;
+  background-color: #fff;
+  border: 2rpx solid black;
+  border-radius:30rpx; 
 }
-
-.basic-info input{
-  padding-left: 24rpx;
-  height: 70rpx;
-  background-color: #ffffff;
-  border-style: solid;
-  border-color: #ccc;
-  border-width: 2rpx;
-  border-radius: 5rpx;
-  margin-bottom: 24rpx;
+button{
+  width: 100px;
+  font-size: 16px;
+  background-color: rgb(61, 149, 238);
+  color: #fff;
+  border: 2rpx solid rgb(61, 149, 238);
+  border-radius:60rpx; 
 }
-
-.basic-info textarea{
-  width: 100%;
-  text-indent: 24rpx;
-  padding-top: 12rpx;
-  height: 200rpx;
-  background-color: #ffffff;
-  border-style: solid;
-  border-color: #ccc;
-  border-width: 2rpx;
-  border-radius: 5rpx;
+.submit-button{
+  position:fixed;
+  right: 20rpx;
+  bottom: 150rpx;
 }
-
-.plan-config input{
-  border-style: solid;
-  border-color: #aaa;
-  border-width: 0 0 2rpx 0;
-  font-size: 32rpx;
-}
-
-.button-view{
-  position: absolute;
-  left: 15rpx;
-  right: 15rpx;
-  bottom: 36rpx;
-  height: 88rpx;
+.placeholder{
+  color: #b6b6b6;
+  font-size: 14px;
   text-align: center;
 }
 
-.button-create{
-  position: relative;
-  background-color: rgb(61, 149, 238);
-  color: #fff;
-  font-size: 32rpx;
-  font-weight: normal;
-  height: 88rpx;
-  line-height: 88rpx;
-}
