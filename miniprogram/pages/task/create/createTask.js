@@ -18,7 +18,7 @@ Page({
     "taskId": "",
     "fileList": [
 
-     ]
+    ]
   },
 
   /**
@@ -101,6 +101,7 @@ Page({
     var _participantsId = [app.globalData.openid];
     var _handlersId = [];
     var status = 0;
+    var _radio = this.data.radio;
     var creationTime = Date.now();
     var deadline = this.data.date;
     var priority = 0;
@@ -116,9 +117,24 @@ Page({
       "creationTime": creationTime,
       "deadline": deadline,
       "priority": priority,
-      "subTasksId": subTasksId
+      "subTasksId": subTasksId,
+      "radio": _radio
     };
 
+    const db = wx.cloud.database();
+    db.collection('users').where({
+      _openid: app.globalData.openid
+    }).get({
+      success: res => {
+        console.log(res.data[0].Mespush)
+        if (res.data[0].Mespush && _radio != '1') {
+          wx.requestSubscribeMessage({
+            tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
+            success(res) {}
+          })
+        }
+      }
+    })
     this._onCreateTask(taskAttr);
   },
 
@@ -137,7 +153,8 @@ Page({
         creationTime: taskAttr["creationTime"],
         deadline: taskAttr["deadline"],
         priority: taskAttr["priority"],
-        subTasksId: taskAttr["subTasksId"]
+        subTasksId: taskAttr["subTasksId"],
+        radio: taskAttr["radio"]
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
@@ -291,26 +308,44 @@ Page({
     });
   },
   afterRead(event) {
-    const { file } = event.detail;
+    const {
+      file
+    } = event.detail;
     fileList = this.data.fileList;
-    this.setData({ fileList: fileList.concat(file) });
+    this.setData({
+      fileList: fileList.concat(file)
+    });
     fileList = this.data.fileList;
     wx.cloud.init();
     if (!fileList.length) {
-      wx.showToast({ title: '请选择图片', icon: 'none' });
+      wx.showToast({
+        title: '请选择图片',
+        icon: 'none'
+      });
       return;
     } else {
       const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`my-photo${index}.png`, file));
       Promise.all(uploadTasks)
         .then(data => {
-          wx.showToast({ title: '上传成功', icon: 'none' });
-          const newFileList = data.map(item => { url: item.fileID });
-          this.setData({ cloudPath: data, fileList: newFileList });
+          wx.showToast({
+            title: '上传成功',
+            icon: 'none'
+          });
+          const newFileList = data.map(item => {
+            url: item.fileID
+          });
+          this.setData({
+            cloudPath: data,
+            fileList: newFileList
+          });
         })
         .catch(e => {
-          wx.showToast({ title: '上传失败', icon: 'none' });
+          wx.showToast({
+            title: '上传失败',
+            icon: 'none'
+          });
           console.log(e);
         });
     }
   },
-}) 
+})

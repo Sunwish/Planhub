@@ -15,7 +15,7 @@
 				<van-cell title="无需提醒" clickable data-name="1" bind:click="onClick">
 					<van-radio slot="right-icon" name="1" />
 				</van-cell>
-				<van-cell title="每日提醒" clickable data-name="2" bind:click="onClick">
+				<van-cell title="截止日前三天提醒" clickable data-name="2" bind:click="onClick">
 					<van-radio slot="right-icon" name="2" />
 				</van-cell>
 				<van-cell title="截止日提醒" clickable data-name="3" bind:click="onClick">

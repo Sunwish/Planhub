@@ -38,7 +38,7 @@ Component({
         })
         var Openid = app.globalData.openid;
         const db = wx.cloud.database();
-        db.collection('users').where({
+      db.collection('users').where({
       _openid: Openid
     }).get({
       success: res => {
