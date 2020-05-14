@@ -36,8 +36,8 @@ Component({
             })
           }
         })
-        var Openid = app.globalData.openid;
-        const db = wx.cloud.database();
+      var Openid = app.globalData.openid;
+      const db = wx.cloud.database();
       db.collection('users').where({
       _openid: Openid
     }).get({
@@ -48,11 +48,6 @@ Component({
       }
     })
       }
-    },
-    setting: function () {
-      wx.navigateTo({
-        url: 'setting/setting',
-      })
     },
     onChange1({
       detail

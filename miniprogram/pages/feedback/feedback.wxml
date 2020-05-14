@@ -1,7 +1,7 @@
 <view class="opinion_wrap">
   <form bindsubmit="formSubmit">
       <textarea name="opinion" maxlength="500" value="{{content}}"  placeholder-class="placeholder" placeholder="您的反馈是我们进步的来源！" />
-      <input name="contact" value="{{contact}}" placeholder-class="placeholder" placeholder="请留下联系方式！" />
+      <input name="contact" value="{{contact}}" placeholder-class="placeholder" placeholder="请留下联系方式！如QQ，微信等" />
       <button class="submit-button" formType="submit" hover-class="none" loading="{{loading}}">提交反馈</button>
   </form>
 </view>

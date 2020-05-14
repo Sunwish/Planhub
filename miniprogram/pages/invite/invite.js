@@ -53,6 +53,11 @@ Page({
     })
 
   },
+  ReTask:function(){
+    wx.switchTab({
+      url: '../planWall/planWall',
+    })
+  },
   onJoinTask: function(){
     //console.log('hahahahahahahahha');
     console.log(this.data.tid);

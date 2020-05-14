@@ -4,7 +4,36 @@
       <van-image class="demo-preview-img" fit="cover" src="./about1.jpg" round width="7rem" height="7rem"   />
       <view class="demo-content">
         <view class="demo-content-h3">Plane Guan</view>
-        <view class="domo-content-p">程序开发，策划。</view>
+        <view class="domo-content-p">程序开发，策划，摸鱼王。</view>
+        <view class="domo-content-p">URL:www.planeguan.com </view>
+      </view>
+    </view>
+</van-skeleton>
+<van-skeleton title loading="{{ loading }}" avatar >
+  <view class="demo-preview">
+      <van-image class="demo-preview-img" fit="cover" src="./about2.jpg" round width="7rem" height="7rem"   />
+      <view class="demo-content">
+        <view class="demo-content-h3">冰箱</view>
+        <view class="domo-content-p">程序开发，职业打杂，佬中佬。</view>
+      </view>
+    </view>
+</van-skeleton>
+<van-skeleton title loading="{{ loading }}" avatar >
+  <view class="demo-preview">
+      <van-image class="demo-preview-img" fit="cover" src="./about3.jpg" round width="7rem" height="7rem"   />
+      <view class="demo-content">
+        <view class="demo-content-h3">Sunwish</view>
+        <view class="domo-content-p">程序开发，UI设计，大中大佬。</view>
+        <view class="domo-content-p">URL:houkaifa.com </view>
+      </view>
+    </view>
+</van-skeleton>
+<van-skeleton title loading="{{ loading }}" avatar >
+  <view class="demo-preview">
+      <van-image class="demo-preview-img" fit="cover" src="./about4.jpg" round width="7rem" height="7rem"   />
+      <view class="demo-content">
+        <view class="demo-content-h3">Despair</view>
+        <view class="domo-content-p">软件测试，文案编写，UI设计。</view>
       </view>
     </view>
 </van-skeleton>

@@ -24,7 +24,8 @@
 			</van-cell-group>
 		</van-radio-group>
 		<van-cell-group title="附件上传（最多上传五个附件,暂时只支持图片）">
-			<van-uploader file-list="{{ fileList }}"   bind:delete="delete" bind:click-preview="clickPreview" use-before-read="{{ true }}" bind:after-read="afterRead"  max-count="5" />
+			<van-uploader name="6" file-list="{{ fileList6 }}" bind:before-read="beforeRead" bind:after-read="afterRead" bind:delete="delete" bind:click-preview="clickPreview" use-before-read="{{ true }}" max-count="5" />
+			<van-button type="primary" bind:click="uploadToCloud">上传至云存储</van-button>
 		</van-cell-group>
 		<van-button round type="info" block bind:click="onCreateTask" class="button-view">创建任务</van-button>
 	</van-tab>
@@ -35,3 +36,5 @@
 		<van-button round type="info" block bind:click="onJoinTask" class="button-view">加入任务</van-button>
 	</van-tab>
 </van-tabs>
+<van-dialog use-slot title="该任务有消息提醒，是否接受消息推送？" show="{{ show2 }}" show-cancel-button bind:confirm="Messet" bind:cancel="cancel">
+</van-dialog>

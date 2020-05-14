@@ -16,16 +16,26 @@ Page({
     "name": "",
     "description": "",
     "taskId": "",
-    "fileList": [
-
-    ]
+    fileList6: [],
+    checked1: {},
+    show2: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var Openid = app.globalData.openid;
+    const db = wx.cloud.database();
+    db.collection('users').where({
+      _openid: Openid
+    }).get({
+      success: res => {
+        this.setData({
+          checked1: res.data[0].Mespush
+        })
+      }
+    })
   },
 
   /**
@@ -96,7 +106,13 @@ Page({
     if (taskDescription == "") {
       taskDescription = "任务描述还是要有的.";
     }
-
+    //消息推送授权
+    if (this.data.radio != '1' && this.data.checked1) {
+      wx.requestSubscribeMessage({
+        tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
+        success(res) {}
+      })
+    }
     var _parentId = "";
     var _participantsId = [app.globalData.openid];
     var _handlersId = [];
@@ -120,21 +136,6 @@ Page({
       "subTasksId": subTasksId,
       "radio": _radio
     };
-
-    const db = wx.cloud.database();
-    db.collection('users').where({
-      _openid: app.globalData.openid
-    }).get({
-      success: res => {
-        console.log(res.data[0].Mespush)
-        if (res.data[0].Mespush && _radio != '1') {
-          wx.requestSubscribeMessage({
-            tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
-            success(res) {}
-          })
-        }
-      }
-    })
     this._onCreateTask(taskAttr);
   },
 
@@ -241,6 +242,7 @@ Page({
   },
 
   onJoinTask: function (data) {
+    const that = this
     const db = wx.cloud.database();
     db.collection('tasks').where({
       _id: this.data.taskId
@@ -259,10 +261,18 @@ Page({
             }, 1000);
             return;
           }
+          //发现可以消息推送
+          if (that.data.checked1 && res.data[0].radio!='1') {
+            that.setData({
+              show2:true
+            })
+          }
+          else{
           this.joinTask({
             taskId: this.data.taskId
           })
-        } else {
+          }
+          } else {
           wx.showToast({
             icon: 'none',
             title: '任务不存在'
@@ -277,7 +287,21 @@ Page({
       }
     })
   },
-
+  //用户点击消息授权的按钮
+  Messet:function(){
+    wx.requestSubscribeMessage({
+      tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
+      success(res) {}
+    })
+    this.joinTask({
+      taskId: this.data.taskId
+    })
+  },
+  cancel:function(){
+    this.joinTask({
+      taskId: this.data.taskId
+    })
+  },
   joinTask: function (data) {
     wx.cloud.callFunction({
       name: 'joinTask',
@@ -307,45 +331,43 @@ Page({
       filePath: chooseResult.path
     });
   },
-  afterRead(event) {
-    const {
-      file
-    } = event.detail;
-    fileList = this.data.fileList;
-    this.setData({
-      fileList: fileList.concat(file)
-    });
-    fileList = this.data.fileList;
+  uploadToCloud() {
     wx.cloud.init();
+    const { fileList6: fileList = [] } = this.data;
     if (!fileList.length) {
-      wx.showToast({
-        title: '请选择图片',
-        icon: 'none'
-      });
-      return;
+      wx.showToast({ title: '请选择图片', icon: 'none' });
     } else {
-      const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`my-photo${index}.png`, file));
+      const uploadTasks = fileList.map((file, index) =>
+        this.uploadFilePromise(`my-photo${index}.png`, file)
+      );
       Promise.all(uploadTasks)
         .then(data => {
-          wx.showToast({
-            title: '上传成功',
-            icon: 'none'
-          });
-          const newFileList = data.map(item => {
-            url: item.fileID
-          });
-          this.setData({
-            cloudPath: data,
-            fileList: newFileList
-          });
+          wx.showToast({ title: '上传成功', icon: 'none' });
+          const fileList = data.map(item => ({ url: item.fileID }));
+          this.setData({ cloudPath: data, fileList6: fileList });
         })
         .catch(e => {
-          wx.showToast({
-            title: '上传失败',
-            icon: 'none'
-          });
+          wx.showToast({ title: '上传失败', icon: 'none' });
           console.log(e);
         });
     }
+  },
+  //自己写永远出错还不如抄！！！
+  beforeRead(event) {
+    const { file, callback = () => {} } = event.detail;
+    callback(true);
+  },
+
+  afterRead(event) {
+    const { file, name } = event.detail;
+    const fileList = this.data[`fileList${name}`];
+
+    this.setData({ [`fileList${name}`]: fileList.concat(file) });
+  },
+  delete(event) {
+    const { index, name } = event.detail;
+    const fileList = this.data[`fileList${name}`];
+    fileList.splice(index, 1);
+    this.setData({ [`fileList${name}`]: fileList });
   },
 })

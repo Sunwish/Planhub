@@ -5,4 +5,6 @@
 </view>
 <view class="comfirm-join">
   <van-button round type="info" color='#1ce25e' bind:click='onJoinTask'> 确认加入</van-button>
+  <van-button round type="info" color='#CD0000' bind:click='ReTask'> 拒绝加入</van-button>
 </view>
+
