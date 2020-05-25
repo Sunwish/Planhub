@@ -62,9 +62,10 @@ Page({
       }
     ],
     active:[1, 2],
-    subTaskParticipantImg:[
-
-    ]
+    subTaskParticipantImg:[],
+    showAddTaskPointPop: false,
+    taskPointTargetIndex: 0,
+    taskPointAddName: ''
   },
 
   onChange(event) {
@@ -74,12 +75,46 @@ Page({
   },
 
   onChange_checkbox(event){
-    var subIndex = event.currentTarget.dataset.subtaskindex
+    var subTaskIndex = event.currentTarget.dataset.subtaskindex
     var pointIndex = event.currentTarget.dataset.taskpointindex
-    var filed = "taskData.subTaskInfo[" + subIndex + "].taskPoints[" + pointIndex + "].checked"
+    var subTaskId = this.data.taskData.subTaskInfo[subTaskIndex]._id
+    var field_cloud = 'taskPoints.' + pointIndex
+    var filed_local = "taskData.subTaskInfo[" + subTaskIndex + "].taskPoints[" + pointIndex + "].checked"
+    var before = !event.detail
     this.setData({
-      [filed]: event.detail
+      [filed_local]: event.detail
     });
+    var newTaskPoint = {
+      taskPoint: this.data.taskData.subTaskInfo[subTaskIndex].taskPoints[pointIndex].taskPoint,
+      checked: event.detail
+    }
+    // checked变动同步到数据库
+    const db = wx.cloud.database()
+    const _ = db.command
+    //console.log(this.data.taskData.subTaskInfo[subTaskIndex].taskPoints[pointIndex].taskPoint)
+    //console.log(subTaskId)
+    //console.log(field_cloud)
+    //console.log(event.detail)
+    db.collection('tasks').doc(subTaskId).update({
+      data: {
+        [field_cloud]: newTaskPoint
+      },
+      success: res => {
+        //console.log(res)
+      },
+      fail: error => {
+        // 同步失败，复位本地状态
+        console.log(before)
+        this.setData({
+          [filed_local]: before
+        });
+        wx.showToast({
+          icon: 'none',
+          title: '任务点状态同步失败'
+        })
+        console.log(error)
+      }
+    })
   },
 
   /**
@@ -93,6 +128,60 @@ Page({
     //console.log(pages[1].options.taskId);
 
     this.onGetTask(taskId);
+  },
+
+  addTaskPoint: function(event){
+    this.setData({
+      taskPointTargetIndex: event.currentTarget.dataset.subtaskindex,
+      showAddTaskPointPop: true
+    })
+  },
+
+  onAddTaskPointPopClose: function(){
+    this.setData({
+      showAddTaskPointPop: false
+    })
+  },
+
+  onCreateTaskPoint: function(){
+    // 获取被添加任务点的子任务ID
+    var subTaskIndex = this.data.taskPointTargetIndex
+    var subTaskId = this.data.taskData.subTaskInfo[subTaskIndex]._id
+    // 构建任务点实例
+    var taskPoint = {
+      taskPoint: this.data.taskPointAddName,
+      checked: false
+    }
+    // 开始添加
+    const db = wx.cloud.database()
+    const _ = db.command
+    db.collection('tasks').doc(subTaskId).update({
+      data: {
+        taskPoints: _.push(taskPoint)
+      },
+      success: res => {
+        console.log(res.data)
+        wx.showToast({
+          icon: 'none',
+          title: '任务点添加成功'
+        })
+        this.onAddTaskPointPopClose()
+        this.onShow()
+      },
+      fail: error =>{
+        wx.showToast({
+          icon: 'none',
+          title: '任务点添加失败'
+        })
+        console.log("任务点添加失败")
+      }
+    })
+  },
+
+  taskPointNameChanged: function(e){
+    this.setData({
+      taskPointAddName: e.detail
+      })
   },
 
   onGetTask: function (taskId) {
