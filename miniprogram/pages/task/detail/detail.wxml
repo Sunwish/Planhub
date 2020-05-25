@@ -34,8 +34,9 @@
         <!--子任务的处理人头像列表（此处数据已绑定，但本地修改未同步到云端！）-->
         <view>
           <view style="display:inline-block; line-height:64rpx;" wx:for="{{subTaskParticipantImg[subTaskIndex]}}" wx:key="key" wx:for-index="subTaskImgIndex">
-            <image src="{{item}}" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
+            <image src="{{item.avatarUrl}}" data-openid="{{item._openid}}" data-subTaskIndex="{{subTaskIndex}}" data-nickName="{{item.nickName}}" data-avatarUrl="{{item.avatarUrl}}" bindtap="handlerAvatarTap" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
           </view>
+          <van-icon name="add" data-subTaskIndex="{{subTaskIndex}}" bindtap="addHandler" size="52rpx" color="rgba(25,137,250)" style="display:inline-block; line-height:64rpx;" />
         </view>
         <view class="divideline"></view>
         <!--add-minitask-view 应当仅处理人可见！-->
@@ -113,6 +114,7 @@
 </van-tabs>
 </van-popup>
 
+<!--添加任务点pop层-->
 <van-popup show="{{ showAddTaskPointPop }}" bind:close="onAddTaskPointPopClose" position="bottom" custom-style="height: 90%;" round>
   <van-cell-group title="添加任务点">
 			<van-field bind:change="taskPointNameChanged" label="任务点" placeholder="给你的任务点取一个名字吧~" value="{{taskPointAddName}}" required />
@@ -120,11 +122,49 @@
   <van-button round type="info" block bind:click="onCreateTaskPoint" class="button-view">添加任务点</van-button>
 </van-popup>
 
+<!--修改任务点pop层-->
 <van-popup show="{{ showRenameTaskPointPop }}" bind:close="onRenameTaskPointPopClose" position="bottom" custom-style="height: 90%;" round>
   <van-cell-group title="修改任务点名">
 			<van-field bind:change="taskPointNameChanged" label="任务点" placeholder="给你的任务点一个新名字吧~" value="{{taskPointAddName}}" required />
 	</van-cell-group>
   <van-button round type="info" block bind:click="onRenameTaskPoint" class="button-view">确认修改</van-button>
+</van-popup>
+
+<!--处理人详情及删除操作pop层-->
+<van-popup show="{{ showHandlerDetailPop }}" bind:close="onHandlerDetailPopClose" position="bottom" custom-style="height: 34%;" round>
+  <view style="text-align:center; margin:20px 0;">
+    <van-image round width="90px" height="90px" src="{{showHandlerAvatarUrl}}"/>
+    <view style="margin-top:5px;">{{showHandlerNickName}}</view>
+  </view>
+  <van-button round type="danger" block bind:click="onRemoveHandler" class="button-view">移除该处理人</van-button>
+</van-popup>
+
+<!--添加处理人pop层-->
+<van-popup show="{{ showAddHandlerPop }}" bind:close="onAddHandlerPopClose" position="bottom" custom-style="height: 80%;" round>
+  <view style="text-align:center; margin:20px 0;">
+  为子任务 [{{taskData.subTaskInfo[subTaskIndex].taskName}}] 指定处理人
+  </view>
+  <van-checkbox-group value="{{ result }}" bind:change="onHandlerSelectChange">
+    <van-cell-group>
+      <van-cell
+        wx:for="{{ taskData.participantsrInfo }}"
+        wx:key="index"
+        title="{{ item.nickName }}"
+        data-openid="{{ item._openid }}"
+        value-class="value-class"
+        clickable
+        data-index="{{ index }}"
+        bind:click="toggle"
+      >
+        <van-checkbox
+          catch:tap="noop"
+          class="checkboxes-{{ index }}"
+          name="{{ item.nickName }}"
+        />
+      </van-cell>
+    </van-cell-group>
+  </van-checkbox-group>
+  <van-button round type="info" block bind:click="onRemoveHandler" class="button-view">添加为处理人</van-button>
 </van-popup>
 
 <view class="create-new-subTask">

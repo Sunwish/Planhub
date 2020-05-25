@@ -55,3 +55,14 @@ van-skeleton>view{
     margin: 30rpx 0;
     padding: 0 15px;
   }
+
+  .button-addAsHandler{
+    display: absolute;
+    bottom: 50px;
+    margin: 30rpx 0;
+    padding: 0 15px;
+  }
+
+.value-class {
+  flex: none !important;
+}

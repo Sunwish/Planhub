@@ -19,7 +19,7 @@ Page({
     taskHandlerDetialTitle: '',
     taskHandlerDetialMenuActions: [
       {
-        name: '删除任务',
+        name: '删除整个任务',
         color: 'red',
       }
     ],
@@ -35,14 +35,14 @@ Page({
     "name": '',
     subTaskHandlerDetialMenuActions: [
       {
-        name: '添加处理人'
+        name: '处理人'
       },
       {
         name: '邀请好友加入处理',
         openType: 'share'
       },
       {
-        name: '删除任务',
+        name: '删除子任务',
         color: 'red',
       }
     ],
@@ -68,7 +68,26 @@ Page({
     taskPointAddName: '',
     showRenameTaskPointPop: false,
     subTaskIndex: 0,
-    pointIndex: 0
+    pointIndex: 0,
+    showHandlerDetailPop: false,
+    showHandlerAvatarUrl: '',
+    showHandlerNickName: '',
+    handlerOpenId: '',
+    showAddHandlerPop: false,
+
+  },
+
+  addHandler: function(event){
+    this.setData({
+      subTaskIndex: event.currentTarget.dataset.subtaskindex,
+      showAddHandlerPop: true
+    })
+  },
+
+  onAddHandlerPopClose: function(){
+    this.setData({
+      showAddHandlerPop: false
+    })
   },
 
   onChange(event) {
@@ -141,7 +160,6 @@ Page({
             },
             success: res => {
               wx.showToast({
-                icon: 'none',
                 title: '删除成功'
               })
               this.onShow()
@@ -179,6 +197,18 @@ Page({
     })
   },
 
+  onHandlerSelectChange: function(event){
+    this.setData({
+      result: event.detail
+    });
+  },
+
+  toggle(event) {
+    const { index } = event.currentTarget.dataset;
+    const checkbox = this.selectComponent(`.checkboxes-${index}`);
+    checkbox.toggle();
+  },
+
   onRenameTaskPoint: function(){
     var subTaskIndex = this.data.subTaskIndex
     var pointIndex = this.data.pointIndex
@@ -197,7 +227,6 @@ Page({
       },
       success: res => {
         wx.showToast({
-          icon: 'none',
           title: '修改成功'
         })
         this.onRenameTaskPointPopClose()
@@ -265,7 +294,6 @@ Page({
       success: res => {
         console.log(res.data)
         wx.showToast({
-          icon: 'none',
           title: '任务点添加成功'
         })
         this.onAddTaskPointPopClose()
@@ -331,7 +359,9 @@ Page({
           success: res => {
             var field = "subTaskParticipantImg[" + res.result.list[0].subTaskIndex + "][" + res.result.list[0].pointIndex + "]"
             this.setData({
-              [field]: res.result.list[0].avatarUrl
+              [field + ".avatarUrl"]: res.result.list[0].avatarUrl,
+              [field + "._openid"]: res.result.list[0]._openid,
+              [field + ".nickName"]: res.result.list[0].nickName
             })
           },
           fail: err => {
@@ -416,6 +446,7 @@ Page({
       },
       fail: err => {
         wx.showToast({
+          icon: 'none',
           title: '删除任务失败，请重试',
         })
       }
@@ -450,6 +481,33 @@ Page({
   onAddSubTaskPopClose: function(){
     this.setData({
       showAddSubTaskPop: false
+    })
+  },
+
+  handlerAvatarTap: function(event){
+    var subTaskIndex = event.currentTarget.dataset.subtaskindex
+    var handlerOpenId = event.currentTarget.dataset.openid
+    var nickName = event.currentTarget.dataset.nickname
+    var avatarUrl = event.currentTarget.dataset.avatarurl
+    this.setData({
+      subTaskIndex: subTaskIndex,
+      handlerOpenId: handlerOpenId,
+      showHandlerAvatarUrl: avatarUrl,
+      showHandlerNickName: nickName,
+      showHandlerDetailPop: true
+    })
+  },
+
+  onRemoveHandler: function(){
+    wx.showToast({
+      icon: 'none',
+      title: '还么写哦'
+    })
+  },
+
+  onHandlerDetailPopClose: function(){
+    this.setData({
+      showHandlerDetailPop: false
     })
   },
 
@@ -580,6 +638,7 @@ Page({
             /* 子任务创建成功但是绑定失败，删除子任务 */
             db.collection('todos').doc('res._id').remove({})
             wx.showToast({
+              icon: 'none',
               title: '子任务添加失败，请尝重新添加',
             })
           }
