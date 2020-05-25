@@ -21,26 +21,30 @@
     </van-cell>
     <van-collapse value="{{ activeNames }}" bind:change="onChange">
     <!--折叠面板开始-->
-      <van-collapse-item name="{{item.taskName}}" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="subTaskInfo">
+      <van-collapse-item name="{{item.taskName}}" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="subTaskInfo" wx:for-index="subTaskIndex">
         <view slot="title">
           <span class="van-collapse-text">{{item.taskName}}  </span>
           <!--<van-tag type="danger">标签</van-tag>-->
         </view>
-        <view class="taskDescription">{{item.taskDescription}}</view>
-        <!--子任务的处理人头像列表（此处数据尚未绑定！）-->
-        <view style="display:inline-block; line-height:64rpx;" wx:for="{{taskData.participantsrInfo}}" wx:key="key">
-            <image src="{{item.avatarUrl}}" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
-        </view>
         <!--子任务的处理人详情按钮 应当仅处理人可见！-->
         <view style="display:block; float:right;">
           <van-icon bindtap="subTaskHandlerDetial" id="{{item._id}}" data-subtaskname="{{item.taskName}}" name="ellipsis" size="24px"/>
+        </view>
+        <view class="taskDescription">{{item.taskDescription}}</view>
+        <!--子任务的处理人头像列表（此处数据已绑定，但本地修改未同步到云端！）-->
+        <view>
+          <view style="display:inline-block; line-height:64rpx;" wx:for="{{subTaskParticipantImg[subTaskIndex]}}" wx:key="key" wx:for-index="subTaskImgIndex">
+            <image src="{{item}}" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
+          </view>
         </view>
         <view class="divideline"></view>
         <!--add-minitask-view 应当仅处理人可见！-->
         <view class="add-minitask-view">
           <van-icon name="plus" color="#1989fa" size="12px"/> 添加任务点
         </view>
-        <van-checkbox value="{{ checked }}" shape="square" bind:change="onChange_checkbox" icon-size="16px">小任务点示例</van-checkbox>
+        <view wx:for="{{item.taskPoints}}" wx:key="key" wx:for-index="taskPointIndex">
+          <van-checkbox value="{{ item.checked }}" shape="square" data-subTaskIndex="{{subTaskIndex}}" data-taskPointIndex="{{taskPointIndex}}" bind:change="onChange_checkbox" icon-size="16px">{{item.taskPoint}}</van-checkbox>
+          </view>
         <van-steps steps="{{ steps }}" active="{{ active[0] }}" active-color="#38f"/>
       </van-collapse-item>
       <!--折叠面板结束-->

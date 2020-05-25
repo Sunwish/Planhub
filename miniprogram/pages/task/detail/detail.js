@@ -61,7 +61,10 @@ Page({
         text: '已完成'
       }
     ],
-    active:[1, 2]
+    active:[1, 2],
+    subTaskParticipantImg:[
+
+    ]
   },
 
   onChange(event) {
@@ -71,8 +74,11 @@ Page({
   },
 
   onChange_checkbox(event){
+    var subIndex = event.currentTarget.dataset.subtaskindex
+    var pointIndex = event.currentTarget.dataset.taskpointindex
+    var filed = "taskData.subTaskInfo[" + subIndex + "].taskPoints[" + pointIndex + "].checked"
     this.setData({
-      checked: event.detail
+      [filed]: event.detail
     });
   },
 
@@ -102,6 +108,7 @@ Page({
           taskData: res.result.list[0],
           loading: false
         })
+        this.getSubTaskParticipantsImg()
       },
       fail: err => {
         wx.showToast({
@@ -111,6 +118,37 @@ Page({
         console.error('[数据库] [查询记录] 失败：', err)
       }
     })
+  },
+
+/**
+ * 获取子任务参与者头像
+ */
+  getSubTaskParticipantsImg: function(){
+    // 初始化存储结构
+    this.data.subTaskParticipantImg = new Array(this.data.taskData.subTaskInfo.length)
+    for (var i = 0; i < this.data.taskData.subTaskInfo.length; i++){
+      this.data.subTaskParticipantImg[i] = new Array(this.data.taskData.subTaskInfo[i]._participantsId.length)
+      for(var j = 0; j < this.data.subTaskParticipantImg[i].length; j++){
+        wx.cloud.callFunction({
+          name: 'getUserInfo',
+          data: {
+            _openid: this.data.taskData.subTaskInfo[i]._participantsId[j],
+            subTaskIndex: i,
+            pointIndex: j
+          },
+          success: res => {
+            var field = "subTaskParticipantImg[" + res.result.list[0].subTaskIndex + "][" + res.result.list[0].pointIndex + "]"
+            this.setData({
+              [field]: res.result.list[0].avatarUrl
+            })
+          },
+          fail: err => {
+            console.error('参与者头像获取失败：', err)
+          }
+        })
+      }
+    }
+    console.log(this.data.subTaskParticipantImg)
   },
 
   addSubTask: function (){

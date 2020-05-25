@@ -10,6 +10,8 @@ exports.main = async (event, context) => {
   联表查询(https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/aggregate/Aggregate.lookup.html)
   */
   const db = cloud.database()
+  const _ = db.command;
+  const $ = db.command.aggregate
   console.log(event.key)
   if (event.key == 'uid'){ // get by creatorId
     let res = await db.collection('tasks').aggregate()
