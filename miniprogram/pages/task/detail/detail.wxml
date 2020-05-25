@@ -45,10 +45,8 @@
         <view>
           <view wx:for="{{item.taskPoints}}" wx:key="key" wx:for-index="taskPointIndex" style="margin-bottom: 10px;">
             <van-checkbox value="{{ item.checked }}" shape="square" data-subTaskIndex="{{subTaskIndex}}" data-taskPointIndex="{{taskPointIndex}}" bind:change="onChange_checkbox" icon-size="16px">{{item.taskPoint}}</van-checkbox>
-            <!-- 任务点编辑/删除按钮
-            <van-icon name="edit" style="position:inline-block; float:right; margin:-20px 20px 0 0;"/>
-            <van-icon name="cross" style="position:inline-block; float:right; margin-top:-20px;"/>
-            -->
+            <van-icon name="edit" bindtap="editTaskPoint" data-subTaskIndex="{{subTaskIndex}}" data-taskPointIndex="{{taskPointIndex}}" style="position:inline-block; float:right; margin:-20px 20px 0 0;"/>
+            <van-icon name="cross" bindtap="deleteTaskPoint" data-subTaskIndex="{{subTaskIndex}}" data-taskPointIndex="{{taskPointIndex}}" style="position:inline-block; float:right; margin-top:-20px;"/>
           </view>
         </view>
         <van-steps steps="{{ steps }}" active="{{ item.status }}" active-color="#38f"/>
@@ -117,9 +115,16 @@
 
 <van-popup show="{{ showAddTaskPointPop }}" bind:close="onAddTaskPointPopClose" position="bottom" custom-style="height: 90%;" round>
   <van-cell-group title="添加任务点">
-			<van-field bind:change="taskPointNameChanged" label="任务点" placeholder="给你的任务点取一个名字吧~" required />
+			<van-field bind:change="taskPointNameChanged" label="任务点" placeholder="给你的任务点取一个名字吧~" value="{{taskPointAddName}}" required />
 	</van-cell-group>
   <van-button round type="info" block bind:click="onCreateTaskPoint" class="button-view">添加任务点</van-button>
+</van-popup>
+
+<van-popup show="{{ showRenameTaskPointPop }}" bind:close="onRenameTaskPointPopClose" position="bottom" custom-style="height: 90%;" round>
+  <van-cell-group title="修改任务点名">
+			<van-field bind:change="taskPointNameChanged" label="任务点" placeholder="给你的任务点一个新名字吧~" value="{{taskPointAddName}}" required />
+	</van-cell-group>
+  <van-button round type="info" block bind:click="onRenameTaskPoint" class="button-view">确认修改</van-button>
 </van-popup>
 
 <view class="create-new-subTask">

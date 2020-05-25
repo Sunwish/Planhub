@@ -65,7 +65,10 @@ Page({
     subTaskParticipantImg:[],
     showAddTaskPointPop: false,
     taskPointTargetIndex: 0,
-    taskPointAddName: ''
+    taskPointAddName: '',
+    showRenameTaskPointPop: false,
+    subTaskIndex: 0,
+    pointIndex: 0
   },
 
   onChange(event) {
@@ -117,6 +120,105 @@ Page({
     })
   },
 
+  deleteTaskPoint: function(event){
+    var subTaskIndex = event.currentTarget.dataset.subtaskindex
+    var pointIndex = event.currentTarget.dataset.taskpointindex
+    var subTaskId = this.data.taskData.subTaskInfo[subTaskIndex]._id
+    var newTaskPoints = this.data.taskData.subTaskInfo[subTaskIndex].taskPoints
+    var taskPointName = this.data.taskData.subTaskInfo[subTaskIndex].taskPoints[pointIndex].taskPoint
+
+    wx.showModal({
+      title: '删除任务点',
+      content: '确定删除任务点' + taskPointName + '吗',
+      success: sm => {
+        if (sm.confirm) {
+          newTaskPoints.splice(pointIndex, 1)
+          const db = wx.cloud.database()
+          const _ = db.command
+          db.collection('tasks').doc(subTaskId).update({
+            data: {
+              taskPoints: newTaskPoints
+            },
+            success: res => {
+              wx.showToast({
+                icon: 'none',
+                title: '删除成功'
+              })
+              this.onShow()
+            },
+            fail: error => {
+              wx.showToast({
+                icon: 'none',
+                title: '删除失败'
+              })
+              console.log(error)
+            }
+          })
+        } else if (sm.cancel) {
+          console.log('cancle')
+        }
+      }
+    })
+  },
+
+  editTaskPoint: function(event){
+    var subTaskIndex = event.currentTarget.dataset.subtaskindex
+    var pointIndex = event.currentTarget.dataset.taskpointindex
+    var oriName = this.data.taskData.subTaskInfo[subTaskIndex].taskPoints[pointIndex].taskPoint
+    this.setData({
+      subTaskIndex: event.currentTarget.dataset.subtaskindex,
+      pointIndex: event.currentTarget.dataset.taskpointindex,
+      taskPointAddName: oriName,
+      showRenameTaskPointPop: true
+    })
+  },
+
+  onRenameTaskPointPopClose: function(){
+    this.setData({
+      showRenameTaskPointPop: false
+    })
+  },
+
+  onRenameTaskPoint: function(){
+    var subTaskIndex = this.data.subTaskIndex
+    var pointIndex = this.data.pointIndex
+    var subTaskId = this.data.taskData.subTaskInfo[subTaskIndex]._id
+    var field_cloud = 'taskPoints.' + pointIndex
+    var newTaskPoint = {
+      taskPoint: this.data.taskPointAddName,
+      checked: this.data.taskData.subTaskInfo[subTaskIndex].taskPoints[pointIndex].checked
+    }
+    
+    const db = wx.cloud.database()
+    const _ = db.command
+    db.collection('tasks').doc(subTaskId).update({
+      data: {
+        [field_cloud]: newTaskPoint
+      },
+      success: res => {
+        wx.showToast({
+          icon: 'none',
+          title: '修改成功'
+        })
+        this.onRenameTaskPointPopClose()
+        this.setData({
+          taskPointAddName: ''
+        })
+        this.onShow()
+      },
+      fail: error => {
+        this.setData({
+          taskPointAddName: ''
+        })
+        wx.showToast({
+          icon: 'none',
+          title: '修改失败'
+        })
+        console.log(error)
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -132,6 +234,7 @@ Page({
 
   addTaskPoint: function(event){
     this.setData({
+      taskPointAddName: '',
       taskPointTargetIndex: event.currentTarget.dataset.subtaskindex,
       showAddTaskPointPop: true
     })
