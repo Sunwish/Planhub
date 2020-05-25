@@ -21,7 +21,7 @@
     </van-cell>
     <van-collapse value="{{ activeNames }}" bind:change="onChange">
     <!--折叠面板开始-->
-      <van-collapse-item name="{{item.taskName}}" icon="stop" value="已接受" wx:for="{{taskData.subTaskInfo}}" wx:key="subTaskInfo" wx:for-index="subTaskIndex">
+      <van-collapse-item name="{{item.taskName}}" icon="stop" value="{{steps[item.status].text}}" wx:for="{{taskData.subTaskInfo}}" wx:key="subTaskInfo" wx:for-index="subTaskIndex">
         <view slot="title">
           <span class="van-collapse-text">{{item.taskName}}  </span>
           <!--<van-tag type="danger">标签</van-tag>-->
@@ -45,7 +45,7 @@
         <view wx:for="{{item.taskPoints}}" wx:key="key" wx:for-index="taskPointIndex">
           <van-checkbox value="{{ item.checked }}" shape="square" data-subTaskIndex="{{subTaskIndex}}" data-taskPointIndex="{{taskPointIndex}}" bind:change="onChange_checkbox" icon-size="16px">{{item.taskPoint}}</van-checkbox>
           </view>
-        <van-steps steps="{{ steps }}" active="{{ active[0] }}" active-color="#38f"/>
+        <van-steps steps="{{ steps }}" active="{{ item.status }}" active-color="#38f"/>
       </van-collapse-item>
       <!--折叠面板结束-->
     </van-collapse>
