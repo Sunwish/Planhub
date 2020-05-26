@@ -77,6 +77,40 @@ Page({
 
   },
 
+  nextStep: function(event){
+    var subTaskIndex = event.currentTarget.dataset.subtaskindex
+    var subTaskId = this.data.taskData.subTaskInfo[subTaskIndex]._id
+    var oriStatus = this.data.taskData.subTaskInfo[subTaskIndex].status
+    var newStatus = (oriStatus + 1) % 4
+    var field_local = "taskData.subTaskInfo[" + subTaskIndex + "].status"
+    this.setData({
+      [field_local]: newStatus
+    })
+
+    // checked变动同步到数据库
+    const db = wx.cloud.database()
+    db.collection('tasks').doc(subTaskId).update({
+      data: {
+        status: newStatus
+      },
+      success: res => {
+        //console.log(res)
+      },
+      fail: error => {
+        // 同步失败，复位本地状态
+        console.log(before)
+        this.setData({
+          [field_local]: oriStatus
+        });
+        wx.showToast({
+          icon: 'none',
+          title: '任务状态同步失败'
+        })
+        console.log(error)
+      }
+    })
+  },
+
   addHandler: function(event){
     this.setData({
       subTaskIndex: event.currentTarget.dataset.subtaskindex,

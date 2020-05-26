@@ -51,6 +51,7 @@
           </view>
         </view>
         <van-steps steps="{{ steps }}" active="{{ item.status }}" active-color="#38f"/>
+        <van-button round type="info" block bindtap="nextStep" data-subTaskIndex="{{subTaskIndex}}">下一步</van-button>
       </van-collapse-item>
       <!--折叠面板结束-->
     </van-collapse>
@@ -115,7 +116,7 @@
 </van-popup>
 
 <!--添加任务点pop层-->
-<van-popup show="{{ showAddTaskPointPop }}" bind:close="onAddTaskPointPopClose" position="bottom" custom-style="height: 90%;" round>
+<van-popup show="{{ showAddTaskPointPop }}" bind:close="onAddTaskPointPopClose" position="bottom" round>
   <van-cell-group title="添加任务点">
 			<van-field bind:change="taskPointNameChanged" label="任务点" placeholder="给你的任务点取一个名字吧~" value="{{taskPointAddName}}" required />
 	</van-cell-group>
@@ -123,7 +124,7 @@
 </van-popup>
 
 <!--修改任务点pop层-->
-<van-popup show="{{ showRenameTaskPointPop }}" bind:close="onRenameTaskPointPopClose" position="bottom" custom-style="height: 90%;" round>
+<van-popup show="{{ showRenameTaskPointPop }}" bind:close="onRenameTaskPointPopClose" position="bottom" round>
   <van-cell-group title="修改任务点名">
 			<van-field bind:change="taskPointNameChanged" label="任务点" placeholder="给你的任务点一个新名字吧~" value="{{taskPointAddName}}" required />
 	</van-cell-group>
@@ -131,7 +132,7 @@
 </van-popup>
 
 <!--处理人详情及删除操作pop层-->
-<van-popup show="{{ showHandlerDetailPop }}" bind:close="onHandlerDetailPopClose" position="bottom" custom-style="height: 34%;" round>
+<van-popup show="{{ showHandlerDetailPop }}" bind:close="onHandlerDetailPopClose" position="bottom" round>
   <view style="text-align:center; margin:20px 0;">
     <van-image round width="90px" height="90px" src="{{showHandlerAvatarUrl}}"/>
     <view style="margin-top:5px;">{{showHandlerNickName}}</view>
@@ -140,7 +141,7 @@
 </van-popup>
 
 <!--添加处理人pop层-->
-<van-popup show="{{ showAddHandlerPop }}" bind:close="onAddHandlerPopClose" position="bottom" custom-style="height: 80%;" round>
+<van-popup show="{{ showAddHandlerPop }}" bind:close="onAddHandlerPopClose" position="bottom" round>
   <view style="text-align:center; margin:20px 0;">
   为子任务 [{{taskData.subTaskInfo[subTaskIndex].taskName}}] 指定处理人
   </view>
