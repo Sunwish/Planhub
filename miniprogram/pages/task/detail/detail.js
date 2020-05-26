@@ -74,7 +74,7 @@ Page({
     showHandlerNickName: '',
     handlerOpenId: '',
     showAddHandlerPop: false,
-
+    addHandlerOpenidList: []
   },
 
   nextStep: function(event){
@@ -115,6 +115,53 @@ Page({
     this.setData({
       subTaskIndex: event.currentTarget.dataset.subtaskindex,
       showAddHandlerPop: true
+    })
+  },
+
+  onRemoveHandler: function () {
+    // subTaskIndex 和 handlerOpenId 在头像点击事件 handlerAvatarTap() 中已经获取过了，直接拿来用
+    var subTaskIndex = this.data.subTaskIndex
+    var handlerOpenId = this.data.handlerOpenId
+    var subTaskId = this.data.taskData.subTaskInfo[subTaskIndex]._id
+    var oriParticipantList = this.data.taskData.subTaskInfo[subTaskIndex]._participantsId
+    var targetIndexInList = oriParticipantList.indexOf(handlerOpenId)
+    if (-1 == targetIndexInList) return
+
+    // 移除处理人
+    // 这里删除有个坑，js里的删除元素返回的并不是完成操作后的新数组，而是返回被删除的元素，操作是直接在被操作对象上执行的
+    var newParticipantList = oriParticipantList
+    newParticipantList.splice(targetIndexInList, 1)
+    
+    var field_local = "taskData.subTaskInfo[" + subTaskIndex + "]._participantsId"
+    this.setData({
+      [field_local]: newParticipantList
+    })
+
+    const db = wx.cloud.database()
+    db.collection('tasks').doc(subTaskId).update({
+      data: {
+        _participantsId: newParticipantList
+      },
+      success: res => {
+        wx.showToast({
+          title: '删除处理人成功'
+        })
+        this.onHandlerDetailPopClose()
+        // 再一个坑：已经存在的头像元素用onShow刷新并不会删除，onShow会把新元素渲染加上，但不会把少的元素删掉，太坑了，于是重载之。
+        wx.reLaunch({
+          url: '/pages/task/detail/detail?taskId=' + this.data.tid,
+        });
+      },
+      fail: error => {
+        this.setData({
+          [field_local]: oriParticipantList
+        })
+        wx.showToast({
+          icon: 'none',
+          title: '操作失败，请重试'
+        })
+        console.log(error)
+      }
     })
   },
 
@@ -232,15 +279,59 @@ Page({
   },
 
   onHandlerSelectChange: function(event){
+    // console.log(event.currentTarget.dataset)
     this.setData({
       result: event.detail
     });
   },
 
   toggle(event) {
+    var targetOpenid = event.currentTarget.dataset.openid
+    var inListIndex = this.data.addHandlerOpenidList.indexOf(targetOpenid)
+    // 判断点击的复选框项是否在勾选列表中
+    if (-1 == inListIndex){
+      // 既未勾选，将其添加到列表中
+      this.data.addHandlerOpenidList.push(targetOpenid)
+    }else{
+      // 已勾选，将其移除
+      this.data.addHandlerOpenidList.splice(inListIndex, 1)
+    }
     const { index } = event.currentTarget.dataset;
     const checkbox = this.selectComponent(`.checkboxes-${index}`);
     checkbox.toggle();
+  },
+
+  onAddHandler: function(event){
+    var subTaskIndex = event.currentTarget.dataset.subtaskindex
+    var subTaskId = this.data.taskData.subTaskInfo[subTaskIndex]._id
+    var addList = this.data.addHandlerOpenidList
+    var oriList = this.data.taskData.subTaskInfo[subTaskIndex]._participantsId
+    var mergedList = Array.from(new Set(oriList.concat(addList))) // 利用集合实例一步去重
+    if(0 == addList.length) return
+    const db = wx.cloud.database()
+    //console.log(oriList)
+    //console.log(addList)
+    console.log(mergedList)
+    db.collection('tasks').doc(subTaskId).update({
+      data: {
+        _participantsId: mergedList
+      },
+      success: res => {
+
+        wx.showToast({
+          title: '添加成功'
+        })
+        this.onAddHandlerPopClose()
+        this.onShow()
+      },
+      fail: error => {
+        wx.showToast({
+          icon: 'none',
+          title: '修改失败，请重试'
+        })
+        console.log(error)
+      }
+    })
   },
 
   onRenameTaskPoint: function(){
@@ -529,13 +620,6 @@ Page({
       showHandlerAvatarUrl: avatarUrl,
       showHandlerNickName: nickName,
       showHandlerDetailPop: true
-    })
-  },
-
-  onRemoveHandler: function(){
-    wx.showToast({
-      icon: 'none',
-      title: '还么写哦'
     })
   },
 

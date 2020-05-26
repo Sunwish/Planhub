@@ -31,7 +31,7 @@
           <van-icon bindtap="subTaskHandlerDetial" id="{{item._id}}" data-subtaskname="{{item.taskName}}" name="ellipsis" size="24px"/>
         </view>
         <view class="taskDescription">{{item.taskDescription}}</view>
-        <!--子任务的处理人头像列表（此处数据已绑定，但本地修改未同步到云端！）-->
+        <!--子任务的处理人头像列表-->
         <view>
           <view style="display:inline-block; line-height:64rpx;" wx:for="{{subTaskParticipantImg[subTaskIndex]}}" wx:key="key" wx:for-index="subTaskImgIndex">
             <image src="{{item.avatarUrl}}" data-openid="{{item._openid}}" data-subTaskIndex="{{subTaskIndex}}" data-nickName="{{item.nickName}}" data-avatarUrl="{{item.avatarUrl}}" bindtap="handlerAvatarTap" style="width:48rpx; height:48rpx;border-radius:24rpx;margin-right:12rpx; background-color:#aaa;"></image>
@@ -165,7 +165,7 @@
       </van-cell>
     </van-cell-group>
   </van-checkbox-group>
-  <van-button round type="info" block bind:click="onRemoveHandler" class="button-view">添加为处理人</van-button>
+  <van-button round type="info" block bind:click="onAddHandler" class="button-view" data-subTaskIndex="{{subTaskIndex}}">添加为处理人</van-button>
 </van-popup>
 
 <view class="create-new-subTask">
