@@ -317,11 +317,13 @@ Page({
         _participantsId: mergedList
       },
       success: res => {
-
         wx.showToast({
           title: '添加成功'
         })
         this.onAddHandlerPopClose()
+        this.setData({
+          addHandlerOpenidList: []
+        })
         this.onShow()
       },
       fail: error => {
@@ -520,7 +522,7 @@ Page({
 
   onTaskHandlerDetialMenuSelect(event) {
     switch (event.detail.name) {
-      case '删除任务':
+      case '删除整个任务':
         this.deleteTask(this.data.operTaskId);
         break;
       default:
@@ -544,7 +546,7 @@ Page({
 
   onSubTaskHandlerDetialMenuSelect(event) {
     switch (event.detail.name){
-      case '删除任务':
+      case '删除子任务':
         this.deleteSubTask(this.data.operTaskId);
         break;
       case "添加处理人":
