@@ -19,6 +19,7 @@ Page({
     fileList6: [],
     checked1: {},
     show2: false,
+    TaskId:{}
   },
 
   /**
@@ -137,6 +138,22 @@ Page({
       "radio": _radio
     };
     this._onCreateTask(taskAttr);
+    wx.cloud.init();
+    const { fileList6: fileList = [] } = this.data;
+    if (!fileList.length) {
+    } else {
+      const uploadTasks = fileList.map((file, index) =>
+        this.uploadFilePromise(`user_files/${this.data.TaskId}/my-photo${index}.png`, file)
+      );
+      Promise.all(uploadTasks)
+        .then(data => {
+          const fileList = data.map(item => ({ url: item.fileID }));
+          this.setData({ cloudPath: data, fileList6: fileList });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   },
 
 
@@ -160,7 +177,7 @@ Page({
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
         this.setData({
-          //counterId: res._id,
+          TaskId: res._id,
         })
         wx.showToast({
           title: '创建任务成功',
@@ -330,27 +347,6 @@ Page({
       cloudPath: fileName,
       filePath: chooseResult.path
     });
-  },
-  uploadToCloud() {
-    wx.cloud.init();
-    const { fileList6: fileList = [] } = this.data;
-    if (!fileList.length) {
-      wx.showToast({ title: '请选择图片', icon: 'none' });
-    } else {
-      const uploadTasks = fileList.map((file, index) =>
-        this.uploadFilePromise(`my-photo${index}.png`, file)
-      );
-      Promise.all(uploadTasks)
-        .then(data => {
-          wx.showToast({ title: '上传成功', icon: 'none' });
-          const fileList = data.map(item => ({ url: item.fileID }));
-          this.setData({ cloudPath: data, fileList6: fileList });
-        })
-        .catch(e => {
-          wx.showToast({ title: '上传失败', icon: 'none' });
-          console.log(e);
-        });
-    }
   },
   //自己写永远出错还不如抄！！！
   beforeRead(event) {
