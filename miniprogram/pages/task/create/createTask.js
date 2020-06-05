@@ -19,7 +19,7 @@ Page({
     fileList6: [],
     checked1: {},
     show2: false,
-    TaskId:{}
+    TaskId: {}
   },
 
   /**
@@ -138,22 +138,6 @@ Page({
       "radio": _radio
     };
     this._onCreateTask(taskAttr);
-    wx.cloud.init();
-    const { fileList6: fileList = [] } = this.data;
-    if (!fileList.length) {
-    } else {
-      const uploadTasks = fileList.map((file, index) =>
-        this.uploadFilePromise(`user_files/${this.data.TaskId}/my-photo${index}.png`, file)
-      );
-      Promise.all(uploadTasks)
-        .then(data => {
-          const fileList = data.map(item => ({ url: item.fileID }));
-          this.setData({ cloudPath: data, fileList6: fileList });
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    }
   },
 
 
@@ -172,13 +156,45 @@ Page({
         deadline: taskAttr["deadline"],
         priority: taskAttr["priority"],
         subTasksId: taskAttr["subTasksId"],
-        radio: taskAttr["radio"]
+        radio: taskAttr["radio"],
+        fileID:[]
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
         this.setData({
           TaskId: res._id,
         })
+        //上传图片
+        wx.cloud.init();
+        const {
+          fileList6: fileList = []
+        } = this.data;
+        if (!fileList.length) {} else {
+          const uploadTasks = fileList.map((file, index) =>
+            this.uploadFilePromise(`/my-photo${index}.png`, file)
+          );
+          Promise.all(uploadTasks)
+            .then(data => {
+              const fileList = data.map(item => ({
+                url: item.fileID
+              }));
+              this.setData({
+                cloudPath: data,
+                fileList6: fileList
+              });
+              db.collection('tasks').doc(this.data.TaskId).update({
+                data: {
+                 fileID: fileList
+                },
+                success: function(res) {        
+                }
+              })
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }
+        //上传图片
         wx.showToast({
           title: '创建任务成功',
         })
@@ -279,17 +295,16 @@ Page({
             return;
           }
           //发现可以消息推送
-          if (that.data.checked1 && res.data[0].radio!='1') {
+          if (that.data.checked1 && res.data[0].radio != '1') {
             that.setData({
-              show2:true
+              show2: true
+            })
+          } else {
+            this.joinTask({
+              taskId: this.data.taskId
             })
           }
-          else{
-          this.joinTask({
-            taskId: this.data.taskId
-          })
-          }
-          } else {
+        } else {
           wx.showToast({
             icon: 'none',
             title: '任务不存在'
@@ -305,7 +320,7 @@ Page({
     })
   },
   //用户点击消息授权的按钮
-  Messet:function(){
+  Messet: function () {
     wx.requestSubscribeMessage({
       tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
       success(res) {}
@@ -314,7 +329,7 @@ Page({
       taskId: this.data.taskId
     })
   },
-  cancel:function(){
+  cancel: function () {
     this.joinTask({
       taskId: this.data.taskId
     })
@@ -343,27 +358,41 @@ Page({
     })
   },
   uploadFilePromise(fileName, chooseResult) {
+    console.log(this.data.TaskId)
     return wx.cloud.uploadFile({
-      cloudPath: fileName,
+      cloudPath: 'user_files/' + this.data.TaskId + fileName,
       filePath: chooseResult.path
     });
   },
   //自己写永远出错还不如抄！！！
   beforeRead(event) {
-    const { file, callback = () => {} } = event.detail;
+    const {
+      file,
+      callback = () => {}
+    } = event.detail;
     callback(true);
   },
 
   afterRead(event) {
-    const { file, name } = event.detail;
+    const {
+      file,
+      name
+    } = event.detail;
     const fileList = this.data[`fileList${name}`];
 
-    this.setData({ [`fileList${name}`]: fileList.concat(file) });
+    this.setData({
+      [`fileList${name}`]: fileList.concat(file)
+    });
   },
   delete(event) {
-    const { index, name } = event.detail;
+    const {
+      index,
+      name
+    } = event.detail;
     const fileList = this.data[`fileList${name}`];
     fileList.splice(index, 1);
-    this.setData({ [`fileList${name}`]: fileList });
+    this.setData({
+      [`fileList${name}`]: fileList
+    });
   },
 })

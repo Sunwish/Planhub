@@ -245,7 +245,7 @@ Component({
                   province: province,
                   city: city,
                   country: country,
-                  Mespush:false
+                  Mespush:true
                 },
                 success: s => {
                   console.log('create UserInfo successed')
