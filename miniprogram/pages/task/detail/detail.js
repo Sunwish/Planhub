@@ -942,7 +942,7 @@ Page({
       title: '加入我的任务',
       //path: 'pages/planWall/planWall',
       path: '/pages/invite/invite?tid='+this.data.tid,
-      imageUrl: '../../../images/invite.jpg',
+      imageUrl: '../../../images/invite.png',
       success: function (res) {
         console.log('成功', res);
       }
