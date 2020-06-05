@@ -19,7 +19,7 @@ Page({
     taskHandlerDetialTitle: '',
     taskHandlerDetialMenuActions: [
       {
-        name: '删除整个任务',
+        name: '',
         color: 'red',
       }
     ],
@@ -74,7 +74,8 @@ Page({
     showHandlerNickName: '',
     handlerOpenId: '',
     showAddHandlerPop: false,
-    addHandlerOpenidList: []
+    addHandlerOpenidList: [],
+    isTaskCreator: true
   },
 
   nextStep: function(event){
@@ -451,10 +452,31 @@ Page({
       },
       success: res => {
         console.log(res.result.list[0])
+        if (res.result.list[0].creatorInfo[0]._openid == app.globalData.openid) {
+          // 是任务的创建者
+          this.setData({
+            isTaskCreator: true,
+            taskHandlerDetialMenuActions: [
+              {
+                name: '删除整个任务',
+                color: 'red',
+              }]
+          })
+        } else {
+          this.setData({
+            isTaskCreator: false,
+            taskHandlerDetialMenuActions: [
+              {
+                name: '退出该任务',
+                color: 'red',
+              }]
+          })
+        }
         this.setData({
           taskData: res.result.list[0],
           loading: false
         })
+        
         this.getSubTaskParticipantsImg()
       },
       fail: err => {
@@ -523,11 +545,60 @@ Page({
   onTaskHandlerDetialMenuSelect(event) {
     switch (event.detail.name) {
       case '删除整个任务':
-        this.deleteTask(this.data.operTaskId);
+        wx.showModal({
+          title: '提示',
+          content: '确定要删除整个任务吗？确认后任务将被解散且不可恢复。',
+          success: sm => {
+            if (sm.confirm) {
+              this.deleteTask(this.data.operTaskId);
+            } else if (sm.cancel) { }
+          }
+        })
+        break;
+      case '退出该任务':
+        wx.showModal({
+          title: '提示',
+          content: '确定要退出任务吗？',
+          success: sm => {
+            if (sm.confirm) {
+              this.leaveTask();
+            } else if (sm.cancel) {}
+          }
+        })
         break;
       default:
         console.log('default');
     }
+  },
+
+  leaveTask: function(){
+    var oriParticipantIdList = this.data.taskData._participantsId
+    var targetIndexInList = oriParticipantIdList.indexOf(app.globalData.openid)
+    if (-1 == targetIndexInList) return
+
+    var newParticipantList = oriParticipantIdList
+    newParticipantList.splice(targetIndexInList, 1)
+
+    const db = wx.cloud.database()
+    db.collection('tasks').doc(this.data.tid).update({
+      data: {
+        _participantsId: newParticipantList
+      },
+      success: res => {
+        wx.showToast({
+          title: '退出任务成功'
+        })
+        this.onHandlerDetailPopClose();
+        wx.navigateBack({})
+      },
+      fail: error => {
+        wx.showToast({
+          icon: 'none',
+          title: '操作失败，请重试'
+        })
+        console.log(error)
+      }
+    })
   },
 
   onTaskHandlerDetialMenuClose() {
