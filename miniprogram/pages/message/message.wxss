@@ -1,1 +1,16 @@
 /* miniprogram/pages/message/message.wxss */
+.scroll-view{
+  position: absolute;
+  left: 0;
+  top: 24rpx;
+  bottom: 100rpx;
+}
+
+.plan-item{
+  background-color: white;
+  margin: 30rpx 24rpx;
+  margin-top: 0;
+  padding: 24rpx;
+  min-height: 92rpx;
+  padding-bottom: 0;
+}

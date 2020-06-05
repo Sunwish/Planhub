@@ -1,2 +1,31 @@
 <!--pages/guide/guide.wxml-->
-<text>待完善</text>
+<van-collapse
+  accordion="true"
+  value="{{ activeNames }}"
+  bind:change="onChange"
+  bind:open="onOpen"
+  bind:close="onClose"
+>
+  <van-collapse-item title="任务与子任务" name="1">
+    一个任务下可以添加多个子任务。
+  </van-collapse-item>
+  <van-collapse-item title="新建与删除" name="2">
+   新建任务：在任务主界面点击「+ TASK」按钮。
+   删除任务：在任务详情页点击主任务的「...」，点击删除整个任务。
+   新建子任务：在任务详情页点击「+ 添加子任务」按钮。
+   删除子任务：在任务详情页点击子任务的「...」，点击删除子任务。
+  </van-collapse-item>
+  <van-collapse-item title="加入任务" name="3">
+    加入主任务：在任务详情页点击邀请成员加入，将链接分享给待邀请的成员。
+    加入子任务：在任务详情页点击子任务的「...」，点击邀请好友加入处理，将链接分享给待邀请的成员。
+  </van-collapse-item>
+  <van-collapse-item title="添加处理人" name="4">
+    处理人。
+  </van-collapse-item>
+  <van-collapse-item title="添加任务点" name="5">
+    任务点。
+  </van-collapse-item>
+  <van-collapse-item title="反馈与意见" name="6">
+    ①点击底部「我的」，点击「意见反馈」进行反馈。②点击底部「我的」，点击「联系客服」与在线客服联系。③点击页面右上角「...」,点击「反馈与投诉」进行反馈。
+  </van-collapse-item>
+</van-collapse>

@@ -35,6 +35,9 @@ Page({
     "name": '',
     subTaskHandlerDetialMenuActions: [
       {
+        name: '复制子任务id'
+      },
+      {
         name: '处理人'
       },
       {
@@ -458,6 +461,9 @@ Page({
             isTaskCreator: true,
             taskHandlerDetialMenuActions: [
               {
+                name: '复制任务id',
+              },
+              {
                 name: '删除整个任务',
                 color: 'red',
               }]
@@ -466,6 +472,9 @@ Page({
           this.setData({
             isTaskCreator: false,
             taskHandlerDetialMenuActions: [
+              {
+                name: '复制任务id',
+              },
               {
                 name: '退出该任务',
                 color: 'red',
@@ -555,6 +564,20 @@ Page({
           }
         })
         break;
+        case '复制任务id':
+          wx.setClipboardData({
+            data: this.data.tid,
+            success: function(res){
+              wx.getClipboardData({
+                success: function(res){
+                  wx.showToast({
+                    title: '复制成功'
+                  })
+                }
+              })
+            }
+          })
+          break;
       case '退出该任务':
         wx.showModal({
           title: '提示',
@@ -623,6 +646,20 @@ Page({
       case "添加处理人":
         console.log('添加处理人');
         break;
+      case '复制子任务id':
+        wx.setClipboardData({
+          data: this.data.operTaskId,
+          success: function(res){
+             wx.getClipboardData({
+                success: function(res){
+                  wx.showToast({
+                    title: '复制成功'
+                  })
+                }
+              })
+          }
+        })
+        break;  
       default:
         console.log('default');
     }
