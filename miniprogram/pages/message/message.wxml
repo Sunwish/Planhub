@@ -1,2 +1,31 @@
 <!--miniprogram/pages/message/message.wxml-->
 
+<view style="overflow: hidden;margin-top:24rpx;margin-bottom:0;">
+  <scroll-view>
+  <view class="plan-item">
+    <view>
+      <view style="border:2rpx solid #eee; border-width:0 0 2rpx 0; padding-bottom: 16rpx; margin-bottom: 16rpx;">
+        <view style="display:inline-block; margin-left:12rpx; width:100%; overflow:hidden;">
+          <view style=" padding-bottom: 10rpx;color: #000;font-size: 36rpx;overflow: hidden;"> <van-icon name="bell" /> 系统通知 </view>
+          <view style="  padding-bottom: 10rpx;color: #aaa;font-size: 30rpx;">欢迎使用「微任务MiniTask」，这是一款不能再简单的多人任务协作小程序。</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  </scroll-view>
+</view>
+
+<view style="overflow: hidden;margin-top:0;">
+  <scroll-view>
+  <view class="plan-item">
+    <view>
+      <view style="border:2rpx solid #eee; border-width:0 0 2rpx 0; padding-bottom: 16rpx; margin-bottom: 16rpx;">
+        <view style="display:inline-block; margin-left:12rpx; width:100%; overflow:hidden;">
+          <view style=" padding-bottom: 10rpx;color: #000;font-size: 36rpx;overflow: hidden;"> <van-icon name="bell" /> 系统通知 </view>
+          <view style="  padding-bottom: 10rpx;color: #aaa;font-size: 30rpx;">新手上路？请参考使用指南。</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  </scroll-view>
+</view>

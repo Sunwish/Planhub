@@ -1,4 +1,9 @@
 {
-  "usingComponents": {},
-  "disableScroll": true
+  "usingComponents": {
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index"
+  },
+  "navigationBarTitleText": "消息" ,
+  "backgroundColor": "#f7f8fa",
+  "enablePullDownRefresh": false,
+  "backgroundTextStyle": "dark" 
 }
