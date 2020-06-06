@@ -3,8 +3,8 @@
 <van-cell-group>
   <van-skeleton row="4" loading="{{ loading }}">
     <van-cell title="{{taskData.taskName}}  {{taskData.deadline}}" label="{{taskData.taskDescription}}" value="" border="{{ false }}" />
-    <view style="display:inline-block;" wx:for='{{taskData.fileID}}'>
-     <image class="pic-view"  src="{{item}}" />
+    <view style="display:inline-block;" wx:if="{{taskData.fileID}}">
+     <image class="pic-view" data-list="{{taskData.fileID}}" wx:for="{{taskData.fileID}}" wx:for-item="dImg" src="{{dImg}}"  bindtap='clickImg' />
      </view>
     <van-cell value="">
       <view slot="title">
