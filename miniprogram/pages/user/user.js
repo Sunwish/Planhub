@@ -88,5 +88,15 @@ Component({
         url: '../guide/guide',
       })
     },
+    onShareAppMessage: function () {
+      return {
+        title: '和我一起用微任务吧！',
+        imageUrl: '../../images/try.png',
+        path: '/pages/planWall/planWall',
+        success: function (res) {
+          console.log('成功', res);
+        }
+      }
+    },
   }
 })
