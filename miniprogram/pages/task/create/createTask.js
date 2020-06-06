@@ -182,13 +182,12 @@ Page({
                 cloudPath: data,
                 fileList6: fileList
               });
+              //把数据绑定到数据库
               db.collection('tasks').doc(this.data.TaskId).update({
-                data: {
-                 fileID: fileList
-                },
-                success: function(res) {        
-                }
-              })
+                  data: {
+                   fileID: data.map(item => item.fileID)
+                  },
+                })
             })
             .catch(e => {
               console.log(e);

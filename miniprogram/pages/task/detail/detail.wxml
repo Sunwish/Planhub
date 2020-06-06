@@ -2,11 +2,14 @@
 
 <van-cell-group>
   <van-skeleton row="4" loading="{{ loading }}">
-    <van-cell title="{{taskData.taskName}}" label="{{taskData.taskDescription}}" value="" border="{{ false }}" />
+    <van-cell title="{{taskData.taskName}}  {{taskData.deadline}}" label="{{taskData.taskDescription}}" value="" border="{{ false }}" />
+    <view style="display:inline-block;" wx:for='{{taskData.fileID}}'>
+     <image class="pic-view"  src="{{item}}" />
+     </view>
     <van-cell value="">
       <view slot="title">
         <view style="font-size:30rpx; margin:0 16rpx 0 0; display:inline-block; ">
-            <van-icon name="friends" size="36rpx"/>
+            <van-icon  name="friends" size="36rpx"/>
         </view>
         <!--<scroll-view class="scroll-forums" scroll-x="true">-->
         <view style="display:inline-block; line-height:64rpx;" wx:for="{{taskData.participantsrInfo}}" wx:key="key">
