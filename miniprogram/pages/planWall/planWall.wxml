@@ -15,49 +15,43 @@
 -->
 <!--Plans selection-->
 <view style="overflow: hidden;">
-  <scroll-view class="scroll-view" scroll-y="true">
-  <view wx:for='{{tasksData}}' wx:key='index' class="plan-item">
-    <view id='{{item._id}}' bindtap="onPlanSelected">
-      <view style="border:2rpx solid #eee; border-width:0 0 2rpx 0; padding-bottom: 16rpx; margin-bottom: 16rpx;">
-        <view style="display:inline-block; margin-left:12rpx; width:80%; overflow:hidden;">
-          <view class="plan-info-name">{{item.taskName}}</view>
-          <view class="plan-info-introdution">{{item.taskDescription}}</view>
-        </view>
-        <view style="float:right; text-align:center; /*border:2rpx dashed #ccc;*/">
-          <image src="{{item.creatorInfo[0].avatarUrl}}" style="width:64rpx; height:64rpx;border-radius:32rpx;"></image>
-          <view style="color:#aaa;font-size:30rpx;">{{item.creatorInfo[0].nickName}}</view>
-        </view>
-      </view>
-      <view style="height:78rpx; width:100%; overflow:hidden;">
-        <view style="font-size:30rpx; color:#aaa; margin:0 16rpx; display:inline-block; line-height:64rpx;">
-          参与者：
-        </view>
-        <view style="display:inline-block; line-height:64rpx;" wx:for="{{item.participantsrInfo}}" wx:key="key">
-          <image src="{{item.avatarUrl}}" style="width:48rpx; height:48rpx;border-radius:24rpx;vertical-align:middle;margin-right:12rpx; background-color:#aaa;"></image>
-        </view>
-      </view>
-    </view>
-  </view>
-  </scroll-view>
+	<scroll-view class="scroll-view" scroll-y="true">
+		<view wx:for='{{tasksData}}' wx:key='index' class="plan-item">
+			<view id='{{item._id}}' bindtap="onPlanSelected">
+				<view style="border:2rpx solid #eee; border-width:0 0 2rpx 0; padding-bottom: 16rpx; margin-bottom: 16rpx;">
+					<view style="display:inline-block; margin-left:12rpx; width:80%; overflow:hidden;">
+						<view class="plan-info-name">{{item.taskName}}</view>
+						<view class="plan-info-introdution">{{item.taskDescription}}</view>
+					</view>
+					<view style="float:right; text-align:center; /*border:2rpx dashed #ccc;*/">
+						<image src="{{item.creatorInfo[0].avatarUrl}}" style="width:64rpx; height:64rpx;border-radius:32rpx;"></image>
+						<view style="color:#aaa;font-size:30rpx;">{{item.creatorInfo[0].nickName}}</view>
+					</view>
+				</view>
+				<view style="height:78rpx; width:100%; overflow:hidden;">
+					<view style="font-size:30rpx; color:#aaa; margin:0 16rpx; display:inline-block; line-height:64rpx;">
+						参与者：
+					</view>
+					<view style="display:inline-block; line-height:64rpx;" wx:for="{{item.participantsrInfo}}" wx:key="key">
+						<image src="{{item.avatarUrl}}" style="width:48rpx; height:48rpx;border-radius:24rpx;vertical-align:middle;margin-right:12rpx; background-color:#aaa;"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
 </view>
 
-<view wx:if="{{showguide}}">
- <text class='welcome'>当前无任务，新建一个试试吧！</text>	
- <image mode="center" class="guide" src="../../images/guide.png"/>
-</view>
 
 <view wx:if="{{authorStatusChecked}}">
-  <view class="authorization" wx:if="{{needAuthor}}">
-    <button open-type="getUserInfo" bindgetuserinfo="authorUserInfo">登录授权</button>
-  </view>
-  <view class="new-task" wx:if="{{!needAuthor}}" >
-    <van-button round type="info" bind:click='addTask' icon="plus"  >TASK</van-button>
-  </view>
+	<view wx:if="{{needAuthor}}">
+    <text class='welcome'>还没登陆呢，快授权体验下！</text>
+		<button  class="authorization" open-type="getUserInfo" bindgetuserinfo="authorUserInfo">登录授权</button>
+	</view>
+	<view  wx:if="{{!needAuthor}}">
+		<view wx:if="{{showguide}}">
+			<text class='welcome'>当前无任务，新建一个试试吧！</text>
+			<image mode="center" class="guide" src="../../images/guide.png" />
+		</view>
+		<van-button class="new-task" round type="info" bind:click='addTask' icon="plus">TASK</van-button>
+	</view>
 </view>
-
-
-
-
-
-
-
