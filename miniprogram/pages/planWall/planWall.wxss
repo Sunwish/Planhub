@@ -47,6 +47,23 @@ Component{
   bottom: 150rpx;
 }
 
+.guide{
+  position:fixed;
+  left: 0;
+  bottom: 200rpx;
+}
+
+.welcome{
+  margin-top:200rpx;
+  display: flex;
+  justify-content: center;
+  font-weight:bold; 
+  color: white;
+  font-size:47rpx;
+  font-family:Microsoft Yahei;
+  text-shadow:0 0 8px grey, 0 0 12px grey;
+}
+
 
 .authorization{
   position: fixed;

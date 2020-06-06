@@ -21,7 +21,4 @@ App({
     this.globalData = {}
 
   },
-  //globalData: {
-    //taskid2share: ""
-  //},
 })

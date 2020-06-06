@@ -4,5 +4,5 @@
     <text class="user-name">加入{{user}}创建的微任务</text>		
 </view>
 <view class="comfirm-join">
-  <van-button round type="info" color='#1ce25e' bind:click='onJoinTask'> 确认加入</van-button>
+  <van-button round type="info" color='#1ce25e' bind:click='Messet'> 确认加入</van-button>
 </view>

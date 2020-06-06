@@ -53,11 +53,14 @@ Page({
     })
 
   },
-  ReTask:function(){
-    wx.switchTab({
-      url: '../planWall/planWall',
+  Messet: function () {
+    wx.requestSubscribeMessage({
+      tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
+      success(res) {}
     })
+      this.onJoinTask();
   },
+
   onJoinTask: function(){
     //console.log('hahahahahahahahha');
     console.log(this.data.tid);

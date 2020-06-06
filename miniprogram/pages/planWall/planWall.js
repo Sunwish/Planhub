@@ -19,7 +19,8 @@ Component({
     tasksData: {},
     openid: '',
     needAuthor: true,
-    authorStatusChecked: false
+    authorStatusChecked: false,
+    showguide: false
   },
 
 /**
@@ -30,7 +31,6 @@ Component({
    if (this.data.openid == '') return;
    const db = wx.cloud.database()
    const _ = db.command
-
    wx.cloud.callFunction({
      name: 'getTasks',
      data:{
@@ -41,6 +41,18 @@ Component({
        this.setData({
          tasksData: res.result.list
        })
+       if(this.data.tasksData.length == 0)
+       {
+        this.setData({
+          showguide: true
+        })
+       }
+       else
+       {
+        this.setData({
+          showguide: false
+        })
+       }
        wx.stopPullDownRefresh();
        wx.hideNavigationBarLoading(); // 完成加载
      },
@@ -275,9 +287,7 @@ Component({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
-
   /**
    * 生命周期函数--监听页面卸载
    */

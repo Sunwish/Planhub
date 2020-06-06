@@ -41,6 +41,11 @@
   </scroll-view>
 </view>
 
+<view wx:if="{{showguide}}">
+ <text class='welcome'>当前无任务，新建一个试试吧！</text>	
+ <image mode="center" class="guide" src="../../images/guide.png"/>
+</view>
+
 <view wx:if="{{authorStatusChecked}}">
   <view class="authorization" wx:if="{{needAuthor}}">
     <button open-type="getUserInfo" bindgetuserinfo="authorUserInfo">登录授权</button>
@@ -49,5 +54,10 @@
     <van-button round type="info" bind:click='addTask' icon="plus"  >TASK</van-button>
   </view>
 </view>
+
+
+
+
+
 
 
