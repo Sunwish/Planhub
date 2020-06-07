@@ -669,12 +669,23 @@ Page({
     for (var i = 0; i < this.data.taskData.subTasksId.length; i++){
       this.deleteSubTask(this.data.taskData.subTasksId[i], true)
     }
+
     const db = wx.cloud.database();
     db.collection('tasks').doc(taskId).remove({
       success: res => {
         wx.showToast({
           title: '删除任务成功',
         })
+        if(this.data.taskData.fileID){
+          wx.cloud.deleteFile({
+            fileList: this.data.taskData.fileID,
+            success: res => {
+              // handle success
+              console.log(res.fileList)
+            },
+            fail: console.error
+          })
+        }
         setTimeout(function () {
           wx.navigateBack({})
         }, 1000)
