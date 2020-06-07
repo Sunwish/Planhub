@@ -53,5 +53,6 @@
 			<image mode="center" class="guide" src="../../images/guide.png" />
 		</view>
 		<van-button class="new-task" round type="info" bind:click='addTask' icon="plus">TASK</van-button>
+		<van-button class="new-task" round type="info" bind:click='123' >123</van-button>
 	</view>
 </view>

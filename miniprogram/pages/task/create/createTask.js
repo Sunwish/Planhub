@@ -110,7 +110,7 @@ Page({
     //消息推送授权
     if (this.data.radio != '1' && this.data.checked1) {
       wx.requestSubscribeMessage({
-        tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
+        tmplIds: ['TsivXeTD3idsr9TPRiajkdpatIH6TGEUXJWGLW6K8kg'],
         success(res) {}
       })
     }
@@ -321,7 +321,7 @@ Page({
   //用户点击消息授权的按钮
   Messet: function () {
     wx.requestSubscribeMessage({
-      tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
+      tmplIds: ['TsivXeTD3idsr9TPRiajkdpatIH6TGEUXJWGLW6K8kg'],
       success(res) {}
     })
     this.joinTask({

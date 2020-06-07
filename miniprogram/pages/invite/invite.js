@@ -55,7 +55,7 @@ Page({
   },
   Messet: function () {
     wx.requestSubscribeMessage({
-      tmplIds: ['TsivXeTD3idsr9TPRiajkXNV4Ws9npmREZeFi2oSGKM'],
+      tmplIds: ['TsivXeTD3idsr9TPRiajkdpatIH6TGEUXJWGLW6K8kg'],
       success(res) {}
     })
       this.onJoinTask();

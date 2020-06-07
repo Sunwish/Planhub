@@ -313,6 +313,17 @@ Component({
   /**
    * 用户点击右上角分享
    */
+  123:function(){
+    wx.cloud.callFunction({
+      name:"Msgsend",
+      data:{
+        openid:app.globalData.openid,
+        taskName:'123',
+      }
+    }).then(res=>{
+      console.log("Yes")
+    })
+  },
   onShareAppMessage: function () {
     return {
       title: '和我一起用微任务吧！',
