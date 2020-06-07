@@ -1,5 +1,4 @@
 <!--miniprogram/custom-tab-bar/index.wxml-->
-<add-tips duration="5"/>
 <view class="tab-bar">
 	<view class="tab-bar-border"></view>
 	<view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">

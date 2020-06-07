@@ -35,5 +35,3 @@
 		<van-button round type="info" block bind:click="onJoinTask" class="button-view">加入任务</van-button>
 	</van-tab>
 </van-tabs>
-<van-dialog use-slot title="该任务有消息提醒，是否接受消息推送？" show="{{ show2 }}" show-cancel-button bind:confirm="Messet" bind:cancel="cancel">
-</van-dialog>

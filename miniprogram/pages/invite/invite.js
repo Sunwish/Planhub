@@ -51,14 +51,13 @@ Page({
         })
       }
     })
-
   },
   Messet: function () {
     wx.requestSubscribeMessage({
       tmplIds: ['TsivXeTD3idsr9TPRiajkdpatIH6TGEUXJWGLW6K8kg'],
       success(res) {}
     })
-      this.onJoinTask();
+    this.joinTask(this.data.tid);
   },
 
   onJoinTask: function(){
@@ -86,7 +85,15 @@ Page({
             }, 1000);
             return;
           }
-          this.joinTask(tid);
+          wx.showModal({
+            title: '提示',
+            content: '该任务需开启消息提醒哦！',
+            success: sm => {
+              if (sm.confirm) {
+                this.Messet();
+              } else if (sm.cancel) { }
+            }
+          })
         } 
         else {
           wx.showToast({

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "add-tips": "../components/weplug-add-tips-master/index"
   },
   "navigationBarTitleText": "任务",
   "backgroundColor": "#f7f8fa",

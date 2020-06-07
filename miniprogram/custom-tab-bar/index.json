@@ -1,7 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "van-icon": "@vant/weapp/icon/index",
-    "add-tips": "../components/weplug-add-tips-master/index"
+    "van-icon": "@vant/weapp/icon/index"
   }
 }

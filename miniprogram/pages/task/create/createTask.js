@@ -18,7 +18,6 @@ Page({
     "taskId": "",
     fileList6: [],
     checked1: {},
-    show2: false,
     TaskId: {}
   },
 
@@ -295,8 +294,14 @@ Page({
           }
           //发现可以消息推送
           if (that.data.checked1 && res.data[0].radio != '1') {
-            that.setData({
-              show2: true
+            wx.showModal({
+              title: '提示',
+              content: '该任务需开启消息提醒哦！',
+              success: sm => {
+                if (sm.confirm) {
+                  this.Messet();
+                } else if (sm.cancel) { }
+              }
             })
           } else {
             this.joinTask({

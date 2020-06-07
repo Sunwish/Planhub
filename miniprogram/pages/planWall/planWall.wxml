@@ -55,3 +55,5 @@
 		<van-button class="new-task" round type="info" bind:click='addTask' icon="plus">TASK</van-button>
 	</view>
 </view>
+
+<add-tips duration="3"/>
