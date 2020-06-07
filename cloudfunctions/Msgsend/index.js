@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
   try{
     const result= await cloud.openapi.subscribeMessage.send({
       touser:'odtr25T7IGDlWObdJ9jqz2JUc1g4',
-      templateId:'TsivXeTD3idsr9TPRiajkdpatIH6TGEUXJWGLW6K8kg',
+      templateId:['TsivXeTD3idsr9TPRiajkdpatIH6TGEUXJWGLW6K8kg'],
       data:{
         thing1: {
           value: event.taskName
