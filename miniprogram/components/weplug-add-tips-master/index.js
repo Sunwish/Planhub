@@ -27,8 +27,8 @@ Component({
 
   ready: function () {
     // 判断是否已经显示过
-    let cache = wx.getStorageSync(STORAGE_KEY);
-    if (cache) return;
+    //let cache = wx.getStorageSync(STORAGE_KEY);
+    //if (cache) return;
     // 没显示过，则进行展示
     this.setData({
       SHOW_TOP: true
