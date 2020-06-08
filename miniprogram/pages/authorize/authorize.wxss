@@ -1,0 +1,60 @@
+/* pages/authorize/authorize.wxss */
+page {
+  background-color: white;
+}
+
+.logo{
+  position:absolute;
+  display: flex;
+  top: 18%;
+  height: 80px;
+  width: 80px;
+  border-radius: 25px;
+}
+
+.words{
+  position:absolute;
+  font-size:47rpx;
+  font-weight:bold; 
+  top: 35%;
+}
+
+.tips{
+  position:absolute;
+  top:40%;
+  font-size: 14px;
+}
+
+.login-button{
+  position:absolute;
+  right: 15%;
+  top:65%;
+  width: 100px;
+  font-size: 16px;
+  background-color: rgb(61, 149, 238);
+  color: #fff;
+  border: 2rpx solid rgb(61, 149, 238);
+  border-radius:60rpx; 
+}
+
+.cancel-button{
+  position:absolute;
+  left: 15%;
+  top:65%;
+  width: 100px;
+  font-size: 16px;
+  background-color: rgb(221, 219, 219);
+  color: rgb(110, 110, 110);
+  border: 2rpx solid rgb(221, 219, 219);
+  border-radius:60rpx; 
+}
+
+.rules{
+  position:absolute;
+  top:80%;
+  font-size: 14px;
+  color:rgb(61, 149, 238);
+  background-color: transparent;
+  outline: none;
+  border: none;
+}

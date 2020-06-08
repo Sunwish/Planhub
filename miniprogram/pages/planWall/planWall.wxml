@@ -57,3 +57,8 @@
 </view>
 
 <add-tips duration="3"/>
+
+
+<van-button class="authorize" round type="info" bind:click='toAuthorize' color='green'>授权页</van-button>
+
+

@@ -47,6 +47,12 @@ Component{
   bottom: 150rpx;
 }
 
+.authorize{
+  position:fixed;
+  right: 50rpx;
+  bottom: 300rpx;
+}
+
 .guide{
   position:fixed;
   left: 0;

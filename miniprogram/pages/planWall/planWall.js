@@ -328,6 +328,12 @@ Component({
       url: '../task/create/createTask',
     })
   },
+  toAuthorize: function () {
+    wx.navigateTo({
+      url: '../authorize/authorize',
+    })
+  },
 
  }
 })
+
