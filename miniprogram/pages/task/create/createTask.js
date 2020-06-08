@@ -196,7 +196,7 @@ Page({
         wx.showToast({
           title: '创建任务成功',
         })
-        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+        //console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
 
         setTimeout(function () {
           wx.navigateBack({})
@@ -207,7 +207,7 @@ Page({
           icon: 'none',
           title: '创建任务失败'
         })
-        console.error('[数据库] [新增记录] 失败：', err)
+        //console.error('[数据库] [新增记录] 失败：', err)
       }
     })
   },

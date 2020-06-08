@@ -8,7 +8,7 @@
   <button class="rules" bindtap="toRules" hover-class="none" loading="{{loading}}">「隐私协议」</button>
 </view>
 
-<button class="login-button" formType="login" hover-class="none" loading="{{loading}}">登录</button>
-<button class="cancel-button" formType="cancel" hover-class="none" loading="{{loading}}">取消</button>
+<button class="login-button" formType="login" hover-class="none" loading="{{loading}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" >登录</button>
+<button class="cancel-button" formType="cancel" hover-class="none" loading="{{loading}}" bindtap="cancel">取消</button>
 
 

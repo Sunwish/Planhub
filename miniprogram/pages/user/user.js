@@ -9,17 +9,6 @@ Component({
           selected: 2
         })
       }
-    }
-  },
-  data: {
-    userimg: {},
-    user: {},
-    hasuserInfo: false,
-    checked1: {},
-  },
-  methods: {
-    onLoad: function () {
-      wx.hideTabBar();
       this.setData({
         hasuserInfo: app.globalData.Authorize
       })
@@ -48,6 +37,17 @@ Component({
       }
     })
       }
+    }
+  },
+  data: {
+    userimg: {},
+    user: {},
+    hasuserInfo: false,
+    checked1: {},
+  },
+  methods: {
+    onLoad: function () {
+      wx.hideTabBar();
     },
     onChange1({
       detail
@@ -97,6 +97,16 @@ Component({
           console.log('成功', res);
         }
       }
+    },
+    getUserInfo:function(){
+      wx.navigateTo({
+        url: '../authorize/authorize',
+      })
+    },
+    signin:function(){
+      wx.navigateTo({
+        url: '../authorize/authorize',
+      })
     },
   }
 })

@@ -4,25 +4,25 @@
 		<text class="user-name">Hi~,{{user.nickName}}</text>
 		<van-cell-group class="function">
 			<van-cell class="s1" title="消息推送" size="large">
-				<van-icon class="cell-icon" slot="icon" name="comment-circle-o"   size="25px" />
-				<van-switch slot="right-icon" class="cell-switch"checked="{{ checked1 }}" size="25px" bind:change="onChange1" />
+				<van-icon class="cell-icon" slot="icon" name="comment-circle-o" size="25px" />
+				<van-switch slot="right-icon" class="cell-switch" checked="{{ checked1 }}" size="25px" bind:change="onChange1" />
 			</van-cell>
 			<van-cell-group class="s2">
 				<van-cell class="function" title="使用指南" size="large" is-link bind:click="guide">
-					<van-icon class="cell-icon" slot="icon" name="question-o" size="25px"  />
+					<van-icon class="cell-icon" slot="icon" name="question-o" size="25px" />
 				</van-cell>
-				<van-cell  class="function" title="意见反馈" size="large" is-link bind:click="feedback" >
-				<van-icon class="cell-icon" slot="icon" name="edit" size="25px" />
-				</van-cell>			
-				<van-cell  class="function" title="关于我们" size="large" is-link bind:click="contact" >
-				<van-icon class="cell-icon" slot="icon" name="contact" size="25px" />
-				</van-cell> 
+				<van-cell class="function" title="意见反馈" size="large" is-link bind:click="feedback">
+					<van-icon class="cell-icon" slot="icon" name="edit" size="25px" />
+				</van-cell>
+				<van-cell class="function" title="关于我们" size="large" is-link bind:click="contact">
+					<van-icon class="cell-icon" slot="icon" name="contact" size="25px" />
+				</van-cell>
 
-		    <button class='contact-btn' open-type='contact'>       
-			  <van-cell title="联系客服" size="large" is-link >
-			  <van-icon class="cell-icon" slot="icon" name="service-o" size="25px" />
-			  </van-cell>
-				</button> 
+				<button class='contact-btn' open-type='contact'>
+					<van-cell title="联系客服" size="large" is-link>
+						<van-icon class="cell-icon" slot="icon" name="service-o" size="25px" />
+					</van-cell>
+				</button>
 
 			</van-cell-group>
 		</van-cell-group>
@@ -31,5 +31,28 @@
 	<block wx:else>
 		<van-image class="user-pic" round width="7rem" height="7rem" src="./user-unlogin.png" fit="cover" click="getUserInfo" />
 		<text class="user-name">Hi~,请登录</text>
+		<van-cell-group class="function">
+			<van-cell class="s1" title="授权登录" size="large" is-link bind:click="signin">
+				<van-icon class="cell-icon" slot="icon" name="certificate" size="25px" />
+			</van-cell>
+			<van-cell-group class="s2">
+				<van-cell class="function" title="使用指南" size="large" is-link bind:click="guide">
+					<van-icon class="cell-icon" slot="icon" name="question-o" size="25px" />
+				</van-cell>
+				<van-cell class="function" title="意见反馈" size="large" is-link bind:click="feedback">
+					<van-icon class="cell-icon" slot="icon" name="edit" size="25px" />
+				</van-cell>
+				<van-cell class="function" title="关于我们" size="large" is-link bind:click="contact">
+					<van-icon class="cell-icon" slot="icon" name="contact" size="25px" />
+				</van-cell>
+
+				<button class='contact-btn' open-type='contact'>
+					<van-cell title="联系客服" size="large" is-link>
+						<van-icon class="cell-icon" slot="icon" name="service-o" size="25px" />
+					</van-cell>
+				</button>
+
+			</van-cell-group>
+		</van-cell-group>
 	</block>
 </view>
