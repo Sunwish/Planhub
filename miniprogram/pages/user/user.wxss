@@ -20,7 +20,7 @@
   margin-top: 70rpx;
 }
 .s2{
-  margin-top: 20rpx;
+  margin-top: 30rpx;
   display: flex;
   flex:1;
 }

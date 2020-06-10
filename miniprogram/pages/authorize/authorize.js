@@ -62,8 +62,15 @@ Page({
         title: '授权成功',
       })
       setTimeout(function () {
-        wx.navigateBack({})
-      }, 1000)
+        wx.switchTab({
+          url: '../planWall/planWall',
+          success: function (e) {
+            let page = getCurrentPages().pop();
+            if (page == undefined || page == null) return;
+            page.onLoad();
+        }
+        },1000)
+      })
     } else {
 
       //用户按了拒绝按钮

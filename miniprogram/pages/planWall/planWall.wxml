@@ -14,6 +14,22 @@
 </scroll-view>
 -->
 <!--Plans selection-->
+
+
+
+<view wx:if="{{authorStatusChecked}}">
+    
+    <view wx:if="{{needAuthor}}">
+    <text class='welcome'>还没登陆呢，快授权体验下！</text>
+		<image mode="center" class="guide" src="../../images/guide.png" />
+		</view>
+	<view  wx:if="{{!needAuthor}}">
+	  
+		<view wx:if="{{showguide}}">
+			<text class='welcome'>当前无任务，新建一个试试吧！</text>
+			<image mode="center" class="guide" src="../../images/guide.png" />
+		</view>
+
 <view style="overflow: hidden;">
 	<scroll-view class="scroll-view" scroll-y="true">
 		<view wx:for='{{tasksData}}' wx:key='index' class="plan-item">
@@ -42,18 +58,10 @@
 </view>
 
 
-<view wx:if="{{authorStatusChecked}}">
-    <!--
-    <view wx:if="{{needAuthor}}">
-    <text class='welcome'>还没登陆呢，快授权体验下！</text>
-		<button  class="authorization" open-type="getUserInfo" bindgetuserinfo="authorUserInfo">登录授权</button>
-  	</view>
-	<view  wx:if="{{!needAuthor}}">
-	  -->
-		<view wx:if="{{showguide}}">
-			<text class='welcome'>当前无任务，新建一个试试吧！</text>
-			<image mode="center" class="guide" src="../../images/guide.png" />
-		</view>
+
+
+
+	</view>
 		<van-button class="new-task" round type="info" bind:click='addTask' icon="plus">TASK</van-button>
 </view>
 

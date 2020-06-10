@@ -29,12 +29,10 @@
 
 	</block>
 	<block wx:else>
-		<van-image class="user-pic" round width="7rem" height="7rem" src="./user-unlogin.png" fit="cover" click="getUserInfo" />
-		<text class="user-name">Hi~,请登录</text>
+		<van-image class="user-pic" round width="7rem" height="7rem" src="./user-unlogin.png" fit="cover" bindtap="getUserInfo" />
+		<text class="user-name">点击头像登录</text>
 		<van-cell-group class="function">
-			<van-cell class="s1" title="授权登录" size="large" is-link bind:click="signin">
-				<van-icon class="cell-icon" slot="icon" name="certificate" size="25px" />
-			</van-cell>
+
 			<van-cell-group class="s2">
 				<van-cell class="function" title="使用指南" size="large" is-link bind:click="guide">
 					<van-icon class="cell-icon" slot="icon" name="question-o" size="25px" />

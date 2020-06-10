@@ -167,7 +167,8 @@ Component({
             //wx.hideTabBar({})
             this.setData({
               // 显示登录授权按钮
-              //needAuthor: true,
+              showguide: false,
+              needAuthor: true,
               authorStatusChecked: true
             })
             app.globalData.Authorize = false;
@@ -175,7 +176,7 @@ Component({
             //wx.showTabBar({})
             this.setData({
               // 显示创建/加入任务按钮
-              //needAuthor: false,
+              needAuthor: false,
               authorStatusChecked: true
             })
             app.globalData.Authorize = true;
@@ -186,7 +187,8 @@ Component({
           //wx.hideTabBar({})
           this.setData({
             // 显示登录授权按钮
-            //needAuthor: true,
+            showguide: false,
+            needAuthor: true,
             authorStatusChecked: true
           })
         }
