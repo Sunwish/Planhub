@@ -39,6 +39,26 @@ function chooseFile(_a) {
           sizeType: sizeType,
           success: resolve,
           fail: reject,
+          complete: (res) => {
+            wx.getFileSystemManager().readFile({
+                filePath: res.tempFilePaths[0],
+                encoding: "base64",
+                success: (res) => {
+                   var result=wx.cloud.callFunction({
+                        name: "check",
+                        data: {
+                            base64: res.data,
+                        }
+                    })
+                 if(!result){
+                  wx.showToast({
+                    title: '图片不合格',
+                  })
+                  return
+                 }
+                }
+            });
+        },
         });
       });
     case 'media':

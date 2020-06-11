@@ -136,6 +136,18 @@ Page({
       "subTasksId": subTasksId,
       "radio": _radio
     };
+  var result=wx.cloud.callFunction({
+      name: "check",
+      data: {
+          content:taskName+taskDescription,
+      }
+    })
+    if(!result){
+      wx.showToast({
+        title: '文本不合法',
+      })
+      return
+     }
     this._onCreateTask(taskAttr);
   },
 

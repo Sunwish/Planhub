@@ -12,13 +12,13 @@ Component({
       "icon": "todo-list-o",
       "selectedIcon":"todo-list"
     },
-    {
+   /* {
       "pagePath": "/pages/message/message",
       "text": "消息",
       "position": "top",
       "icon": "chat-o",
       "selectedIcon":"chat"
-    },
+    },*/
     {
       "pagePath": "/pages/user/user",
       "text": "我的",
