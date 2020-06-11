@@ -44,18 +44,27 @@ function chooseFile(_a) {
                 filePath: res.tempFilePaths[0],
                 encoding: "base64",
                 success: (res) => {
-                   var result=wx.cloud.callFunction({
-                        name: "check",
+                    wx.cloud.callFunction({
+                        name: "checkimg",
                         data: {
                             base64: res.data,
+                        },
+                        success: function (res) {
+                          console.log(res.result.errCode)
+                          if (res.result.errCode == 87014) {
+                            wx.showToast({
+                              title: '含有违法违规内容',
+                              icon: 'none'
+                            })
+                            return;
+                            wx.navigateBack({})
+                          }
+                        },
+                        fail: function (res) {
+                          console.error;
+                          return;
                         }
                     })
-                 if(!result){
-                  wx.showToast({
-                    title: '图片不合格',
-                  })
-                  return
-                 }
                 }
             });
         },

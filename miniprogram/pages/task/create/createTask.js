@@ -136,19 +136,28 @@ Page({
       "subTasksId": subTasksId,
       "radio": _radio
     };
-  var result=wx.cloud.callFunction({
+     const that= this
+     wx.cloud.callFunction({
       name: "check",
       data: {
-          content:taskName+taskDescription,
+          content:[taskName,taskDescription],
+      },
+      success: function (res) {
+        if (res.result.errCode == 87014) {
+          wx.showToast({
+            title: '含有违法违规内容',
+            icon: 'none'
+          })
+        }
+        else{
+          that._onCreateTask(taskAttr);
+        }
+      },
+      fail: function (res) {
+        console.error;
+        return;
       }
     })
-    if(!result){
-      wx.showToast({
-        title: '文本不合法',
-      })
-      return
-     }
-    this._onCreateTask(taskAttr);
   },
 
 
