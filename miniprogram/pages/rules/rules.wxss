@@ -1,1 +1,15 @@
 /* pages/rules/rules.wxss */
+page{
+  background-color: white;
+}
+
+.body{
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  right: 10%;
+  line-height: 50rpx;
+}
+.bold{
+  font-weight:bold;
+}
